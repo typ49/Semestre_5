@@ -1,5 +1,5 @@
-/* ball sort game   |   TP1   |   S5          |
- * Julien Gauthier  |   TP1A  |   2023-2024   |
+/* ball sort game   |   TP1_WA  |   S5          |
+ * Julien Gauthier  |   TP1A    |   2023-2024   |
  */
 
 // Path: ballsort.js
