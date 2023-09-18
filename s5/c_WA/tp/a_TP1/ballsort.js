@@ -61,6 +61,8 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function generateRandomLevel(colorCount) {
+    gameOver = false;
+    gameWin = false;
     const colors = [
       "red",
       "blue",
@@ -116,6 +118,9 @@ document.addEventListener("DOMContentLoaded", function () {
     // réinitialise le compteur de mouvements
     moveCount = 0;
     document.querySelector("#mouvements").innerText = moveCount;
+    // supprime les balles sélectionnées
+    TODO
+
   }
 
   function shuffleArray(array) {
