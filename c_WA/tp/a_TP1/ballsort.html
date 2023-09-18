@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ball Sort Puzzle Game</title>
+    <link rel="stylesheet" type="text/css" href="ballsort.css">
+    <script src="ballsort.js"></script>
+
+    
+</head>
+<body>
+    <nav>
+        <label>
+            Déplacements : <span id="movements">0</span> 
+            <button id="btnRestart" title="Recommencer">&#x21BA;</button>
+        </label>
+        <label>
+            Niveau aléatoire avec 
+            <input id="numColors" type="number" min="3" value="5" max="10"> couleurs 
+            <button id="btnRandom">Générer</button>
+        </label>
+        <label>
+            <input type="checkbox" id="cbDarkmode"> Mode sombre
+        </label>
+    </nav>
+    <main>
+        <div class="tube">
+            <div style="background-color: red;"></div>
+            <div style="background-color: blue;"></div>
+            <div style="background-color: red;"></div>
+            <div style="background-color: green;"></div>
+        </div>
+        <div class="tube">
+            <div style="background-color: red;"></div>
+            <div style="background-color: blue;"></div>
+            <div style="background-color: green;"></div>
+            <div style="background-color: green;"></div>
+        </div>
+        <div class="tube">
+            <div style="background-color: blue;"></div>
+            <div style="background-color: blue;"></div>
+            <div style="background-color: red;"></div>
+            <div style="background-color: green;"></div>
+        </div>
+        <div class="tube"></div>
+        <div class="tube"></div>
+    </main>
+</body>
+</html>
