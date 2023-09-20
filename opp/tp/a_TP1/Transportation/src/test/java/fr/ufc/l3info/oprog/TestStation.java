@@ -16,15 +16,19 @@ public class TestStation {
     public void setup() {
         // creation of an object to test
         s = new Station("ma Station");
+
     }
 
 
     @Test   // indicates that this method is a test case
     public void testName() {
-        // an observation that will obviously succeed
-        Assert.assertTrue(s != null);
         // an observation that will cause the test to fail:
         Assert.assertEquals("ma Station", s.getName());
+    }
+
+    @Test
+    public void TestGetLines() {
+    	Assert.assertEquals(0, s.getLines().size());
     }
 
 
