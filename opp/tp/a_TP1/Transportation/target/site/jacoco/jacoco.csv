@@ -1,6 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-Transportation,default,Station.LineInfo,0,9,0,0,0,4,0,1,0,1
-Transportation,default,Station,44,94,16,14,14,20,16,9,3,7
-Transportation,fr.ufc.l3info.oprog,Network,20,0,0,0,11,0,9,0,9,0
-Transportation,fr.ufc.l3info.oprog,Station.LineInfo,0,9,0,0,0,4,0,1,0,1
-Transportation,fr.ufc.l3info.oprog,Station,44,94,16,14,14,20,16,9,3,7
