@@ -1,39 +1,61 @@
-/* ball sort game   |   TP1_WA  |   S5          |
+/** ball sort game   |   TP1_WA  |   S5          |
  * Julien Gauthier  |   TP1A    |   2023-2024   |
  */
 
 // Path: ballsort.js
 
 document.addEventListener("DOMContentLoaded", function () {
+  // variables globales
   let selectedBall = null;
   let moveCount = 0;
   let gameWin = false;
-  let gameOver = false;
+  let initialBallOrder = [
+    "red",
+    "blue",
+    "red",
+    "green",
+    "red",
+    "blue",
+    "green",
+    "green",
+    "blue",
+    "blue",
+    "red",
+    "green",
+  ];
+  let currentColorCount = 3;
 
-  // Sélectionner une balle
-  document.querySelector("main").addEventListener("click", function (event) {
+  // Gestionnaire d'interaction pour les tubes
+  function handleTubeInteraction(event) {
+    event.preventDefault(); // Pour éviter des comportements par défaut sur certains appareils mobiles
+
     const tube = event.target.closest(".tube");
-    if (!tube) return;
-    if (gameWin) return;
+    if (!tube || gameWin) return;
 
     if (selectedBall) {
       const currentBall = selectedBall;
       if (canPlaceBall(tube, selectedBall)) {
         tube.prepend(currentBall);
         currentBall.classList.remove("selected");
-        currentBall.classList.add("bounce");
-        setTimeout(() => currentBall.classList.remove("bounce"), 1000); // Retirer l'animation après 1s
-        selectedBall = null;
         if (tube !== currentBall.originTube) {
           moveCount++;
           document.querySelector("#movements").innerText = moveCount;
         }
+        selectedBall = null;
         checkWinCondition();
       }
     } else {
       selectABall(tube);
     }
-  });
+  }
+
+  // Ajout des gestionnaires d'événements pour les interactions
+  document
+    .querySelector("main")
+    .addEventListener("touchstart", handleTubeInteraction, false);
+  document
+    .querySelector("main")
+    .addEventListener("click", handleTubeInteraction, false);
 
   function selectABall(tube) {
     if (tube.children.length === 0) return;
@@ -44,25 +66,35 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function canPlaceBall(tube, ball) {
-
-    // si le tube est le tube d'origine de la ball, autoriser le placement
     if (ball.originTube === tube) return true;
-
-    // Vérifiez si le tube est plein
     if (tube.children.length == 4) return false;
-
     const topBall = tube.firstElementChild;
-    if (!topBall) return true; // Si le tube est vide, la balle peut être placée
-
+    if (!topBall) return true;
     if (topBall.style.backgroundColor === ball.style.backgroundColor)
-      return true; // Si les couleurs correspondent, la balle peut être placée
-
-    return false; // Sinon, la balle ne peut pas être placée
+      return true;
+    return false;
   }
 
-  function generateRandomLevel(colorCount) {
-    gameOver = false;
+  function hasFourConsecutiveSameColors(balls) {
+    let consecutiveCount = 1;
+
+    for (let i = 1; i < balls.length; i++) {
+      if (balls[i] === balls[i - 1]) {
+        consecutiveCount++;
+        if (consecutiveCount === 4) {
+          return true;
+        }
+      } else {
+        consecutiveCount = 1;
+      }
+    }
+
+    return false;
+  }
+
+  function generateRandomLevel(colorCount, useInitialBallOrder = false) {
     gameWin = false;
+    currentColorCount = colorCount;
     const colors = [
       "red",
       "blue",
@@ -84,22 +116,27 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
 
-    // mélanger les balles
-    balls = shuffleArray(balls);
+    if (!useInitialBallOrder) {
+      // mélanger les balles
+      balls = shuffleArray(balls);
 
-    // supprimer les tubes existants
+      // Vérifiez si quatre balles consécutives ont la même couleur
+      while (hasFourConsecutiveSameColors(balls)) {
+        balls = shuffleArray(balls);
+      }
+      initialBallOrder = balls;
+    } else {
+      balls = initialBallOrder;
+    }
+
     const existingTubes = document.querySelectorAll(".tube");
     existingTubes.forEach((tube) => tube.remove());
-
-    // créer les nouveaux tubes
     const tubeContainer = document.querySelector("main");
     for (let i = 0; i < colorCount + 2; i++) {
       const tube = document.createElement("div");
       tube.classList.add("tube");
       tubeContainer.appendChild(tube);
     }
-
-    //distribuer les balles
     const tubes = document.querySelectorAll(".tube");
     let ballIndex = 0;
     tubes.forEach((tube) => {
@@ -109,18 +146,16 @@ document.addEventListener("DOMContentLoaded", function () {
           "style",
           "background-color: " + balls[ballIndex] + ";"
         );
-        //console.log(balls[ballIndex]);
         tube.appendChild(ball);
         ballIndex++;
       }
     });
-
-    // réinitialise le compteur de mouvements
     moveCount = 0;
-    document.querySelector("#mouvements").innerText = moveCount;
-    // supprime les balles sélectionnées
-    TODO
-
+    document.querySelector("#movements").innerText = moveCount;
+    if (selectedBall) {
+      selectedBall.classList.remove("selected");
+      selectedBall = null;
+    }
   }
 
   function shuffleArray(array) {
@@ -132,15 +167,9 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function checkWinCondition() {
-    if (gameOver) {
-      setTimeout(() => {
-        alert("Plus de coup disponible... Vous avez perdu =(");
-      }, 600);
-    }
     let win = true;
     document.querySelectorAll(".tube").forEach((tube) => {
       if (tube.children.length === 4) {
-        // Vérifiez si le tube est complètement rempli
         const color = tube.children[0].style.backgroundColor;
         for (let ball of tube.children) {
           if (ball.style.backgroundColor !== color) {
@@ -149,7 +178,6 @@ document.addEventListener("DOMContentLoaded", function () {
           }
         }
       } else if (tube.children.length > 0) {
-        // Si le tube n'est pas vide et n'est pas complètement rempli, le jeu n'est pas gagné
         win = false;
       }
     });
@@ -161,43 +189,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   }
 
-  function isMoveAvailable() {
-    const tubes = document.querySelectorAll(".tube");
-
-    for (let tube of tubes) {
-      if (tube.children.length === 0) {
-        // Si un tube est vide, un coup est disponible
-        return true;
-      }
-
-      const topBallColor = tube.firstElementChild.style.backgroundColor;
-
-      for (let targetTube of tubes) {
-        if (tube === targetTube) continue; // Ne vérifiez pas le même tube
-
-        if (targetTube.children.length === 0) {
-          // Si le tube cible est vide, un coup est disponible
-          return true;
-        }
-
-        const targetTopBallColor =
-          targetTube.firstElementChild.style.backgroundColor;
-
-        if (topBallColor === targetTopBallColor) {
-          // Si les couleurs des balles du dessus correspondent, un coup est disponible
-          gameOver = false;
-        }
-      }
-    }
-
-    // Si aucune des conditions ci-dessus n'est remplie, aucun coup n'est disponible
-    gameOver = true;
-  }
-
-  // Gestion du menu
   document.querySelector("#btnRestart").addEventListener("click", function () {
     if (confirm("Voulez-vous vraiment recommencer?")) {
-      location.reload();
+      gameWin = false;
+      generateRandomLevel(currentColorCount, true);
     }
   });
 
@@ -214,6 +209,18 @@ document.addEventListener("DOMContentLoaded", function () {
     ) {
       const colorCount = parseInt(document.querySelector("#numColors").value);
       generateRandomLevel(colorCount);
+    }
+  });
+
+  const numColorsInput = document.querySelector("#numColors");
+  numColorsInput.addEventListener("input", function () {
+    this.select();
+  });
+  numColorsInput.addEventListener("change", function () {
+    if (this.value < 3) {
+      this.value = 3;
+    } else if (this.value > 10) {
+      this.value = 10;
     }
   });
 

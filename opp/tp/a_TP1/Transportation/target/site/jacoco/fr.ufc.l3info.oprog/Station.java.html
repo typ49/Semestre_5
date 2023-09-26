@@ -1,141 +1,88 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Station.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Transportation</a> &gt; <a href="index.source.html" class="el_package">fr.ufc.l3info.oprog</a> &gt; <span class="el_source">Station.java</span></div><h1>Station.java</h1><pre class="source lang-java linenums">package fr.ufc.l3info.oprog;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.HashMap;
 import java.util.HashSet;
 
-/**
- * Class representing a station.
- */
 public class Station {
     private final String name;
     private final Map&lt;String, LineInfo&gt; lines;
 
-    /**
-     * Class representing a line associated to a station.
-     */
     private static class LineInfo {
         final int number;
         final double distance;
 
-        /**
-         * Builds a line info.
-         * @param _number
-         * @param _distance
-         */
-<span class="nc" id="L27">        LineInfo(int _number, double _distance) {</span>
-<span class="nc" id="L28">            this.number = _number;</span>
-<span class="nc" id="L29">            this.distance = _distance;</span>
-<span class="nc" id="L30">        }</span>
+<span class="fc" id="L15">        LineInfo(int _number, double _distance) {</span>
+<span class="fc" id="L16">            this.number = _number;</span>
+<span class="fc" id="L17">            this.distance = _distance;</span>
+<span class="fc" id="L18">        }</span>
     }
 
-    /**
-     * Builds a station associated to no lines.
-     * @param _name the name of the station.
-     */
-<span class="fc" id="L37">    public Station(String _name) {</span>
-<span class="fc" id="L38">        this.name = _name;</span>
-<span class="fc" id="L39">        this.lines = new HashMap&lt;&gt;();</span>
-<span class="fc" id="L40">    }</span>
+<span class="fc" id="L21">    public Station(String _name) {</span>
+<span class="fc" id="L22">        this.name = _name;</span>
+<span class="fc" id="L23">        this.lines = new HashMap&lt;&gt;();</span>
+<span class="fc" id="L24">    }</span>
 
-    /**
-     * Builds a station, initially associated to a given line with a given number.
-     * @param _name the name of the station
-     * @param _line the name of the line associated to the station
-     * @param _number the number of the station on the considered line
-     * @param _dist the distance of the station on the considered line
-     */
     public Station(String _name, String _line, int _number, double _dist) {
-<span class="nc" id="L50">        this(_name);</span>
-<span class="nc" id="L51">        addLine(_line, _number, _dist);</span>
-<span class="nc" id="L52">    }</span>
+<span class="nc" id="L27">        this(_name);</span>
+<span class="nc" id="L28">        addLine(_line, _number, _dist);</span>
+<span class="nc" id="L29">    }</span>
 
-    /**
-     * Adds a line to the current station, with the appropriate parameters.
-     * If the line already exists, the previous information are overwritten.
-     * @param _line the name of the line associated to the station
-     * @param _number the number of the station on the considered line
-     * @param _dist the distance of the station on the considered line
-     */
     public void addLine(String _line, int _number, double _dist) {
-<span class="nc bnc" id="L62" title="All 4 branches missed.">        if (_line == null || _line.trim().isEmpty()) {</span>
-<span class="nc" id="L63">            return;</span>
+<span class="pc bpc" id="L32" title="2 of 4 branches missed.">        if (_line == null || _line.trim().isEmpty()) {</span>
+<span class="nc" id="L33">            return;</span>
         }
-<span class="nc bnc" id="L65" title="All 2 branches missed.">        if (_number &lt;= 0) {</span>
-<span class="nc" id="L66">            return;</span>
+<span class="pc bpc" id="L35" title="1 of 2 branches missed.">        if (_number &lt;= 0) {</span>
+<span class="nc" id="L36">            return;</span>
         }
-<span class="nc bnc" id="L68" title="All 2 branches missed.">        if (_dist &lt; 0) {</span>
-<span class="nc" id="L69">            return;</span>
+<span class="pc bpc" id="L38" title="1 of 2 branches missed.">        if (_dist &lt; 0) {</span>
+<span class="nc" id="L39">            return;</span>
         }
-<span class="nc" id="L71">        lines.put(_line, new LineInfo(_number, _dist));</span>
-<span class="nc" id="L72">    }</span>
+<span class="fc" id="L41">        lines.put(_line, new LineInfo(_number, _dist));</span>
+<span class="fc" id="L42">    }</span>
 
-    /**
-     * Removes a line from the station.
-     * @param _line the line to remove.
-     */
     public void removeLine(String _line) {
-<span class="nc bnc" id="L79" title="All 4 branches missed.">        if (_line == null || _line.trim().isEmpty()) {</span>
-<span class="nc" id="L80">            return;</span>
+<span class="pc bpc" id="L45" title="2 of 4 branches missed.">        if (_line == null || _line.trim().isEmpty()) {</span>
+<span class="nc" id="L46">            return;</span>
         }
-<span class="nc" id="L82">        lines.remove(_line);</span>
-<span class="nc" id="L83">    }</span>
+<span class="fc" id="L48">        lines.remove(_line);</span>
+<span class="fc" id="L49">    }</span>
 
-    /**
-     * Retrieves the name of the station.
-     * @return the name of the station
-     */
     public String getName() {
-<span class="fc" id="L90">        return name;</span>
+<span class="fc" id="L52">        return name;</span>
     }
 
-    /**
-     * Returns the number of the station on a given line.
-     * @param l The name of the line
-     * @return the # of the station for the given line,
-     *         or 0 if the line does not exist at the station.
-     */
     public int getNumberForLine(String l) {
-<span class="nc bnc" id="L100" title="All 4 branches missed.">        if (l == null || l.trim().isEmpty()) {</span>
-<span class="nc" id="L101">            return 0;</span>
+<span class="pc bpc" id="L56" title="2 of 4 branches missed.">        if (l == null || l.trim().isEmpty()) {</span>
+<span class="nc" id="L57">            return 0;</span>
         }
-<span class="nc" id="L103">        LineInfo info = lines.get(l);</span>
-<span class="nc bnc" id="L104" title="All 2 branches missed.">        return info != null ? info.number : 0;</span>
+<span class="fc" id="L59">        LineInfo info = lines.get(l);</span>
+<span class="fc bfc" id="L60" title="All 2 branches covered.">        return info != null ? info.number : 0;</span>
     }
 
-    /**
-     * Returns the distance of the station on a given line.
-     * @param l The name of the line.
-     * @return the distance of the station w.r.t. the beginning of the line.
-     */
     public double getDistanceForLine(String l) {
-<span class="nc bnc" id="L113" title="All 4 branches missed.">        if (l == null || l.trim().isEmpty()) {</span>
-<span class="nc" id="L114">            return -1.0;</span>
+<span class="pc bpc" id="L64" title="2 of 4 branches missed.">        if (l == null || l.trim().isEmpty()) {</span>
+<span class="nc" id="L65">            return -1.0;</span>
         }
-<span class="nc" id="L116">        LineInfo info = lines.get(l);</span>
-<span class="nc bnc" id="L117" title="All 2 branches missed.">        return info != null ? info.distance : -1.0;</span>
+<span class="fc" id="L67">        LineInfo info = lines.get(l);</span>
+<span class="fc bfc" id="L68" title="All 2 branches covered.">        return info != null ? info.distance : -1.0;</span>
     }
 
-    /**
-     * Computes the set of lines associated to the station.
-     * @return a set containing the names of the lines that cross the station.
-     */
     public Set&lt;String&gt; getLines() {
-<span class="fc" id="L125">        return new HashSet&lt;&gt;(lines.keySet());</span>
+<span class="fc" id="L72">        return new HashSet&lt;&gt;(lines.keySet());</span>
     }
 
     @Override
     public int hashCode() {
-<span class="nc" id="L130">        return name.hashCode();</span>
+<span class="nc" id="L77">        return name.hashCode();</span>
     }
 
     @Override
     public boolean equals(Object o) {
-<span class="nc bnc" id="L135" title="All 2 branches missed.">        if (this == o) return true;</span>
-<span class="nc bnc" id="L136" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
-<span class="nc" id="L137">        Station station = (Station) o;</span>
-<span class="nc" id="L138">        return name.equals(station.name);</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (this == o) return true;</span>
+<span class="nc bnc" id="L83" title="All 4 branches missed.">        if (o == null || getClass() != o.getClass()) return false;</span>
+<span class="nc" id="L84">        Station station = (Station) o;</span>
+<span class="nc" id="L85">        return name.equals(station.name);</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
