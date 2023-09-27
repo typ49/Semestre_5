@@ -51,7 +51,7 @@ namespace fa
 
   bool Automaton::addState(int state)
   {
-    if (states.find(state) == states.end())
+    if (!hasState(state))
     {
       states.insert(state);
       return true;
@@ -61,9 +61,20 @@ namespace fa
 
   bool Automaton::removeState(int state)
   {
-    if (states.find(state) != states.end())
+    if (hasState(state))
     {
+      // supprime l'état
       states.erase(state);
+      initialStates.erase(state);
+      finalStates.erase(state);
+      // supprime les transition associées à l'état supprimé
+      for (auto from : transitions)
+      {
+        for (auto alpha : from.second)
+        {
+          alpha.second.erase(state);
+        }
+      }
       return true;
     }
     return false;
@@ -109,7 +120,7 @@ namespace fa
 
   bool Automaton::addTransition(int from, char alpha, int to)
   {
-    if (hasState(from) && hasState(to) && hasSymbol(alpha))
+    if (hasState(from) && hasState(to) && hasSymbol(alpha) && !hasTransition(from, alpha, to))
     {
       transitions[from][alpha].insert(to);
       return true;
@@ -119,7 +130,7 @@ namespace fa
 
   bool Automaton::removeTransition(int from, char alpha, int to)
   {
-    if (hasState(from) && hasState(to) && hasSymbol(alpha))
+    if (hasState(from) && hasState(to) && hasSymbol(alpha) && hasTransition(from, alpha, to))
     {
       transitions[from][alpha].erase(to);
       return true;
@@ -149,48 +160,57 @@ namespace fa
     return count;
   }
 
-  void Automaton::prettyPrint(std::ostream &os) const {
-    os << "Automaton:" << std::endl;
+  void Automaton::prettyPrint(std::ostream &os) const
+  {
+    os << std::endl << "Automaton:" << std::endl;
 
     // Afficher l'alphabet
     os << "Alphabet: { ";
-    for (char symbol : alphabet) {
+    for (char symbol : alphabet)
+    {
       os << symbol << " ";
     }
     os << "}" << std::endl;
 
     // Afficher les états
     os << "States: { ";
-    for (int state : states) {
+    for (int state : states)
+    {
       os << state << " ";
     }
     os << "}" << std::endl;
 
     // Afficher les états initiaux
     os << "Initial States: { ";
-    for (int initState : initialStates) {
+    for (int initState : initialStates)
+    {
       os << initState << " ";
     }
     os << "}" << std::endl;
 
     // Afficher les états finaux
     os << "Final States: { ";
-    for (int finalState : finalStates) {
+    for (int finalState : finalStates)
+    {
       os << finalState << " ";
     }
     os << "}" << std::endl;
 
     // Afficher les transitions
     os << "Transitions:" << std::endl;
-    for (const auto &fromEntry : transitions) {
+    for (const auto &fromEntry : transitions)
+    {
       int fromState = fromEntry.first;
-      for (const auto &symbolEntry : fromEntry.second) {
+      for (const auto &symbolEntry : fromEntry.second)
+      {
         char symbol = symbolEntry.first;
-        for (int toState : symbolEntry.second) {
+        for (int toState : symbolEntry.second)
+        {
           os << "  " << fromState << " --" << symbol << "-> " << toState << std::endl;
         }
       }
     }
+    os << std::endl;
   }
 
 }
