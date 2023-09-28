@@ -60,7 +60,7 @@ int main()
             perror("shmat");
             exit(1);
         }
-        
+    
 
         struct sigaction action;
         action.sa_handler = SIG_IGN;
