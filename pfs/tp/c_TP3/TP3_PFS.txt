@@ -1,0 +1,34 @@
+[3.1]
+
+La différence entre les deux définitions est significative en termes de clarté, de modularité et d'intention. Voici une explication détaillée :
+
+1. **Clarté et lisibilité**:
+   
+   - La première définition `(define (mk-recording key-0 title-0 author-list-0 year-0 publisher-0 key-list-0) ...)` est explicite sur ce qu'elle attend comme arguments. Chaque argument a un nom descriptif qui indique son rôle ou sa signification.
+   
+   - La seconde définition `(define mk-recording list)` est simplement un alias pour la fonction `list`. Elle ne donne aucune indication sur le nombre d'arguments attendus ni sur leur signification.
+
+2. **Intention**:
+
+   - La première définition montre clairement l'intention de créer un enregistrement avec des champs spécifiques. Si vous lisez le code, vous pouvez immédiatement comprendre que cette fonction est destinée à créer un enregistrement avec des champs tels que `key`, `title`, `author-list`, etc.
+   
+   - La seconde définition ne montre aucune intention spécifique. Elle pourrait être utilisée pour n'importe quelle liste, pas seulement pour un enregistrement.
+
+3. **Modularité et évolutivité**:
+
+   - Avec la première définition, si vous souhaitez apporter des modifications à la structure de l'enregistrement à l'avenir (par exemple, ajouter un nouveau champ ou modifier l'ordre des champs), vous pouvez le faire de manière contrôlée en modifiant le constructeur `mk-recording`.
+   
+   - Avec la seconde définition, toute modification de la structure nécessiterait des modifications dans tous les endroits où `mk-recording` est utilisé, car il n'y a pas de structure clairement définie.
+
+4. **Erreurs et débogage**:
+
+   - Si vous faites une erreur en fournissant des arguments à la première définition, il est plus facile de localiser et de corriger l'erreur car chaque argument a un rôle spécifique.
+   
+   - Avec la seconde définition, si vous faites une erreur en fournissant des arguments, il peut être difficile de déterminer quel argument est incorrect ou manquant, car tous les arguments sont traités de la même manière.
+
+En conclusion, bien que la seconde définition soit plus concise, la première est préférable car elle est plus claire, plus intentionnelle, plus modulaire et plus facile à déboguer.
+
+[4 - get-key]
+La raison pour laquelle les résultats retournés par la fonction get-key ne présentent pas d'ambiguïtés, contrairement à ceux de la fonction get-information-e, est que les clés dans une base de données (ou dans notre liste j-list dans ce cas) sont uniques. Cela signifie que chaque enregistrement est identifié par une seule clé unique. Ainsi, même si plusieurs enregistrements ont la même information (par exemple, le même titre de chanson), ils auront des clés différentes. Lorsque nous recherchons une clé en fonction d'une information donnée, nous obtenons la clé du premier enregistrement qui correspond à cette information, ce qui est sans ambiguïté.
+
+En revanche, avec get-information-e, si nous recherchons une information en fonction d'une clé, et que cette clé n'est pas unique (ce qui ne devrait pas se produire dans une base de données bien conçue), nous pourrions obtenir des informations différentes pour la même clé, ce qui serait ambigu.

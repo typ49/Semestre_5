@@ -45,6 +45,7 @@ void* affichageIDThreads( void* arg) {
         printf("Thread ID : %lu, Affichage n° : %d\n\n", pthread_self(), i+1);
         sleep(1);
     }
+    scanf("%d", &i);
     return NULL;
 }
 
