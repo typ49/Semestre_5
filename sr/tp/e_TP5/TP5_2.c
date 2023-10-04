@@ -19,6 +19,8 @@ struct Matrix {
     int **data;
 };
 
+// TODO : faire une autre structure pour l'initialisation, la somme n'as rien à faire là
+
 struct ThreadArgs {
     int *row;
     int nbElements;
