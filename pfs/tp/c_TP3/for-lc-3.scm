@@ -261,6 +261,7 @@
 
 ;;(writeln/return (map (lambda (x) (+ x 1)) '(28 9 2023)))
 
+
   
   (writeln/return (unique-keys? miles-davis-r))
   (writeln/return (unique-keys? stan-getz-r))
@@ -482,6 +483,7 @@
   (merge-sort compare-publishers stan-getz-r))
 
 (pretty-writeln/return sorted-miles-davis-publishers)
+(newline)
 (pretty-writeln/return sorted-stan-getz-publishers)
 
 
@@ -490,32 +492,46 @@
    ((x) (+ x 1))
    ((x y) (+ x y))))
 
+(define (compare-editors e1 e2)
+  (cond
+    ((and (unknown? e1) (unknown? e2)) #t)
+    ((unknown? e1) #f)
+    ((unknown? e2) #t)
+    (else (string<=? e1 e2))))
+
+
+(define (mergesort-plus l rel2? k1)
+  (letrec ((merge (lambda (lst1 lst2)
+                    (cond
+                      ((null? lst1) lst2)
+                      ((null? lst2) lst1)
+                      ((rel2? (k1 (car lst1)) (k1 (car lst2)))
+                       (cons (car lst1) (merge (cdr lst1) lst2)))
+                      (else (cons (car lst2) (merge lst1 (cdr lst2)))))))
+           (msort (lambda (lst)
+                    (if (<= (length lst) 1)
+                        lst
+                        (let ((half (quotient (length lst) 2)))
+                          (merge (msort (take lst half)) 
+                                 (msort (drop lst half))))))))
+    (msort l)))
 
 
 
-(define mergesort-plus
-  (case-lambda
-    [(lst) (mergesort-plus lst <= (lambda (x) x))]
-    [(lst rel2?) (mergesort-plus lst rel2? (lambda (x) x))]
-    [(lst rel2? k1)
-     (letrec ((merge (lambda (lst1 lst2)
-                       (cond
-                         ((null? lst1) lst2)
-                         ((null? lst2) lst1)
-                         ((rel2? (cdr (car lst1)) (cdr (car lst2)))
-                          (cons (car lst1) (merge (cdr lst1) lst2)))
-                         (else (cons (car lst2) (merge lst1 (cdr lst2)))))))
-              (msort (lambda (lst)
-                       (if (<= (length lst) 1)
-                           lst
-                           (let ((half (quotient (length lst) 2)))
-                             (merge (msort (take lst half))
-                                    (msort (drop lst half))))))))
-       (map car (msort (map (lambda (x) (cons x (k1 x))) lst))))]))
 
-; Exemples d'utilisation :
-(define sorted-by-publisher-1 (mergesort-plus miles-davis-r publisher<=? publisher))
-(define sorted-by-publisher-2 (mergesort-plus stan-getz-r publisher<=? publisher))
 
-(pretty-writeln/return sorted-by-publisher-1)
-(pretty-writeln/return sorted-by-publisher-2)
+
+
+
+; Fonction pour extraire l'éditeur d'un enregistrement
+(define (get-editor recording)
+  (let ((editor (list-ref recording 4)))
+    (if (string? editor)
+        editor
+        ""))) ; retourne une chaîne vide si l'éditeur n'est pas une chaîne
+
+; Trier la base de données miles-davis-r par éditeur
+(newline)
+  (pretty-writeln/return (mergesort-plus miles-davis-r compare-editors get-editor))
+
+

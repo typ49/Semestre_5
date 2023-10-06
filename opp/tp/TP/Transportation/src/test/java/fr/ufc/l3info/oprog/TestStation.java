@@ -1,4 +1,5 @@
 package fr.ufc.l3info.oprog;
+
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -8,45 +9,118 @@ public class TestStation {
     Station s;
 
     @Before
-    public void setup() {
-        // Création d'un objet à tester
+    public void initialisation() {
         s = new Station("ma Station");
     }
 
     @Test
-    public void testName() {
-        // Vérifie si la méthode getName renvoie le nom de la station attendu
+    public void testNomDeLaStation() {
         Assert.assertEquals("ma Station", s.getName());
     }
 
     @Test
-    public void TestGetLines() {
-        // Vérifie si getLines renvoie un ensemble vide lorsque aucune ligne n'a été ajoutée
+    public void testObtenirLignesSansAjout() {
         Assert.assertEquals(0, s.getLines().size());
     }
 
     @Test
-    public void testAddLine() {
-        // Ajoute une ligne à la station
-        s.addLine("Ligne1", 1, 10.0);
+    public void testMutantAjoutLigneAvecNumeroZero() {
+        s.addLine("Ligne2", 0, 5.0);
+        Assert.assertEquals(0, s.getLines().size());
+    }
 
-        // Vérifie si la ligne a été ajoutée avec succès
+    @Test
+    public void testMutantDistancePourLigneInexistante() {
+        double distance = s.getDistanceForLine("Ligne3");
+        Assert.assertEquals(-1.0, distance, 0.01);
+    }
+
+    @Test
+    public void testAjoutMultipleDeLignes() {
+        s.addLine("LigneA", 1, 5.0);
+        s.addLine("LigneB", 2, 10.0);
+        s.addLine("LigneC", 3, 15.0);
+        Assert.assertEquals(3, s.getLines().size());
+    }
+
+    @Test
+    public void testSuppressionDeLigne() {
+        s.addLine("LigneB", 2, 10.0);
+        s.removeLine("LigneB");
+        Assert.assertEquals(0, s.getLines().size());
+    }
+
+    @Test
+    public void testAjoutLigneAvecNomVide() {
+        s.addLine("", 1, 5.0);
+        Assert.assertEquals(0, s.getLines().size());
+    }
+
+    @Test
+    public void testAjoutLigneAvecNumeroNegatif() {
+        s.addLine("LigneD", -1, 5.0);
+        Assert.assertEquals(0, s.getLines().size());
+    }
+
+    @Test
+    public void testAjoutLigneAvecDistanceNegative() {
+        s.addLine("LigneE", 1, -5.0);
+        Assert.assertEquals(0, s.getLines().size());
+    }
+
+    @Test
+    public void testAjoutLignesAvecNomsSimilaires() {
+        s.addLine("LigneA", 1, 5.0);
+        s.addLine("LigneA", 2, 10.0);
         Assert.assertEquals(1, s.getLines().size());
-        Assert.assertEquals(1, s.getNumberForLine("Ligne1"));
-        Assert.assertEquals(10.0, s.getDistanceForLine("Ligne1"), 0.01);
+        Assert.assertEquals(2, s.getNumberForLine("LigneA"));
+        Assert.assertEquals(10.0, s.getDistanceForLine("LigneA"), 0.01);
     }
 
     @Test
-    public void testRemoveLine() {
-        // Ajoute une ligne à la station
-        s.addLine("Ligne1", 1, 10.0);
-
-        // Supprime la ligne
-        s.removeLine("Ligne1");
-
-        // Vérifie si la ligne a été supprimée avec succès
+    public void testSuppressionLigneInexistante() {
+        s.removeLine("LigneInexistante");
         Assert.assertEquals(0, s.getLines().size());
-        Assert.assertEquals(0, s.getNumberForLine("Ligne1"));
-        Assert.assertEquals(-1.0, s.getDistanceForLine("Ligne1"), 0.01);
+    }
+
+    @Test
+    public void testAjoutLigneAvecNomNull() {
+        s.addLine(null, 1, 5.0);
+        Assert.assertEquals(0, s.getLines().size());
+    }
+
+    @Test
+    public void testRecuperationInfosAvecNomNull() {
+        Assert.assertEquals(0, s.getNumberForLine(null));
+        Assert.assertEquals(-1.0, s.getDistanceForLine(null), 0.01);
+    }
+
+    @Test
+    public void testEgaliteDeuxStations() {
+        Station s2 = new Station("ma Station");
+        Assert.assertTrue(s.equals(s2));
+    }
+
+    @Test
+    public void testNonEgaliteDeuxStations() {
+        Station s2 = new Station("autre Station");
+        Assert.assertFalse(s.equals(s2));
+    }
+
+    @Test
+    public void testEgaliteStationAvecAutreObjet() {
+        Object o = new Object();
+        Assert.assertFalse(s.equals(o));
+    }
+
+    @Test
+    public void testEgaliteStationAvecNull() {
+        Assert.assertFalse(s.equals(null));
+    }
+
+    @Test
+    public void testHashCodeStation() {
+        int expectedHashCode = "ma Station".hashCode();
+        Assert.assertEquals(expectedHashCode, s.hashCode());
     }
 }
