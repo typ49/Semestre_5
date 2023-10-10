@@ -123,10 +123,18 @@ namespace fa
 
   bool Automaton::addTransition(int from, char alpha, int to)
   {
-    if (hasState(from) && hasState(to) && hasSymbol(alpha) && !hasTransition(from, alpha, to))
+    // Vérifie si l'état de départ, l'état d'arrivée et le symbole sont valides et si la transition n'existe pas déjà
+    // peux ajouter une epsilon transition
+    if (!hasTransition(from, alpha, to))
     {
-      transitions[from][alpha].insert(to);
-      return true;
+      if (hasState(from) && hasState(to))
+      {
+        if (hasSymbol(alpha) || alpha == Epsilon)
+        {
+          transitions[from][alpha].insert(to);
+          return true;
+        }
+      }
     }
     return false;
   }
@@ -143,9 +151,12 @@ namespace fa
 
   bool Automaton::hasTransition(int from, char alpha, int to) const
   {
-    if (hasState(from) && hasState(to) && hasSymbol(alpha))
+    if (hasState(from) && hasState(to))
     {
-      return transitions.find(from) != transitions.end() && transitions.at(from).find(alpha) != transitions.at(from).end() && transitions.at(from).at(alpha).find(to) != transitions.at(from).at(alpha).end();
+      if (hasSymbol(alpha) || alpha == Epsilon)
+      {
+        return transitions.find(from) != transitions.end() && transitions.at(from).find(alpha) != transitions.at(from).end() && transitions.at(from).at(alpha).find(to) != transitions.at(from).at(alpha).end();
+      }
     }
     return false;
   }
@@ -241,12 +252,14 @@ namespace fa
     // Vérifie si l'automate a des transitions epsilon
     if (hasEpsilonTransition())
     {
+      printf("a une epsilon transition");
       return false;
     }
 
     // Vérifie si l'automate a exactement un état initial
     if (initialStates.size() != 1)
     {
+      printf("n'a pas exactement un état initial");
       return false;
     }
 
@@ -266,42 +279,134 @@ namespace fa
         // Si aucune transition ou plus d'une transition est définie pour une combinaison état-symbole, l'automate n'est pas déterministe
         if (transitionCount != 1)
         {
+          printf("n'est pas déterministe");
           return false;
         }
       }
     }
-
+  printf("est déterministe");
     return true;
   }
 
-  static Automaton createComplete(const Automaton &automaton)
+  bool Automaton::isComplete() const
   {
-    // TODO
+    // Parcourir chaque état de l'automate
+    for (int state : states)
+    {
+      // Parcourir chaque symbole de l'alphabet
+      for (char symbol : alphabet)
+      {
+        bool transitionExists = false;
+
+        // Vérifier s'il existe une transition pour cet état et ce symbole
+        for (int toState : states)
+        {
+          if (hasTransition(state, symbol, toState))
+          {
+            transitionExists = true;
+            break;
+          }
+        }
+
+        if (!transitionExists)
+        {
+          return false; // Si aucune transition n'est trouvée pour une combinaison état-symbole, l'automate n'est pas complet
+        }
+      }
+    }
+    return true; // Si des transitions existent pour chaque combinaison état-symbole, l'automate est complet
   }
 
-  static Automaton createComplement(const Automaton &automaton)
+  Automaton Automaton::createComplete(const Automaton &automaton)
   {
-    // TODO
+    Automaton completeAutomaton = automaton; // Copier l'automate donné
+
+    int trapState = -1;          // Utiliser -1 comme état poubelle, mais vous pouvez choisir une autre valeur si nécessaire
+    bool trapStateAdded = false; // Indicateur pour savoir si l'état poubelle a été ajouté
+
+    // Parcourir chaque état de l'automate
+    for (int state : automaton.states)
+    {
+      // Parcourir chaque symbole de l'alphabet
+      for (char symbol : automaton.alphabet)
+      {
+        // Vérifier s'il existe une transition pour cet état et ce symbole
+        bool transitionExists = false;
+        for (int toState : automaton.states)
+        {
+          if (automaton.hasTransition(state, symbol, toState))
+          {
+            transitionExists = true;
+            break;
+          }
+        }
+
+        // Si aucune transition n'existe pour cette combinaison état-symbole
+        if (!transitionExists)
+        {
+          // Ajouter l'état poubelle si ce n'est pas déjà fait
+          if (!trapStateAdded)
+          {
+            completeAutomaton.addState(trapState);
+            trapStateAdded = true;
+          }
+
+          // Ajouter une transition vers l'état poubelle
+          completeAutomaton.addTransition(state, symbol, trapState);
+        }
+      }
+    }
+
+    // Si l'état poubelle a été ajouté, ajouter des transitions de l'état poubelle vers lui-même pour chaque symbole
+    if (trapStateAdded)
+    {
+      for (char symbol : automaton.alphabet)
+      {
+        completeAutomaton.addTransition(trapState, symbol, trapState);
+      }
+    }
+
+    return completeAutomaton;
   }
 
-  static Automaton createMirror(const Automaton &automaton)
+  Automaton Automaton::createComplement(const Automaton &automaton)
   {
-    // TODO
+    Automaton complement;
+    complement.alphabet = automaton.alphabet;
+    complement.states = automaton.states;
+    complement.initialStates = automaton.initialStates;
+    for (auto state : automaton.states)
+    {
+      if (!automaton.isStateFinal(state))
+      {
+        complement.setStateFinal(state);
+      }
+    }
+    return complement;
   }
 
-  std::set<int> makeTransition(const std::set<int> &origin, char alpha) const
+  Automaton Automaton::createMirror(const Automaton &automaton)
   {
     // TODO
+    return Automaton(); // Ajouté temporairement pour éviter les erreurs de compilation
   }
 
-  std::set<int> readString(const std::string &word) const
+  std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha) const
   {
     // TODO
+    return std::set<int>(); // Ajouté temporairement pour éviter les erreurs de compilation
   }
 
-  bool match(const std::string &word) const
+  std::set<int> Automaton::readString(const std::string &word) const
   {
     // TODO
+    return std::set<int>(); // Ajouté temporairement pour éviter les erreurs de compilation
+  }
+
+  bool Automaton::match(const std::string &word) const
+  {
+    // TODO
+    return false; // Ajouté temporairement pour éviter les erreurs de compilation
   }
 
 } // namespace fa

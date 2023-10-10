@@ -80,16 +80,17 @@
       this.speed += GRAVITY * deltaTime;
       this.y += this.speed * deltaTime;
   
-      // Empêcher l'oiseau de dépasser le bas de l'écran
+      // Empêcher l'oiseau de dépasser le bas de l'écran en le tuant
       if (this.y + this.height > HEIGHT - SPRITE_FLOOR_HEIGHT) {
           this.y = HEIGHT - this.height - SPRITE_FLOOR_HEIGHT;
           this.speed = 0;
       }
   
-      // Empêcher l'oiseau de dépasser le haut de l'écran
+      // Empêcher l'oiseau de dépasser le haut de l'écran en le tuant
       if (this.y < 0) {
           this.y = 0;
           this.speed = 0;
+          
       }
   }
   
@@ -230,6 +231,15 @@
         return;
       }
       this.bird.update(deltaTime);
+      // game over si l'oiseau touche le sol ou le plafond
+      if (
+        this.bird.y + this.bird.height >= HEIGHT - SPRITE_FLOOR_HEIGHT ||
+        this.bird.y < 1
+      ) {
+        this.checkAndSaveScore();
+        this.state = "GAME_OVER"; // arrêter le jeu
+        return;
+      }
 
       this.obstacleTimer += deltaTime;
       if (this.obstacleTimer >= OBSTACLE_INTERVAL) {

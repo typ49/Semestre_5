@@ -17,13 +17,12 @@ namespace fa
 
   class Automaton
   {
-  private:
+  public:
     std::set<char> alphabet;                                  // Ensembles des symboles de l'automate
     std::set<int> states;                                     // Ensembles des etats de l'automate
     std::set<int> initialStates;                              // Ensembles des etats initiaux de l'automate
     std::set<int> finalStates;                                // Ensembles des etats finaux de l'automate
     std::map<int, std::map<char, std::set<int>>> transitions; // Map des transitions de l'automate
-  public:
     /**
      * Build an empty automaton (no state, no transition).
      */

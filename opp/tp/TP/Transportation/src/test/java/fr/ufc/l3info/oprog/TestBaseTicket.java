@@ -4,18 +4,18 @@ import org.junit.*;
 
 public class TestBaseTicket {
 
-    BaseTicket10 ticketChild;
-    BaseTicket10 ticketNegativeAmount;
-    BaseTicket10 ticketAdult;
-    BaseTicket10 ticketNoAmount;
+    BaseTicket04 ticketChild;
+    BaseTicket04 ticketNegativeAmount;
+    BaseTicket04 ticketAdult;
+    BaseTicket04 ticketNoAmount;
 
 
     @Before
     public void setup() {
-        ticketChild = new BaseTicket10(true, 100);
-        ticketNegativeAmount = new BaseTicket10(false, -100);
-        ticketAdult = new BaseTicket10(false, 100);
-        ticketNoAmount = new BaseTicket10(false, 0);
+        ticketChild = new BaseTicket04(true, 100);
+        ticketNegativeAmount = new BaseTicket04(false, -100);
+        ticketAdult = new BaseTicket04(false, 100);
+        ticketNoAmount = new BaseTicket04(false, 0);
     }
 
     /**
@@ -141,19 +141,19 @@ public class TestBaseTicket {
     }
 
     @Test
-    public void testEnteringAfterInvalidate_KO() {
+    public void testEnteringAfterInvalidate() {
         ticketChild.invalidate();
         Assert.assertFalse(ticketChild.entering("station"));
     }
 
 
-    BaseTicket10 ticketMinValue;
-    BaseTicket10 ticketMaxValue;
+    BaseTicket04 ticketMinValue;
+    BaseTicket04 ticketMaxValue;
 
     @Before
     public void additionalSetup() {
-        ticketMinValue = new BaseTicket10(false, Integer.MIN_VALUE);
-        ticketMaxValue = new BaseTicket10(false, Integer.MAX_VALUE);
+        ticketMinValue = new BaseTicket04(false, Integer.MIN_VALUE);
+        ticketMaxValue = new BaseTicket04(false, Integer.MAX_VALUE);
     }
 
     @Test
@@ -211,7 +211,7 @@ public class TestBaseTicket {
 
     @Test
     public void testIsValid_JustCreated() {
-        Assert.assertTrue(new BaseTicket10(true, 50).isValid());
+        Assert.assertTrue(new BaseTicket04(true, 50).isValid());
     }
 
 
@@ -225,7 +225,7 @@ public class TestBaseTicket {
 
 
     @Test
-    public void testSwitchingStationsWithoutInvalidation_KO() {
+    public void testSwitchingStationsWithoutInvalidation() {
         ticketChild.entering("station1");
         Assert.assertFalse(ticketChild.entering("station2"));
         Assert.assertNull(ticketChild.getEntryStation());
@@ -234,13 +234,13 @@ public class TestBaseTicket {
 
     @Test
     public void testAmountJustAboveZero() {
-        BaseTicket10 ticket = new BaseTicket10(false, 1);
+        BaseTicket04 ticket = new BaseTicket04(false, 1);
         Assert.assertEquals(1, ticket.getAmount());
     }
 
     @Test
     public void testAmountJustBelowZero() {
-        BaseTicket10 ticket = new BaseTicket10(false, -1);
+        BaseTicket04 ticket = new BaseTicket04(false, -1);
         Assert.assertEquals(0, ticket.getAmount());  // Si l'implémentation ne permet pas les montants négatifs
     }
 
