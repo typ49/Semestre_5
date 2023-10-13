@@ -262,7 +262,7 @@
 ;;(writeln/return (map (lambda (x) (+ x 1)) '(28 9 2023)))
 
 
-  
+#|  
   (writeln/return (unique-keys? miles-davis-r))
   (writeln/return (unique-keys? stan-getz-r))
 
@@ -273,7 +273,7 @@
 
   (writeln/return (get-key "Kelo" title miles-davis-r))
   (writeln/return (get-key "Blue Moon" title stan-getz-r))
-
+|#
 ;; 1. Liste des noms des œuvres enregistrées par Miles Davis en 1972.
 (define miles-1972-titles
   (those-that 
@@ -336,6 +336,7 @@
    key))
 
 ;; Affichage des résultats
+#|
 (writeln/return miles-1972-titles)
 (writeln/return stan-multiple-authors)
 (writeln/return miles-single-author)
@@ -343,7 +344,7 @@
 (writeln/return miles-emi-keys)
 (writeln/return miles-self-recorded)
 (writeln/return stan-multiple-cds)
-
+|#
 
 (writeln/return (top-years miles-davis-r))
 (writeln/return (top-years stan-getz-r))
@@ -431,9 +432,12 @@
 (define sorted-miles-davis-large
   (merge-sort compare-years-large miles-davis-r))
 
+
+;; print sorted-strict
 (pretty-writeln/return sorted-miles-davis-strict)
 (newline)
 (newline)
+;; print sorted-large
 (pretty-writeln/return sorted-miles-davis-large)
 (newline)
 (newline)
@@ -447,8 +451,10 @@
 (define sorted-miles-davis-years-titles
   (merge-sort compare-years-then-titles miles-davis-r))
 
+;; print miles davis sorted by years and titles
 (pretty-writeln/return sorted-miles-davis-years-titles)
-
+(newline)
+(newline)
 
 
 (define (position x l)
@@ -482,8 +488,10 @@
 (define sorted-stan-getz-publishers
   (merge-sort compare-publishers stan-getz-r))
 
+;; print miles davis sorted by publishers
 (pretty-writeln/return sorted-miles-davis-publishers)
 (newline)
+;; print stan getz sorted by publishers
 (pretty-writeln/return sorted-stan-getz-publishers)
 
 
@@ -494,27 +502,42 @@
 
 (define (compare-editors e1 e2)
   (cond
-    ((and (unknown? e1) (unknown? e2)) #t)
-    ((unknown? e1) #f)
-    ((unknown? e2) #t)
+    ((and (equal? e1 "??") (equal? e2 "??")) #t)
+    ((equal? e1 "??") #f)
+    ((equal? e2 "??") #t)
     (else (string<=? e1 e2))))
 
 
-(define (mergesort-plus l rel2? k1)
+
+(define (mergesort-plus list compar? get)
+  ;; La fonction principale `mergesort-plus` prend trois arguments :
+  ;; - `list` est la liste à trier.
+  ;; - `compar?` est une fonction de comparaison qui prend deux éléments et renvoie `#t` si le premier élément doit venir avant le second dans l'ordre trié, et `#f` sinon.
+  ;; - `get` est une fonction qui extrait la clé de tri d'un élément de la liste.
+
+  ;; La fonction `merge` fusionne deux listes triées en une seule liste triée.
   (letrec ((merge (lambda (lst1 lst2)
                     (cond
-                      ((null? lst1) lst2)
-                      ((null? lst2) lst1)
-                      ((rel2? (k1 (car lst1)) (k1 (car lst2)))
+                      ((null? lst1) lst2) ; Si `lst1` est vide, renvoie `lst2`.
+                      ((null? lst2) lst1) ; Si `lst2` est vide, renvoie `lst1`.
+                      ((compar? (get (car lst1)) (get (car lst2)))
+                       ;; Si l'élément en tête de `lst1` doit venir avant l'élément en tête de `lst2`, ajoute l'élément en tête de `lst1` au résultat et fusionne le reste de `lst1` avec `lst2`.
                        (cons (car lst1) (merge (cdr lst1) lst2)))
-                      (else (cons (car lst2) (merge lst1 (cdr lst2)))))))
+                      (else
+                       ;; Sinon, ajoute l'élément en tête de `lst2` au résultat et fusionne `lst1` avec le reste de `lst2`.
+                       (cons (car lst2) (merge lst1 (cdr lst2)))))))
+
+           ;; La fonction `msort` effectue le tri fusion récursif sur une liste.
            (msort (lambda (lst)
                     (if (<= (length lst) 1)
-                        lst
+                        lst ; Si la liste a une longueur de 1 ou moins, elle est déjà triée, donc renvoie `lst`.
                         (let ((half (quotient (length lst) 2)))
+                          ;; Sinon, divise `lst` en deux moitiés, trie chaque moitié récursivement avec `msort`, puis fusionne les deux moitiés triées avec `merge`.
                           (merge (msort (take lst half)) 
                                  (msort (drop lst half))))))))
-    (msort l)))
+    ;; Enfin, la fonction `mergesort-plus` trie la liste en utilisant la fonction `msort` et renvoie le résultat.
+    (msort list)))
+
 
 
 
@@ -526,12 +549,19 @@
 ; Fonction pour extraire l'éditeur d'un enregistrement
 (define (get-editor recording)
   (let ((editor (list-ref recording 4)))
-    (if (string? editor)
-        editor
-        ""))) ; retourne une chaîne vide si l'éditeur n'est pas une chaîne
+    (if (or (string? editor) (symbol? editor))
+        (symbol->string editor)
+        "??")))
+
+
 
 ; Trier la base de données miles-davis-r par éditeur
 (newline)
   (pretty-writeln/return (mergesort-plus miles-davis-r compare-editors get-editor))
+(newline)(newline)
+(display (get-editor (car miles-davis-r))) ; Doit afficher l'éditeur du premier enregistrement
+(newline)
+(display (compare-editors "EMI" "??")) ; Doit afficher #t ou #f en fonction de l'ordre des éditeurs
+(display (compare-editors "??" "EMI"))
 
 
