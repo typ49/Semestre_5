@@ -37,7 +37,7 @@ public class Network {
     }
 
     public boolean isValid() {
-        if (stations.isEmpty()) return true; // An empty network is valid
+        if (stations.isEmpty()) return false; // An empty network is invalid
 
         Set<String> lines = getLines();
 
