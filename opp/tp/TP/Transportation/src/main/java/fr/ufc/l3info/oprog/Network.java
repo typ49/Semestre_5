@@ -1,7 +1,6 @@
 package fr.ufc.l3info.oprog;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Network {
 
@@ -16,26 +15,12 @@ public class Network {
         }
     }
 
-    public void removeStation(Station s) {
-        if (s != null) {
-            stations.remove(s.getName());
-        }
-    }
-
-    private boolean stationWithNameExists(String name) {
-        return stations.containsKey(name);
-    }
-
     public Set<String> getLines() {
         Set<String> lines = new HashSet<>();
         for (Station s : stations.values()) {
             lines.addAll(s.getLines());
         }
         return lines;
-    }
-
-    public Collection<Station> getStations() {
-        return stations.values();
     }
 
     public Station getStationByName(String name) {
@@ -52,48 +37,40 @@ public class Network {
     }
 
     public boolean isValid() {
-        if (stations.isEmpty()) return false;
+        if (stations.isEmpty()) return true; // An empty network is valid
 
         Set<String> lines = getLines();
-
-        // Vérification: il existe au moins une ligne.
-        if (lines.isEmpty()) return false;
 
         for (String line : lines) {
             boolean foundStationOne = false;
             double previousKm = -1;
-            Set<Integer> seenNumbers = new HashSet<>();
+            int expectedNumber = 1;
 
+            List<Station> stationsOnLine = new ArrayList<>();
             for (Station s : stations.values()) {
                 if (s.getLines().contains(line)) {
-                    int stationNumber = s.getNumberForLine(line);
-                    double stationKm = s.getDistanceForLine(line); // Cette méthode doit être définie dans Station
-
-                    // Vérification: la première station porte le numéro 1 et se trouve au kilomètre 0.
-                    if (stationNumber == 1) {
-                        foundStationOne = true;
-                        if (stationKm != 0) return false;
-                    }
-
-                    // Vérification: les positions kilométriques sont strictement croissantes tout au long de la ligne.
-                    if (stationKm <= previousKm) return false;
-                    previousKm = stationKm;
-
-                    // Vérification: la numérotation des stations de la ligne ne présente pas de numéros en double ou de numéro manquants.
-                    if (seenNumbers.contains(stationNumber) || (stationNumber - seenNumbers.size() > 1)) {
-                        return false;
-                    }
-                    seenNumbers.add(stationNumber);
+                    stationsOnLine.add(s);
                 }
             }
-            if (!foundStationOne) return false;
+            stationsOnLine.sort(Comparator.comparingInt(s -> s.getNumberForLine(line)));
+
+            for (Station s : stationsOnLine) {
+                int stationNumber = s.getNumberForLine(line);
+                double stationKm = s.getDistanceForLine(line);
+
+                if (stationNumber == 1) {
+                    foundStationOne = true;
+                    if (stationKm != 0) return false;
+                }
+
+                if (stationKm <= previousKm) return false;
+                previousKm = stationKm;
+
+                if (stationNumber != expectedNumber) return false;
+                expectedNumber++;
+            }
+            if (!foundStationOne) return false; // There should be a station with number 1 for each line
         }
-
-        // À ce stade, chaque ligne est correctement structurée.
-        // Reste à vérifier que chaque station est accessible depuis n'importe quelle autre station.
-
-        // Cela nécessite un algorithme de parcours de graphe pour vérifier la connectivité.
-        // Pour le moment, on suppose que c'est vrai. Cette partie pourrait être ajoutée ultérieurement.
 
         return true;
     }
@@ -103,15 +80,22 @@ public class Network {
         Station station2 = getStationByName(s2);
 
         if (station1 == null || station2 == null) {
-            return -1.0; // Retourner une valeur négative ou NaN plutôt que de lancer une exception.
+            return -1.0;
         }
 
-        // Calcul de distance entre deux stations sur la même ligne:
+        double shortestDistance = Double.MAX_VALUE;
+        boolean found = false;
+
         for (String line : getLines()) {
             if (station1.getLines().contains(line) && station2.getLines().contains(line)) {
-                return Math.abs(station1.getDistanceForLine(line) - station2.getDistanceForLine(line));
+                double currentDistance = Math.abs(station1.getDistanceForLine(line) - station2.getDistanceForLine(line));
+                if (currentDistance < shortestDistance) {
+                    shortestDistance = currentDistance;
+                    found = true;
+                }
             }
         }
-        return -1.0; // Retourner une valeur négative ou NaN plutôt que de lancer une exception.
+
+        return found ? shortestDistance : -1.0;
     }
 }
