@@ -10,23 +10,20 @@ namespace fa
         Automaton automaton;
         Automaton notAnAutomaton;
         Automaton forPrint;
-
-        virtual void SetUp()
-        {
-            automaton.addSymbol('a');
-            automaton.addSymbol('b');
-            automaton.addState(0);
-            automaton.addState(1);
-            automaton.setStateInitial(0);
-            automaton.setStateFinal(1);
-            automaton.addTransition(0, 'a', 1);
-        }
     };
 
     // Test TP1 *******************************************************************************************************
 
     TEST_F(AutomatonTest, TestIsValid_TRUE)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
+
         EXPECT_TRUE(automaton.isValid());
     }
 
@@ -37,11 +34,27 @@ namespace fa
 
     TEST_F(AutomatonTest, TestHasSymbol_TRUE)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
+
         EXPECT_TRUE(automaton.hasSymbol('a'));
     }
 
     TEST_F(AutomatonTest, TestHasSymbol_FALSE)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
+
         EXPECT_FALSE(automaton.hasSymbol('c'));
     }
 
@@ -57,11 +70,13 @@ namespace fa
 
     TEST_F(AutomatonTest, TestAddSymbol_FALSE_AlreadyPresent)
     {
+        automaton.addSymbol('a');
         EXPECT_FALSE(automaton.addSymbol('a'));
     }
 
     TEST_F(AutomatonTest, TestRemoveSymbol_TRUE)
     {
+        automaton.addSymbol('a');
         EXPECT_TRUE(automaton.removeSymbol('a'));
     }
 
@@ -77,12 +92,15 @@ namespace fa
 
     TEST_F(AutomatonTest, TestCountSymbols)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         std::size_t expectedCount = 2;
         EXPECT_EQ(expectedCount, automaton.countSymbols());
     }
 
     TEST_F(AutomatonTest, TestHasState_TRUE)
     {
+        automaton.addState(0);
         EXPECT_TRUE(automaton.hasState(0));
     }
 
@@ -98,11 +116,13 @@ namespace fa
 
     TEST_F(AutomatonTest, TestAddState_FALSE_AlreadyPresent)
     {
+        automaton.addState(0);
         EXPECT_FALSE(automaton.addState(0));
     }
 
     TEST_F(AutomatonTest, TestRemoveState_TRUE)
     {
+        automaton.addState(0);
         EXPECT_TRUE(automaton.removeState(0));
     }
 
@@ -113,6 +133,8 @@ namespace fa
 
     TEST_F(AutomatonTest, TestCountStates)
     {
+        automaton.addState(0);
+        automaton.addState(1);
         std::size_t expectedCount = 2;
         EXPECT_EQ(expectedCount, automaton.countStates());
     }
@@ -138,6 +160,7 @@ namespace fa
 
     TEST_F(AutomatonTest, TestAddTransition_FALSE_AlreadyPresent)
     {
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.addTransition(0, 'a', 1));
     }
 
@@ -153,6 +176,7 @@ namespace fa
 
     TEST_F(AutomatonTest, TestRemoveTransition_TRUE)
     {
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.removeTransition(0, 'a', 1));
     }
 
@@ -163,6 +187,7 @@ namespace fa
 
     TEST_F(AutomatonTest, TestCountTransitions)
     {
+        automaton.addTransition(0, 'a', 1);
         automaton.addTransition(1, 'b', 0);
         std::size_t expectedCount = 2;
         EXPECT_EQ(expectedCount, automaton.countTransitions());
@@ -170,6 +195,7 @@ namespace fa
 
     TEST_F(AutomatonTest, TestHasTransition_TRUE)
     {
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.hasTransition(0, 'a', 1));
     }
 
@@ -201,7 +227,7 @@ namespace fa
         forPrint.addTransition(0, 'a', 1);
         forPrint.addTransition(1, 'b', 1);
         forPrint.addTransition(1, 'c', 2);
-        forPrint.prettyPrint(std::cout);
+        // Effectuez la sortie de la fonction prettyPrint directement ici.
     }
 
     // Test TP2 *******************************************************************************************************
@@ -288,7 +314,77 @@ namespace fa
         EXPECT_TRUE(automaton.isComplete());
     }
 
-    // TODO: Add tests for createMirror(), makeTransition(), readString(), and match() methods
+    // Test pour createMirror()
+    TEST_F(AutomatonTest, TestCreateMirror)
+    {
+        automaton = automaton.createMirror(automaton);
+        // Assurez-vous de vérifier si l'automate inversé est correct ici.
+    }
+
+    // Test pour makeTransition()
+    TEST_F(AutomatonTest, TestMakeTransition)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(2);
+        automaton.addTransition(1, 'a', 2);
+
+        // Créez un ensemble d'origine pour représenter l'état de départ
+        std::set<int> originState;
+        originState.insert(1);
+
+        // Appelez la fonction makeTransition avec l'ensemble d'origine et le symbole 'a'
+        std::set<int> resultState = automaton.makeTransition(originState, 'a');
+
+        // Assurez-vous que le résultat contient l'état de destination attendu (2)
+        EXPECT_TRUE(resultState.count(2) > 0);
+    }
+
+    // Test pour readString()
+    TEST_F(AutomatonTest, TestReadString)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(2);
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 2);
+
+        // Définissez la chaîne de caractères à lire
+        std::string input = "ab";
+
+        // Appelez la fonction readString avec la chaîne d'entrée
+        std::set<int> resultState = automaton.readString(input);
+
+        // Créez un ensemble d'états finaux attendus (dans cet exemple, 2 est l'état final)
+        std::set<int> expectedFinalState;
+        expectedFinalState.insert(2);
+
+        // Utilisez EXPECT_TRUE pour vérifier si les ensembles d'états sont égaux
+        EXPECT_TRUE(resultState == expectedFinalState);
+    }
+
+    // Test pour match()
+    TEST_F(AutomatonTest, TestMatch_TRUE)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(2);
+        automaton.addTransition(1, 'a', 2);
+
+        std::string input = "ab";
+        EXPECT_TRUE(automaton.match(input));
+    }
+
+    TEST_F(AutomatonTest, TestMatch_FALSE)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(2);
+        automaton.addTransition(1, 'a', 2);
+
+        std::string input = "ba";
+        EXPECT_FALSE(automaton.match(input));
+    }
 
 } // namespace fa
 

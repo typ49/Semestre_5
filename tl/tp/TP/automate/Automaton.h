@@ -27,6 +27,9 @@ namespace fa
      * Build an empty automaton (no state, no transition).
      */
     Automaton();
+    /** TP1
+     *
+     */
 
     /**
      * Tell if an automaton is valid.
@@ -142,6 +145,10 @@ namespace fa
     // void dotPrint(std::ostream& os) const;
 
     /**
+     * TP2
+     */
+
+    /**
      * Tell if the automaton has one or more epsilon-transition
      */
     bool hasEpsilonTransition() const;
@@ -170,6 +177,10 @@ namespace fa
      * Tell if the word is in the language accepted by the automaton
      */
     bool match(const std::string &word) const;
+
+    /**
+     * TP3
+     */
 
     /**
      * Remove non-accessible states
