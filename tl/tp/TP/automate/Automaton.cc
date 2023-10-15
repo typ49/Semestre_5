@@ -258,14 +258,14 @@ namespace fa
     // Vérifie si l'automate a des transitions epsilon
     if (hasEpsilonTransition())
     {
-      printf("a une epsilon transition");
+      printf("\na une epsilon transition\n");
       return false;
     }
 
     // Vérifie si l'automate a exactement un état initial
     if (initialStates.size() != 1)
     {
-      printf("n'a pas exactement un état initial");
+      printf("\nn'a pas exactement un état initial\n");
       return false;
     }
 
@@ -274,23 +274,28 @@ namespace fa
     {
       for (auto alpha : alphabet)
       {
-        int transitionCount = 0;
-
-        // Compte le nombre de transitions pour l'état courant et le symbole courant
+        // Vérifie le nombre d'états d'arrivée pour cette combinaison état-symbole
         if (transitions.find(state) != transitions.end() && transitions.at(state).find(alpha) != transitions.at(state).end())
         {
-          transitionCount = transitions.at(state).at(alpha).size();
-        }
+          const auto &targetStates = transitions.at(state).at(alpha);
 
-        // Si aucune transition ou plus d'une transition est définie pour une combinaison état-symbole, l'automate n'est pas déterministe
-        if (transitionCount != 1)
+          // Si plus d'un état d'arrivée est présent, l'automate n'est pas déterministe
+          if (targetStates.size() != 1)
+          {
+            printf("\nn'est pas déterministe\n");
+            return false;
+          }
+        }
+        else
         {
-          printf("n'est pas déterministe");
+          // S'il n'y a pas de transition pour cette combinaison état-symbole, l'automate n'est pas déterministe
+          printf("\nn'est pas déterministe\n");
           return false;
         }
       }
     }
-    printf("est déterministe");
+
+    printf("\nest déterministe\n");
     return true;
   }
 

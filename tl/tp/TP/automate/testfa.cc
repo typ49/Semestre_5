@@ -175,6 +175,13 @@ namespace fa
         EXPECT_FALSE(automaton.addTransition(0, 'c', 1));
     }
 
+    TEST_F(AutomatonTest, TestAddTransition_TRUE_SameState)
+    {
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        EXPECT_TRUE(automaton.addTransition(0, 'a', 0));
+    }
+
     TEST_F(AutomatonTest, TestAddTransition_TRUE_EPSILON)
     {
         automaton.addState(0);
@@ -287,36 +294,80 @@ namespace fa
     }
 
     TEST_F(AutomatonTest, TestIsDeterministic_TRUE)
-    {
-        EXPECT_TRUE(automaton.isDeterministic());
-    }
+{
+    automaton.addSymbol('a');
+    automaton.addSymbol('b');
+    automaton.addState(0);
+    automaton.addState(1);
+    automaton.setStateInitial(0);
+    automaton.setStateFinal(1);
+
+    automaton.addTransition(0, 'a', 1);
+    automaton.addTransition(0, 'b', 0);  // Une seule transition possible pour 'b'
+    automaton.addTransition(1, 'a', 1);
+    automaton.addTransition(1, 'b', 1);
+
+    EXPECT_TRUE(automaton.isDeterministic());
+}
+
 
     TEST_F(AutomatonTest, TestIsDeterministic_FALSE_DueToMultipleTransitions)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         automaton.addTransition(0, 'a', 0);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.isDeterministic());
     }
 
     TEST_F(AutomatonTest, TestIsDeterministic_FALSE_NoInitialState)
     {
-        automaton.removeState(0);
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.isDeterministic());
     }
 
     TEST_F(AutomatonTest, TestIsDeterministic_FALSE_MultipleInitialState)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
         automaton.setStateInitial(1);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.isDeterministic());
     }
 
     TEST_F(AutomatonTest, TestIsDeterministic_FALSE_WithEpsilonTransition)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         automaton.addTransition(0, fa::Epsilon, 1);
         EXPECT_FALSE(automaton.isDeterministic());
     }
 
     TEST_F(AutomatonTest, TestIsComplete_TRUE)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(2);
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 2);
         automaton.addTransition(0, 'b', 1);
         EXPECT_TRUE(automaton.isComplete());
     }
