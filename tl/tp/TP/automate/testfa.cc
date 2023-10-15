@@ -1,5 +1,5 @@
+#include "gtest/gtest.h"
 #include "Automaton.h"
-#include <gtest/gtest.h>
 
 namespace fa
 {
@@ -141,16 +141,18 @@ namespace fa
 
     TEST_F(AutomatonTest, TestSetAndGetStateInitial)
     {
+        automaton.addState(1);
+        automaton.addState(0);
         automaton.setStateInitial(1);
         EXPECT_TRUE(automaton.isStateInitial(1));
-        EXPECT_TRUE(automaton.isStateInitial(0));
+        EXPECT_FALSE(automaton.isStateInitial(0));
     }
 
     TEST_F(AutomatonTest, TestSetAndGetStateFinal)
     {
         automaton.setStateFinal(0);
         EXPECT_TRUE(automaton.isStateFinal(0));
-        EXPECT_TRUE(automaton.isStateFinal(1));
+        EXPECT_FALSE(automaton.isStateFinal(1));
     }
 
     TEST_F(AutomatonTest, TestAddTransition_TRUE)

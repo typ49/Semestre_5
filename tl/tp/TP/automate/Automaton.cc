@@ -99,7 +99,6 @@ namespace fa
     {
       initialStates.insert(state);
     }
-    return;
   }
 
   bool Automaton::isStateInitial(int state) const
@@ -113,7 +112,6 @@ namespace fa
     {
       finalStates.insert(state);
     }
-    return;
   }
 
   bool Automaton::isStateFinal(int state) const

@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/juliengauthier410/l3/s5/_PROJECT/tutorial.cc
+gf/Clock.h
+-
+gf/Color.h
+-
+gf/Event.h
+-
+gf/RenderWindow.h
+-
+gf/Shapes.h
+-
+gf/Vector.h
+-
+gf/Window.h
+-
+gf/Math.h
+-
+iostream
+-
+stdlib.h
+-
+
