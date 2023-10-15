@@ -35,26 +35,12 @@ namespace fa
     TEST_F(AutomatonTest, TestHasSymbol_TRUE)
     {
         automaton.addSymbol('a');
-        automaton.addSymbol('b');
-        automaton.addState(0);
-        automaton.addState(1);
-        automaton.setStateInitial(0);
-        automaton.setStateFinal(1);
-        automaton.addTransition(0, 'a', 1);
-
         EXPECT_TRUE(automaton.hasSymbol('a'));
     }
 
     TEST_F(AutomatonTest, TestHasSymbol_FALSE)
     {
         automaton.addSymbol('a');
-        automaton.addSymbol('b');
-        automaton.addState(0);
-        automaton.addState(1);
-        automaton.setStateInitial(0);
-        automaton.setStateFinal(1);
-        automaton.addTransition(0, 'a', 1);
-
         EXPECT_FALSE(automaton.hasSymbol('c'));
     }
 
@@ -150,6 +136,8 @@ namespace fa
 
     TEST_F(AutomatonTest, TestSetAndGetStateFinal)
     {
+        automaton.addState(1);
+        automaton.addState(0);
         automaton.setStateFinal(0);
         EXPECT_TRUE(automaton.isStateFinal(0));
         EXPECT_FALSE(automaton.isStateFinal(1));
@@ -157,57 +145,105 @@ namespace fa
 
     TEST_F(AutomatonTest, TestAddTransition_TRUE)
     {
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
         EXPECT_TRUE(automaton.addTransition(0, 'b', 1));
     }
 
     TEST_F(AutomatonTest, TestAddTransition_FALSE_AlreadyPresent)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        automaton.addState(1);
         automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.addTransition(0, 'a', 1));
     }
 
     TEST_F(AutomatonTest, TestAddTransition_FALSE_StateNotPresent)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
         EXPECT_FALSE(automaton.addTransition(0, 'a', 2));
+        EXPECT_FALSE(automaton.addTransition(2, 'a', 0));
     }
 
     TEST_F(AutomatonTest, TestAddTransition_FALSE_SymbolNotPresent)
     {
+        automaton.addState(0);
+        automaton.addState(1);
         EXPECT_FALSE(automaton.addTransition(0, 'c', 1));
+    }
+
+    TEST_F(AutomatonTest, TestAddTransition_TRUE_EPSILON)
+    {
+        automaton.addState(0);
+        automaton.addState(1);
+        EXPECT_TRUE(automaton.addTransition(0, fa::Epsilon, 1));
     }
 
     TEST_F(AutomatonTest, TestRemoveTransition_TRUE)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        automaton.addState(1);
         automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.removeTransition(0, 'a', 1));
     }
 
     TEST_F(AutomatonTest, TestRemoveTransition_FALSE_NotPresent)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        automaton.addState(1);
         EXPECT_FALSE(automaton.removeTransition(0, 'b', 1));
     }
 
     TEST_F(AutomatonTest, TestCountTransitions)
     {
+        const size_t expectCount0 = 0;
+        const size_t expectCount1 = 1;
+        const size_t expectCount2 = 2;
+
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        EXPECT_EQ(expectCount0, automaton.countTransitions());
         automaton.addTransition(0, 'a', 1);
+        EXPECT_EQ(expectCount1, automaton.countTransitions());
         automaton.addTransition(1, 'b', 0);
-        std::size_t expectedCount = 2;
-        EXPECT_EQ(expectedCount, automaton.countTransitions());
+        EXPECT_EQ(expectCount2, automaton.countTransitions());
     }
 
     TEST_F(AutomatonTest, TestHasTransition_TRUE)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
+        automaton.addState(1);
         automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.hasTransition(0, 'a', 1));
     }
 
     TEST_F(AutomatonTest, TestHasTransition_FALSE_NotPresent)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.hasTransition(0, 'b', 1));
+    }
+
+    TEST_F(AutomatonTest, TestHasTransition_FALSE_transitionEmpty)
+    {
+        EXPECT_FALSE(automaton.hasTransition(0, 'a', 1));
     }
 
     TEST_F(AutomatonTest, TestHasTransition_FALSE_StateNotPresent)
     {
+        automaton.addSymbol('a');
+        automaton.addState(0);
         EXPECT_FALSE(automaton.hasTransition(0, 'a', 2));
     }
 
@@ -229,13 +265,17 @@ namespace fa
         forPrint.addTransition(0, 'a', 1);
         forPrint.addTransition(1, 'b', 1);
         forPrint.addTransition(1, 'c', 2);
+        forPrint.addTransition(1, '\0', 2);
         // Effectuez la sortie de la fonction prettyPrint directement ici.
+        forPrint.prettyPrint(std::cout);
     }
 
     // Test TP2 *******************************************************************************************************
 
     TEST_F(AutomatonTest, TestHasEpsilonTransition_TRUE_usingHasTransition)
     {
+        automaton.addState(0);
+        automaton.addState(1);
         automaton.addTransition(0, fa::Epsilon, 1);
         automaton.prettyPrint(std::cout);
         EXPECT_TRUE(automaton.hasTransition(0, fa::Epsilon, 1));

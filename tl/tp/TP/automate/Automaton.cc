@@ -213,10 +213,18 @@ namespace fa
     os << "Transitions:" << std::endl;
     for (const auto &fromEntry : transitions)
     {
+      char symbol;
       int fromState = fromEntry.first;
       for (const auto &symbolEntry : fromEntry.second)
       {
-        char symbol = symbolEntry.first;
+        if (symbolEntry.first == Epsilon)
+        {
+          symbol = '0';
+        }
+        else
+        {
+          symbol = symbolEntry.first;
+        }
         for (int toState : symbolEntry.second)
         {
           os << "  " << fromState << " --" << symbol << "-> " << toState << std::endl;
@@ -282,7 +290,7 @@ namespace fa
         }
       }
     }
-  printf("est déterministe");
+    printf("est déterministe");
     return true;
   }
 
