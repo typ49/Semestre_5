@@ -332,22 +332,6 @@ cxxabi.h
 acxx_demangle.h
 -
 
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.cc
-Automaton.h
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.h
-iostream
--
-vector
--
-map
--
-set
--
-cassert
--
-cctype
--
-
 /home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.h
 cstddef
 -
@@ -367,8 +351,8 @@ cctype
 -
 
 /home/juliengauthier410/l3/s5/tl/tp/TP/automate/testfa.cc
+gtest/gtest.h
+/home/juliengauthier410/l3/s5/tl/tp/TP/automate/gtest/gtest.h
 Automaton.h
 /home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.h
-gtest/gtest.h
--
 
