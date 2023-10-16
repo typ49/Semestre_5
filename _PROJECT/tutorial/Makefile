@@ -67,10 +67,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/juliengauthier410/l3/s5/_PROJECT
+CMAKE_SOURCE_DIR = /home/juliengauthier410/l3/s5/_PROJECT/tutorial
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/juliengauthier410/l3/s5/_PROJECT
+CMAKE_BINARY_DIR = /home/juliengauthier410/l3/s5/_PROJECT/tutorial
 
 #=============================================================================
 # Targets provided globally by CMake.
@@ -99,9 +99,9 @@ rebuild_cache/fast: rebuild_cache
 
 # The main all target
 all: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/juliengauthier410/l3/s5/_PROJECT/CMakeFiles /home/juliengauthier410/l3/s5/_PROJECT//CMakeFiles/progress.marks
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/juliengauthier410/l3/s5/_PROJECT/tutorial/CMakeFiles /home/juliengauthier410/l3/s5/_PROJECT/tutorial//CMakeFiles/progress.marks
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 all
-	$(CMAKE_COMMAND) -E cmake_progress_start /home/juliengauthier410/l3/s5/_PROJECT/CMakeFiles 0
+	$(CMAKE_COMMAND) -E cmake_progress_start /home/juliengauthier410/l3/s5/_PROJECT/tutorial/CMakeFiles 0
 .PHONY : all
 
 # The main clean target

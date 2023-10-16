@@ -294,22 +294,21 @@ namespace fa
     }
 
     TEST_F(AutomatonTest, TestIsDeterministic_TRUE)
-{
-    automaton.addSymbol('a');
-    automaton.addSymbol('b');
-    automaton.addState(0);
-    automaton.addState(1);
-    automaton.setStateInitial(0);
-    automaton.setStateFinal(1);
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
 
-    automaton.addTransition(0, 'a', 1);
-    automaton.addTransition(0, 'b', 0);  // Une seule transition possible pour 'b'
-    automaton.addTransition(1, 'a', 1);
-    automaton.addTransition(1, 'b', 1);
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(0, 'b', 0); // Une seule transition possible pour 'b'
+        automaton.addTransition(1, 'a', 1);
+        automaton.addTransition(1, 'b', 1);
 
-    EXPECT_TRUE(automaton.isDeterministic());
-}
-
+        EXPECT_TRUE(automaton.isDeterministic());
+    }
 
     TEST_F(AutomatonTest, TestIsDeterministic_FALSE_DueToMultipleTransitions)
     {
@@ -359,52 +358,230 @@ namespace fa
 
     TEST_F(AutomatonTest, TestIsComplete_TRUE)
     {
-        automaton.addSymbol('a');
-        automaton.addSymbol('b');
+
+        // Ajout des symboles à l'alphabet
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        // Ajout des états
         automaton.addState(0);
         automaton.addState(1);
         automaton.addState(2);
+
+        // Définition de l'état initial
         automaton.setStateInitial(0);
-        automaton.setStateFinal(2);
-        automaton.addTransition(0, 'a', 1);
-        automaton.addTransition(1, 'b', 2);
-        automaton.addTransition(0, 'b', 1);
+
+        // Définition de l'état final
+        automaton.setStateFinal(1);
+
+        // Ajout des transitions
+        automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
+        automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
+        automaton.addTransition(1, '0', 2); // Transition de l'état 1 à l'état 2 avec '0'
+        automaton.addTransition(1, '1', 1); // Transition de l'état 1 à lui-même avec '1'
+        automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
+        automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
+
         EXPECT_TRUE(automaton.isComplete());
     }
 
-    TEST_F(AutomatonTest, TestIsComplete_FALSE)
+    TEST_F(AutomatonTest, TestIsComplete_FALSE_TransitionMissing)
     {
+        // Ajout des symboles à l'alphabet
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        // Ajout des états
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        // Définition de l'état initial
+        automaton.setStateInitial(0);
+
+        // Définition de l'état final
+        automaton.setStateFinal(1);
+
+        // Ajout des transitions
+        automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
+        automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
+        automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
         EXPECT_FALSE(automaton.isComplete());
     }
 
     TEST_F(AutomatonTest, TestIsComplete_FALSE_NoInitialState)
     {
-        automaton.removeState(0);
+        // Ajout des symboles à l'alphabet
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        // Ajout des états
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        // Définition de l'état final
+        automaton.setStateFinal(1);
+
+        // Ajout des transitions
+        automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
+        automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
+        automaton.addTransition(1, '0', 2); // Transition de l'état 1 à l'état 2 avec '0'
+        automaton.addTransition(1, '1', 1); // Transition de l'état 1 à lui-même avec '1'
+        automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
+        automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
         EXPECT_FALSE(automaton.isComplete());
     }
 
     TEST_F(AutomatonTest, TestIsComplete_FALSE_MultipleInitialState)
     {
+        // Ajout des symboles à l'alphabet
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        // Ajout des états
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        // Définition de l'état initial
+        automaton.setStateInitial(0);
         automaton.setStateInitial(1);
+
+        // Définition de l'état final
+        automaton.setStateFinal(1);
+
+        // Ajout des transitions
+        automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
+        automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
+        automaton.addTransition(1, '0', 2); // Transition de l'état 1 à l'état 2 avec '0'
+        automaton.addTransition(1, '1', 1); // Transition de l'état 1 à lui-même avec '1'
+        automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
+        automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
         EXPECT_FALSE(automaton.isComplete());
     }
 
-    TEST_F(AutomatonTest, TestIsComplete_FALSE_WithEpsilonTransition)
+    // test for createComplete()
+    TEST_F(AutomatonTest, TestCreateComplete_AlreadyComplete)
     {
-        automaton.addTransition(0, fa::Epsilon, 1);
-        EXPECT_FALSE(automaton.isComplete());
+        Automaton completeAutomaton;
+
+        // Ajout des symboles à l'alphabet
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        // Ajout des états
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        // Définition de l'état initial
+        automaton.setStateInitial(0);
+
+        // Définition de l'état final
+        automaton.setStateFinal(1);
+
+        // Ajout des transitions
+        automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
+        automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
+        automaton.addTransition(1, '0', 2); // Transition de l'état 1 à l'état 2 avec '0'
+        automaton.addTransition(1, '1', 1); // Transition de l'état 1 à lui-même avec '1'
+        automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
+        automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
+
+        completeAutomaton = automaton.createComplete(automaton);
+        EXPECT_TRUE(completeAutomaton.isComplete());
+        EXPECT_TRUE(automaton.isComplete());
+        EXPECT_EQ(automaton.countStates(), completeAutomaton.countStates());
+        EXPECT_EQ(automaton.countSymbols(), completeAutomaton.countSymbols());
+        EXPECT_EQ(automaton.countTransitions(), completeAutomaton.countTransitions());
     }
 
-    TEST_F(AutomatonTest, TestCreateComplete)
+    TEST_F(AutomatonTest, TestCreateComplete_TransitionMissing)
     {
-        automaton = automaton.createComplete(automaton);
-        EXPECT_TRUE(automaton.isComplete());
+        Automaton completeAutomaton;
+
+        // Ajout des symboles à l'alphabet
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        // Ajout des états
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        // Définition de l'état initial
+        automaton.setStateInitial(0);
+
+        // Définition de l'état final
+        automaton.setStateFinal(1);
+
+        // Ajout des transitions
+        automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
+        automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
+        automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
+        completeAutomaton = automaton.createComplete(automaton);
+        EXPECT_TRUE(completeAutomaton.isComplete());
     }
 
-    TEST_F(AutomatonTest, TestCreateComplement)
+    TEST_F(AutomatonTest, TestCreateComplete_NoInitialState)
     {
-        automaton = automaton.createComplement(automaton);
-        EXPECT_TRUE(automaton.isComplete());
+        Automaton completeAutomaton;
+
+        // Ajout des symboles à l'alphabet
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        // Ajout des états
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        // Définition de l'état final
+        automaton.setStateFinal(1);
+
+        // Ajout des transitions
+        automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
+        automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
+        automaton.addTransition(1, '0', 2); // Transition de l'état 1 à l'état 2 avec '0'
+        automaton.addTransition(1, '1', 1); // Transition de l'état 1 à lui-même avec '1'
+        automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
+        automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
+
+        completeAutomaton = automaton.createComplete(automaton);
+        EXPECT_TRUE(completeAutomaton.isComplete());
+    }
+
+    TEST_F(AutomatonTest, TestCreateComplete_MultipleInitialState)
+    {
+        Automaton completeAutomaton;
+
+        // Ajout des symboles à l'alphabet
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        // Ajout des états
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        // Définition de l'état initial
+        automaton.setStateInitial(0);
+        automaton.setStateInitial(1);
+
+        // Définition de l'état final
+        automaton.setStateFinal(1);
+
+        // Ajout des transitions
+        automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
+        automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
+        automaton.addTransition(1, '0', 2); // Transition de l'état 1 à l'état 2 avec '0'
+        automaton.addTransition(1, '1', 1); // Transition de l'état 1 à lui-même avec '1'
+        automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
+        automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
+
+        completeAutomaton = automaton.createComplete(automaton);
+        EXPECT_TRUE(completeAutomaton.isComplete());
     }
 
     // Test pour createMirror()

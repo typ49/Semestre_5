@@ -301,6 +301,17 @@ namespace fa
 
   bool Automaton::isComplete() const
   {
+    // if (hasEpsilonTransition())
+    // {
+    //   printf("\na une epsilon transition\n");
+    //   return false;
+    // }
+
+    if (initialStates.size() != 1)
+    {
+      printf("\nn'a pas exactement un état initial\n");
+      return false;
+    }
     // Parcourir chaque état de l'automate
     for (int state : states)
     {
@@ -321,16 +332,20 @@ namespace fa
 
         if (!transitionExists)
         {
+          printf("\nn'est pas complet\n");
           return false; // Si aucune transition n'est trouvée pour une combinaison état-symbole, l'automate n'est pas complet
         }
       }
     }
+    printf("\nest complet\n");
     return true; // Si des transitions existent pour chaque combinaison état-symbole, l'automate est complet
   }
 
   Automaton Automaton::createComplete(const Automaton &automaton)
   {
     Automaton completeAutomaton = automaton; // Copier l'automate donné
+    // remove initialStates
+    completeAutomaton.initialStates.clear();
 
     int trapState = -1;          // Utiliser -1 comme état poubelle, mais vous pouvez choisir une autre valeur si nécessaire
     bool trapStateAdded = false; // Indicateur pour savoir si l'état poubelle a été ajouté
@@ -375,6 +390,43 @@ namespace fa
       {
         completeAutomaton.addTransition(trapState, symbol, trapState);
       }
+    }
+
+    if (automaton.initialStates.size() > 1)
+    {
+      printf("\netat init ++\n");
+      // Créer un nouvel état initial
+      int newInitialState = completeAutomaton.addState(-2);
+      bool test = completeAutomaton.hasState(-2);
+      printf("\n%d\n", test);
+
+      // Connecter tous les anciens états initiaux au nouvel état initial avec des transitions epsilon
+      for (int initialState : automaton.initialStates)
+      {
+        completeAutomaton.addTransition(newInitialState, '\0', initialState);
+        printf("\nDONE\n")
+      }
+
+      // Définir le nouvel état initial
+      completeAutomaton.setStateInitial(newInitialState);
+      // affiche les états initiaux
+      for (auto state : completeAutomaton.initialStates)
+      {
+        printf("\n%d\n", state);
+      }
+    }
+    else if (automaton.initialStates.size() == 1)
+    {
+      printf("\netat init = 1\n");
+      // Définir l'unique état initial
+      completeAutomaton.setStateInitial(*automaton.initialStates.begin());
+    }
+    else
+    {
+      printf("\netat init = 0\n");
+      // Si aucune état initial n'existe dans l'automate donné, ajoutez un nouvel état initial
+      int newInitialState = completeAutomaton.addState(0);
+      completeAutomaton.setStateInitial(newInitialState);
     }
 
     return completeAutomaton;
