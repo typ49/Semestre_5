@@ -267,4 +267,68 @@ public class TestBarrierIntegration {
         assertFalse(result);
     }
 
+    @Test
+    public void testExitWithAlreadyExitedTicket() {
+        // Initialisation
+        Network network = new Network();
+        Station station1 = new Station("Station1");
+        station1.addLine("A", 1, 0.0);
+        network.addStation(station1);
+        Map<Double, Integer> prices = new HashMap<>();
+        prices.put(0.0, 10);
+        prices.put(5.0, 20);
+        Barrier barrier = Barrier.build(network, "Station1", prices);
+        ITicket adultTicket = new BaseTicket(false, 30); // Adult ticket with 30 units
+
+        // Test
+        barrier.enter(adultTicket);
+        barrier.exit(adultTicket);
+        boolean result = barrier.exit(adultTicket);
+        assertFalse(result);
+    }
+
+    @Test
+    public void testExitWithChildTicketInsufficientFundsLongDistance() {
+        // Initialisation
+        Network network = new Network();
+        Station station1 = new Station("Station1");
+        station1.addLine("A", 1, 0.0);
+        network.addStation(station1);
+
+        Station station2 = new Station("Station2");
+        station2.addLine("A", 2, 5.0);
+        network.addStation(station2);
+
+        Map<Double, Integer> prices = new HashMap<>();
+        prices.put(0.0, 10);
+        prices.put(5.0, 20);
+        Barrier entryBarrier = Barrier.build(network, "Station1", prices);
+        Barrier exitBarrier = Barrier.build(network, "Station2", prices);
+
+        // Test
+        ITicket childTicket = new BaseTicket(true, 5); // Child ticket with 10 units
+        entryBarrier.enter(childTicket);
+        boolean result = exitBarrier.exit(childTicket);
+        assertFalse(result);
+        assertTrue(childTicket.isValid());
+    }
+
+    @Test
+    public void testBarrierBuildWithNegativePrices() {
+        // Initialisation
+        Network network = new Network();
+        Station station1 = new Station("Station1");
+        station1.addLine("A", 1, 0.0);
+        network.addStation(station1);
+
+        // Test with negative price
+        Map<Double, Integer> pricesWithNegative = new HashMap<>();
+        pricesWithNegative.put(0.0, -10);
+        Barrier barrier2 = Barrier.build(network, "Station1", pricesWithNegative);
+        assertNull(barrier2);
+    }
+
+
+
+
 }
