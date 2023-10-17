@@ -2,20 +2,31 @@ package fr.ufc.l3info.oprog;
 
 import org.junit.*;
 
+/* pour pouvoir utiliser baseTicket.jar, il faut ajouter dans le pom.xml
+<dependency>
+      <groupId>fr.ufc.l3info.oprog</groupId>
+      <artifactId>Ticket</artifactId>
+      <version>1.0</version>
+      <scope>system</scope>cket(false,
+      <systemPath>${basedir}/target/BaseTickets.jar</systemPath>
+    </dependency>
+ */
+// sujet de test 04
+
 public class TestBaseTicket {
 
-    BaseTicket04 ticketChild;
-    BaseTicket04 ticketNegativeAmount;
-    BaseTicket04 ticketAdult;
-    BaseTicket04 ticketNoAmount;
+    BaseTicket ticketChild;
+    BaseTicket ticketNegativeAmount;
+    BaseTicket ticketAdult;
+    BaseTicket ticketNoAmount;
 
 
     @Before
     public void setup() {
-        ticketChild = new BaseTicket04(true, 100);
-        ticketNegativeAmount = new BaseTicket04(false, -100);
-        ticketAdult = new BaseTicket04(false, 100);
-        ticketNoAmount = new BaseTicket04(false, 0);
+        ticketChild = new BaseTicket(true, 100);
+        ticketNegativeAmount = new BaseTicket(false, -100);
+        ticketAdult = new BaseTicket(false, 100);
+        ticketNoAmount = new BaseTicket(false, 0);
     }
 
     /**
@@ -147,13 +158,13 @@ public class TestBaseTicket {
     }
 
 
-    BaseTicket04 ticketMinValue;
-    BaseTicket04 ticketMaxValue;
+    BaseTicket ticketMinValue;
+    BaseTicket ticketMaxValue;
 
     @Before
     public void additionalSetup() {
-        ticketMinValue = new BaseTicket04(false, Integer.MIN_VALUE);
-        ticketMaxValue = new BaseTicket04(false, Integer.MAX_VALUE);
+        ticketMinValue = new BaseTicket(false, Integer.MIN_VALUE);
+        ticketMaxValue = new BaseTicket(false, Integer.MAX_VALUE);
     }
 
     @Test
@@ -211,7 +222,7 @@ public class TestBaseTicket {
 
     @Test
     public void testIsValid_JustCreated() {
-        Assert.assertTrue(new BaseTicket04(true, 50).isValid());
+        Assert.assertTrue(new BaseTicket(true, 50).isValid());
     }
 
 
@@ -234,13 +245,13 @@ public class TestBaseTicket {
 
     @Test
     public void testAmountJustAboveZero() {
-        BaseTicket04 ticket = new BaseTicket04(false, 1);
+        BaseTicket ticket = new BaseTicket(false, 1);
         Assert.assertEquals(1, ticket.getAmount());
     }
 
     @Test
     public void testAmountJustBelowZero() {
-        BaseTicket04 ticket = new BaseTicket04(false, -1);
+        BaseTicket ticket = new BaseTicket(false, -1);
         Assert.assertEquals(0, ticket.getAmount());  // Si l'implémentation ne permet pas les montants négatifs
     }
 

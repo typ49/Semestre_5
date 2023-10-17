@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AdjustedTicket.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Transportation</a> &gt; <a href="index.source.html" class="el_package">fr.ufc.l3info.oprog</a> &gt; <span class="el_source">AdjustedTicket.java</span></div><h1>AdjustedTicket.java</h1><pre class="source lang-java linenums">package fr.ufc.l3info.oprog;
+
+public class AdjustedTicket implements ITicket {
+    private final ITicket initialTicket;
+    private final int additionalAmount;
+
+<span class="fc" id="L7">    protected AdjustedTicket(ITicket initial, int amount) {</span>
+<span class="fc bfc" id="L8" title="All 2 branches covered.">        if (initial == null) {</span>
+<span class="fc" id="L9">            throw new NullPointerException(&quot;Initial ticket cannot be null.&quot;);</span>
+        }
+
+<span class="fc" id="L12">        this.initialTicket = initial;</span>
+
+        // Ensure the amount doesn't reduce the initial ticket's provision.
+<span class="fc" id="L15">        this.additionalAmount = Math.max(amount, 0);</span>
+<span class="fc" id="L16">    }</span>
+
+    @Override
+    public boolean isChild() {
+<span class="fc" id="L20">        return initialTicket.isChild();</span>
+    }
+
+    @Override
+    public int getAmount() {
+<span class="fc" id="L25">        return initialTicket.getAmount() + additionalAmount;</span>
+    }
+
+    @Override
+    public String getEntryStation() {
+<span class="fc" id="L30">        return initialTicket.getEntryStation();</span>
+    }
+
+    @Override
+    public boolean entering(String station) {
+<span class="fc" id="L35">        return initialTicket.entering(station);</span>
+    }
+
+    @Override
+    public void invalidate() {
+<span class="fc" id="L40">        initialTicket.invalidate();</span>
+<span class="fc" id="L41">    }</span>
+
+    @Override
+    public boolean isValid() {
+<span class="fc" id="L45">        return initialTicket.isValid();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

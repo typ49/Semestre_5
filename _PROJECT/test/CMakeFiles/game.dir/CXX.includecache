@@ -6,9 +6,31 @@
 
 #IncludeRegexTransform: 
 
-/home/juliengauthier410/l3/s5/_PROJECT/test/plateforme.cc
+/home/juliengauthier410/l3/s5/_PROJECT/test/main.cc
+squareEntity.h
+/home/juliengauthier410/l3/s5/_PROJECT/test/squareEntity.h
 plateforme.h
 /home/juliengauthier410/l3/s5/_PROJECT/test/plateforme.h
+gf/Clock.h
+-
+gf/Color.h
+-
+gf/Event.h
+-
+gf/RenderWindow.h
+-
+gf/Shapes.h
+-
+gf/Vector.h
+-
+gf/Window.h
+-
+gf/Math.h
+-
+iostream
+-
+stdlib.h
+-
 
 /home/juliengauthier410/l3/s5/_PROJECT/test/plateforme.h
 gf/Vector.h
@@ -19,12 +41,6 @@ gf/RenderTarget.h
 -
 gf/Shapes.h
 -
-
-/home/juliengauthier410/l3/s5/_PROJECT/test/squareEntity.cc
-squareEntity.h
-/home/juliengauthier410/l3/s5/_PROJECT/test/squareEntity.h
-plateforme.h
-/home/juliengauthier410/l3/s5/_PROJECT/test/plateforme.h
 
 /home/juliengauthier410/l3/s5/_PROJECT/test/squareEntity.h
 gf/Vector.h

@@ -1,1 +1,0 @@
-/usr/bin/c++ -rdynamic CMakeFiles/my_game.dir/main.cc.o -o my_game  -lgf 

@@ -1,46 +1,102 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Network.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Transportation</a> &gt; <a href="index.source.html" class="el_package">fr.ufc.l3info.oprog</a> &gt; <span class="el_source">Network.java</span></div><h1>Network.java</h1><pre class="source lang-java linenums">package fr.ufc.l3info.oprog;
 
-import java.util.Set;
+import java.util.*;
 
 public class Network {
 
-    private final Set&lt;Station&gt; stations;
+<span class="fc" id="L7">    private final Map&lt;String, Station&gt; stations = new HashMap&lt;&gt;();</span>
 
-
-<span class="nc" id="L10">    public Network() {</span>
-<span class="nc" id="L11">        this.stations = null;</span>
-<span class="nc" id="L12">    }</span>
+<span class="fc" id="L9">    public Network() {</span>
+<span class="fc" id="L10">    }</span>
 
     public void addStation(Station s) {
-
-<span class="nc" id="L16">    }</span>
-
-    public void removeStation(Station s) {
-
-<span class="nc" id="L20">    }</span>
+<span class="fc bfc" id="L13" title="All 2 branches covered.">        if (s != null) {</span>
+<span class="fc" id="L14">            stations.put(s.getName(), s);</span>
+        }
+<span class="fc" id="L16">    }</span>
 
     public Set&lt;String&gt; getLines() {
-<span class="nc" id="L23">        return null;</span>
-    }
-
-    public Set&lt;Station&gt; getStations() {
-<span class="nc" id="L27">        return null;</span>
+<span class="fc" id="L19">        Set&lt;String&gt; lines = new HashSet&lt;&gt;();</span>
+<span class="fc bfc" id="L20" title="All 2 branches covered.">        for (Station s : stations.values()) {</span>
+<span class="fc" id="L21">            lines.addAll(s.getLines());</span>
+<span class="fc" id="L22">        }</span>
+<span class="fc" id="L23">        return lines;</span>
     }
 
     public Station getStationByName(String name) {
-<span class="nc" id="L31">        return null;</span>
+<span class="fc" id="L27">        return stations.get(name);</span>
     }
 
     public Station getStationByLineAndNumber(String line, int number) {
-<span class="nc" id="L35">        return null;</span>
+<span class="fc bfc" id="L31" title="All 2 branches covered.">        for (Station s : stations.values()) {</span>
+<span class="fc bfc" id="L32" title="All 4 branches covered.">            if (s.getLines().contains(line) &amp;&amp; s.getNumberForLine(line) == number) {</span>
+<span class="fc" id="L33">                return s;</span>
+            }
+<span class="fc" id="L35">        }</span>
+<span class="fc" id="L36">        return null;</span>
     }
 
     public boolean isValid() {
-<span class="nc" id="L39">        return false;</span>
+<span class="fc bfc" id="L40" title="All 2 branches covered.">        if (stations.isEmpty()) return false; // An empty network is invalid</span>
+
+<span class="fc" id="L42">        Set&lt;String&gt; lines = getLines();</span>
+
+<span class="fc bfc" id="L44" title="All 2 branches covered.">        for (String line : lines) {</span>
+<span class="fc" id="L45">            boolean foundStationOne = false;</span>
+<span class="fc" id="L46">            double previousKm = -1;</span>
+<span class="fc" id="L47">            int expectedNumber = 1;</span>
+
+<span class="fc" id="L49">            List&lt;Station&gt; stationsOnLine = new ArrayList&lt;&gt;();</span>
+<span class="fc bfc" id="L50" title="All 2 branches covered.">            for (Station s : stations.values()) {</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">                if (s.getLines().contains(line)) {</span>
+<span class="fc" id="L52">                    stationsOnLine.add(s);</span>
+                }
+<span class="fc" id="L54">            }</span>
+<span class="fc" id="L55">            stationsOnLine.sort(Comparator.comparingInt(s -&gt; s.getNumberForLine(line)));</span>
+
+<span class="fc bfc" id="L57" title="All 2 branches covered.">            for (Station s : stationsOnLine) {</span>
+<span class="fc" id="L58">                int stationNumber = s.getNumberForLine(line);</span>
+<span class="fc" id="L59">                double stationKm = s.getDistanceForLine(line);</span>
+
+<span class="fc bfc" id="L61" title="All 2 branches covered.">                if (stationNumber == 1) {</span>
+<span class="fc" id="L62">                    foundStationOne = true;</span>
+<span class="fc bfc" id="L63" title="All 2 branches covered.">                    if (stationKm != 0) return false;</span>
+                }
+
+<span class="fc bfc" id="L66" title="All 2 branches covered.">                if (stationKm &lt;= previousKm) return false;</span>
+<span class="fc" id="L67">                previousKm = stationKm;</span>
+
+<span class="fc bfc" id="L69" title="All 2 branches covered.">                if (stationNumber != expectedNumber) return false;</span>
+<span class="fc" id="L70">                expectedNumber++;</span>
+<span class="fc" id="L71">            }</span>
+<span class="pc bpc" id="L72" title="1 of 2 branches missed.">            if (!foundStationOne) return false; // There should be a station with number 1 for each line</span>
+<span class="fc" id="L73">        }</span>
+
+<span class="fc" id="L75">        return true;</span>
     }
 
     public double distance(String s1, String s2) {
-<span class="nc" id="L43">        return 0.0;</span>
+<span class="fc" id="L79">        Station station1 = getStationByName(s1);</span>
+<span class="fc" id="L80">        Station station2 = getStationByName(s2);</span>
+
+<span class="fc bfc" id="L82" title="All 4 branches covered.">        if (station1 == null || station2 == null) {</span>
+<span class="fc" id="L83">            return -1.0;</span>
+        }
+
+<span class="fc" id="L86">        double shortestDistance = Double.MAX_VALUE;</span>
+<span class="fc" id="L87">        boolean found = false;</span>
+
+<span class="fc bfc" id="L89" title="All 2 branches covered.">        for (String line : getLines()) {</span>
+<span class="fc bfc" id="L90" title="All 4 branches covered.">            if (station1.getLines().contains(line) &amp;&amp; station2.getLines().contains(line)) {</span>
+<span class="fc" id="L91">                double currentDistance = Math.abs(station1.getDistanceForLine(line) - station2.getDistanceForLine(line));</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">                if (currentDistance &lt; shortestDistance) {</span>
+<span class="fc" id="L93">                    shortestDistance = currentDistance;</span>
+<span class="fc" id="L94">                    found = true;</span>
+                }
+            }
+<span class="fc" id="L97">        }</span>
+
+<span class="fc bfc" id="L99" title="All 2 branches covered.">        return found ? shortestDistance : -1.0;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

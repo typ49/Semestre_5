@@ -1,0 +1,151 @@
+#!r7rs
+
+(import (scheme base) (scheme cxr) (scheme write))
+
+(define (writeln/return x)
+  (write x)
+  (newline)
+  x)
+
+;;;  ==========================================================================
+;;;  Intrada
+
+(define (retain p1? l)
+  (if (null? l)
+      '()
+      (let ((first (car l))
+            (more (retain p1? (cdr l))))
+        (if (p1? first) (cons first more) more))))
+
+;;;  ==========================================================================
+;;;  Multiple values
+
+(writeln/return (call-with-values (lambda () (values 'L 3)) cons))
+
+(writeln/return (let ((a 'sure)
+                      (b 'here)
+                      (x 'little)
+                      (y 'players))
+                  (let-values (((a b) (values x y))
+                               ((x y) (values a b)))
+                    (list a b x y))))
+
+(writeln/return (let ((a 'sure)
+                      (b 'here)
+                      (x 'little)
+                      (y 'players))
+                  (let*-values (((a b) (values x y))
+                                ((x y) (values a b)))
+                    (list a b x y))))
+
+(writeln/return (let-values (((first) (car '(very little players)))
+                             ((the-quotient the-remainder) (truncate/ 2000 9)))
+                  (cons the-quotient (cons the-remainder first))))
+
+(define (take n l)
+  (if (zero? n) '() (cons (car l) (take (- n 1) (cdr l)))))
+
+(define (drop n l)
+  (if (zero? n) l (drop (- n 1) (cdr l))))
+
+(define (take-while p1? l)
+  (if (null? l)
+      '()
+      (let ((first (car l)))
+        (if (p1? first) (cons first (take-while p1? (cdr l))) '()))))
+
+(define (drop-while p1? l)
+  (if (or (null? l) (not (p1? (car l)))) l (drop-while p1? (cdr l))))
+
+;;;  ==========================================================================
+;;;  Displaying multiple values
+
+(define-syntax write-values
+  (syntax-rules ()
+    ((write-values the-values) (let ((nothing-string "*nothing*")
+                                     (and-string " *and* "))
+                                 (call-with-values (lambda () the-values)
+                                   (lambda arg-list
+                                     (if (null? arg-list)
+                                         (display nothing-string)
+                                         (begin
+                                           (write (car arg-list))
+                                           (for-each (lambda (arg)
+                                                       (display and-string)
+                                                       (write arg))
+                                                     (cdr arg-list))))
+                                     (newline)
+                                     #t))))))
+
+;;;  ==========================================================================
+;;;  Mini data-bases
+
+(define unknown '??)
+
+(define (unknown? x)
+  (eq? x unknown))
+
+(define (mk-recording key-0 title-0 author-list-0 year-0 publisher-0 
+		      key-list-0)
+  ;;  SYMBOL,STRING,LIST-of[SYMBOL}^,INTEGER,SYMBOL^,LIST-of[SYMBOL]^ -> JAZZ-R
+  (list key-0 title-0 author-list-0 year-0 publisher-0 key-list-0))
+
+(define miles-davis-r
+  (list (mk-recording 'd0 "On the Corner" unknown 1972 unknown '(c40))
+	(mk-recording 'd1 "New-York Girl" unknown 1972 unknown '(c40))
+	(mk-recording 'd2 "Thinkin' One Thing and Doin' Another" unknown 1972
+		      unknown '(c40))
+	(mk-recording 'd3 "One and One" unknown 1972 unknown '(c40))
+	(mk-recording 'd4 "Well You Needn't" '(Thelonius-Monk) 1954
+		      'Blue-Ribbon-Music '(c41))
+	(mk-recording 'd5 "Love for Sale" '(Cole-Porter) 1958 'Chappell '(c41))
+	(mk-recording 'd6 "Something Else" '(Miles-Davis) 1958 'EMI '(c41))
+	(mk-recording 'd7 "Dear Old Stockholm" '(Stan-Getz P-Golly) 1952
+		      'Windswept-Pacific-Music '(c41))
+	(mk-recording 'd8 "Black Satin" unknown 1972 unknown '(c40))
+	(mk-recording 'd9 "Mr. Freedom X" unknown 1972 unknown '(c40))
+	(mk-recording 'd10 "Helen Butte" unknown 1972 unknown '(c40))
+	(mk-recording 'd11 "Boplicity" '(Cleo-Henry) 1949 'Campbell '(c40))
+	(mk-recording 'd12 "Ray's Idea" '(Ray-Bonner W-G-Fuller) 1953 
+		      'Bosworth '(c41))
+	(mk-recording 'd13 "Yesterdays" '(Kern Harbach) 1952 'Universal '(c42))
+	(mk-recording 'd14 "Vote for Miles" unknown 1972 unknown '(c40))
+	(mk-recording 'd15 "Deception" '(Miles-Davis) 1950 'Sony '(c41))
+	(mk-recording 'd16 "Israel" '(John-Carisi) 1949 'EMI '(c41))
+	(mk-recording 'd17 "How Deep is the Ocean" '(Irving-Berlin) 1952 'EMI
+		      '(c41))
+	(mk-recording 'd18 "Kelo" '(Jay-Jay-Johnson) 1953 'Kensington-Music
+		      '(c41))
+	(mk-recording 'd19 "Woody 'n' You" '(Dizzy-Gillepsie) 1952 'Chappell
+		      '(c41))
+	(mk-recording 'd20 "Chance It" '(Oscar-Petitford) 1952 'Orpheus-Music
+		      '(c41))))
+
+(define stan-getz-r
+  (list (mk-recording 'g30 "Autumn Leaves" '(Kosma Prevert) 1980
+		      'Peter-Maurice-Co-Ltd '(c44))
+	(mk-recording 'g31 "Nature Boy" '(Abbon) 1980 'Chappell '(c44))))
+
+(define key 
+  ;;  JAZZ-R -> SYMBOL
+  car)
+
+(define title
+  ;;  JAZZ-R -> STRING
+  cadr)
+
+(define authors
+  ;;  JAZZ-R -> LIST-of[SYMBOL]^
+  caddr)
+
+(define year
+  ;;  JAZZ-R -> INTEGER
+  cadddr)
+
+(define (publisher jazz-r0)
+  ;;  JAZZ-R -> SYMBOL^
+  (car (cddddr jazz-r0)))
+
+(define (cds jazz-r0)
+  ;;  JAZZ-R -> LIST-of[SYMBOL]^
+  (cadr (cddddr jazz-r0)))

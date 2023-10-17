@@ -266,12 +266,6 @@ boost_headers_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/boost_headers-1.74.0
 //The directory containing a CMake configuration file for gf.
 gf_DIR:PATH=/usr/local/lib/cmake/gf
 
-//Value Computed by CMake
-my_game_BINARY_DIR:STATIC=/home/juliengauthier410/l3/s5/_PROJECT/test
-
-//Value Computed by CMake
-my_game_SOURCE_DIR:STATIC=/home/juliengauthier410/l3/s5/_PROJECT/test
-
 //The directory containing a CMake configuration file for pugixml.
 pugixml_DIR:PATH=/usr/lib/x86_64-linux-gnu/cmake/pugixml
 

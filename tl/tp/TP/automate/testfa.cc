@@ -322,14 +322,14 @@ namespace fa
         EXPECT_FALSE(automaton.isDeterministic());
     }
 
-    TEST_F(AutomatonTest, TestIsDeterministic_FALSE_NoInitialState)
+    TEST_F(AutomatonTest, TestIsDeterministic_TRUE_NoInitialState)
     {
         automaton.addSymbol('a');
         automaton.addState(0);
         automaton.addState(1);
         automaton.setStateFinal(1);
         automaton.addTransition(0, 'a', 1);
-        EXPECT_FALSE(automaton.isDeterministic());
+        EXPECT_TRUE(automaton.isDeterministic());
     }
 
     TEST_F(AutomatonTest, TestIsDeterministic_FALSE_MultipleInitialState)

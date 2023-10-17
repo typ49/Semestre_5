@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>BaseTicket.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Transportation</a> &gt; <a href="index.source.html" class="el_package">fr.ufc.l3info.oprog</a> &gt; <span class="el_source">BaseTicket.java</span></div><h1>BaseTicket.java</h1><pre class="source lang-java linenums">package fr.ufc.l3info.oprog;
+
+/**
+ * Black-box testing --&gt; wrong implementations to detect based on the specification
+ */
+public class BaseTicket implements ITicket {
+
+    /** is this a child ticket? */
+    private final boolean child;
+
+    /** amount of money on the ticket for the trip */
+    private final int amount;
+
+    /** entry station */
+<span class="fc" id="L15">    private String entry = &quot;should not be returned&quot;;</span>
+
+    /** state of the ticket: 0 - issued, 1 - entry set, 2 - invalid */
+    private int state;
+<span class="fc" id="L19">    final private int ISSUED = 0;</span>
+<span class="fc" id="L20">    final private int ENTERED = 1;</span>
+<span class="fc" id="L21">    final private int INVALID = 2;</span>
+
+
+    /**
+     * Constructor for the Ticket class.
+     * Creates a ticket with the initial childhood properties and amount.
+     * @param child indicates if the ticket concerns a child or not.
+     * @param amount initial amount of money on the card.
+     */
+<span class="fc" id="L30">    protected BaseTicket(boolean child, int amount) {</span>
+<span class="fc" id="L31">        this.child = child;</span>
+<span class="fc" id="L32">        this.amount = Math.max(amount, 0);</span>
+<span class="fc" id="L33">        this.state = ISSUED;</span>
+<span class="fc" id="L34">    }</span>
+
+
+    /**
+     * Checks if the ticket is a child ticket.
+     * @return true if the ticket is for a child traveller.
+     */
+    public boolean isChild() {
+<span class="fc" id="L42">        return this.child;</span>
+    }
+
+
+    /**
+     * Returns the entry station stored on the ticket.
+     * @return The station name, or null if the ticket is invalid,
+     *          or if the traveller didn't pass the barrier to enter.
+     */
+    public String getEntryStation() {
+<span class="fc bfc" id="L52" title="All 2 branches covered.">        return (state == ENTERED) ? entry : null;</span>
+    }
+
+
+    /**
+     * Sets the entry station on the ticket. Should be done only once.
+     * @param name the name of the station.
+     * @return true if the station has been properly stored.
+     */
+    public boolean entering(String name) {
+<span class="fc bfc" id="L62" title="All 6 branches covered.">        if (this.state == ISSUED &amp;&amp; name != null &amp;&amp; !name.trim().isEmpty()) {</span>
+<span class="fc" id="L63">            entry = name;</span>
+<span class="fc" id="L64">            this.state = ENTERED;</span>
+<span class="fc" id="L65">            return true;</span>
+        }
+<span class="fc" id="L67">        invalidate();</span>
+<span class="fc" id="L68">        return false;</span>
+    }
+
+
+    /**
+     * Signals the exiting of the station.
+     */
+    public void invalidate() {
+<span class="fc" id="L76">        state = INVALID;</span>
+<span class="fc" id="L77">    }</span>
+
+
+    /**
+     * Provides the amount of money that is on the ticket.
+     * @return the balance of the ticket.
+     */
+    public int getAmount() {
+<span class="fc" id="L85">        return amount;</span>
+    }
+
+
+    /**
+     * Determines if the ticket is valid.
+     * @return true if the ticket has not been invalidated.
+     */
+    public boolean isValid() {
+<span class="fc bfc" id="L94" title="All 2 branches covered.">        return state != INVALID;</span>
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

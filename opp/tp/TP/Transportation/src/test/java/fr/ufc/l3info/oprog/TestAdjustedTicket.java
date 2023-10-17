@@ -13,12 +13,12 @@ public class TestAdjustedTicket {
 
     @Before
     public void setup() {
-        baseTicket = new BaseTicket04(true, 100);
+        baseTicket = new BaseTicket(true, 100);
         adjustedTicket = new AdjustedTicket(baseTicket, 25);
         adjustedChild = new AdjustedTicket(baseTicket, 20);
         adjustedNegative = new AdjustedTicket(baseTicket, -20);
-        adjustedAdult = new AdjustedTicket(new BaseTicket04(false, 100), 20);
-        adjustedNoAmount = new AdjustedTicket(new BaseTicket04(false, 0), 20);
+        adjustedAdult = new AdjustedTicket(new BaseTicket(false, 100), 20);
+        adjustedNoAmount = new AdjustedTicket(new BaseTicket(false, 0), 20);
     }
 
     @Test(expected = NullPointerException.class)
@@ -192,16 +192,16 @@ public class TestAdjustedTicket {
     }
 
     @Test
-    public void testAdjustmentToZeroAmount_KO() {
+    public void testAdjustmentToZeroAmount() {
         AdjustedTicket adjustToZero = new AdjustedTicket(adjustedNoAmount, -20);
-        Assert.assertEquals(0, adjustToZero.getAmount());
+        Assert.assertEquals(adjustedNoAmount.getAmount(), adjustToZero.getAmount());
     }
 
     @Test
-    public void testEnteringAfterInvalidate_KO() {
+    public void testEnteringAfterInvalidate() {
         adjustedTicket.entering("station1");
         adjustedTicket.invalidate();
-        Assert.assertTrue(adjustedTicket.entering("station2"));
+        Assert.assertFalse(adjustedTicket.entering("station2"));
     }
 
     @Test

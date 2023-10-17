@@ -269,26 +269,21 @@ namespace fa
       return false;
     }
 
-    // Vérifie si chaque état a une transition définie pour chaque symbole de l'alphabet
-    for (auto state : states)
+    // Vérifie pour chaque état, si il y a bien 0 ou 1 transition par symbole
+    for (int state : states)
     {
-      for (auto alpha : alphabet)
+      for (char symbol : alphabet)
       {
-        // Vérifie le nombre d'états d'arrivée pour cette combinaison état-symbole
-        if (transitions.find(state) != transitions.end() && transitions.at(state).find(alpha) != transitions.at(state).end())
+        int transitionCount = 0;
+        for (int toState : states)
         {
-          const auto &targetStates = transitions.at(state).at(alpha);
-
-          // Si plus d'un état d'arrivée est présent, l'automate n'est pas déterministe
-          if (targetStates.size() != 1)
+          if (hasTransition(state, symbol, toState))
           {
-            printf("\nn'est pas déterministe\n");
-            return false;
+            transitionCount++;
           }
         }
-        else
+        if (transitionCount > 1)
         {
-          // S'il n'y a pas de transition pour cette combinaison état-symbole, l'automate n'est pas déterministe
           printf("\nn'est pas déterministe\n");
           return false;
         }
@@ -301,12 +296,6 @@ namespace fa
 
   bool Automaton::isComplete() const
   {
-    // if (hasEpsilonTransition())
-    // {
-    //   printf("\na une epsilon transition\n");
-    //   return false;
-    // }
-
     if (initialStates.size() != 1)
     {
       printf("\nn'a pas exactement un état initial\n");
@@ -404,7 +393,7 @@ namespace fa
       for (int initialState : automaton.initialStates)
       {
         completeAutomaton.addTransition(newInitialState, '\0', initialState);
-        printf("\nDONE\n")
+        printf("\nDONE\n");
       }
 
       // Définir le nouvel état initial
