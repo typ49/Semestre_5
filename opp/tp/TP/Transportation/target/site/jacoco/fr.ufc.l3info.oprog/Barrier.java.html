@@ -39,7 +39,7 @@ public class Barrier {
      */
     public static Barrier build(Network associatedNetwork, String stationName, Map&lt;Double, Integer&gt; tariffStructure) {
         // Vérifications de base
-<span class="pc bpc" id="L42" title="5 of 12 branches missed.">        if (associatedNetwork == null || stationName == null || tariffStructure == null || !associatedNetwork.isValid() || associatedNetwork.getStationByName(stationName) == null || tariffStructure.isEmpty()) {</span>
+<span class="pc bpc" id="L42" title="4 of 12 branches missed.">        if (associatedNetwork == null || stationName == null || tariffStructure == null || !associatedNetwork.isValid() || associatedNetwork.getStationByName(stationName) == null || tariffStructure.isEmpty()) {</span>
 <span class="fc" id="L43">            return null;</span>
         }
 
@@ -55,8 +55,20 @@ public class Barrier {
 <span class="nc" id="L55">            return null;</span>
         }
 
-<span class="fc" id="L58">        return new Barrier(associatedNetwork, stationName, tariffStructure);</span>
+        // vérification de l'augmentation croissante du tarif par rapport à la distance
+<span class="fc" id="L59">        double previousDistance = -1.0; // Initialisation à une valeur négative pour s'assurer que la première distance est toujours supérieure</span>
+<span class="fc" id="L60">        int previousPrice = -1; // Initialisation à une valeur négative pour s'assurer que le premier prix est toujours supérieur</span>
+<span class="fc bfc" id="L61" title="All 2 branches covered.">        for (Map.Entry&lt;Double, Integer&gt; entry : tariffStructure.entrySet()) {</span>
+<span class="pc bpc" id="L62" title="1 of 4 branches missed.">            if (entry.getKey() &lt;= previousDistance || entry.getValue() &lt;= previousPrice) {</span>
+<span class="fc" id="L63">                return null;</span>
+            }
+<span class="fc" id="L65">            previousDistance = entry.getKey();</span>
+<span class="fc" id="L66">            previousPrice = entry.getValue();</span>
+<span class="fc" id="L67">        }</span>
+
+<span class="fc" id="L69">        return new Barrier(associatedNetwork, stationName, tariffStructure);</span>
     }
+
 
     /**
      * Méthode pour entrer dans le réseau de métro.
@@ -66,13 +78,13 @@ public class Barrier {
      */
     public boolean enter(ITicket providedTicket) {
         // Vérifications de base pour l'entrée
-<span class="pc bpc" id="L69" title="2 of 8 branches missed.">        if (providedTicket == null || !providedTicket.isValid() || providedTicket.getEntryStation() != null || providedTicket.getAmount() &lt;= 0) {</span>
-<span class="fc" id="L70">            return false;</span>
+<span class="pc bpc" id="L81" title="1 of 8 branches missed.">        if (providedTicket == null || !providedTicket.isValid() || providedTicket.getEntryStation() != null || providedTicket.getAmount() &lt;= 0) {</span>
+<span class="fc" id="L82">            return false;</span>
         }
 
         // Enregistrement de la station d'entrée sur le ticket
-<span class="fc" id="L74">        providedTicket.entering(this.stationName);</span>
-<span class="fc" id="L75">        return true;</span>
+<span class="fc" id="L86">        providedTicket.entering(this.stationName);</span>
+<span class="fc" id="L87">        return true;</span>
     }
 
     /**
@@ -83,30 +95,29 @@ public class Barrier {
      */
     public boolean exit(ITicket providedTicket) {
         // Vérifications de base pour la sortie
-<span class="pc bpc" id="L86" title="2 of 6 branches missed.">        if (providedTicket == null || !providedTicket.isValid() || providedTicket.getEntryStation() == null) {</span>
-<span class="fc" id="L87">            return false;</span>
+<span class="pc bpc" id="L98" title="2 of 6 branches missed.">        if (providedTicket == null || !providedTicket.isValid() || providedTicket.getEntryStation() == null) {</span>
+<span class="fc" id="L99">            return false;</span>
         }
 
         // Calcul du coût du trajet
-<span class="fc" id="L91">        double shortestDistance = associatedNetwork.distance(providedTicket.getEntryStation(), this.stationName);</span>
-<span class="fc" id="L92">        int adultFare = calculateFareForDistance(shortestDistance);</span>
-<span class="fc" id="L93">        int childFare = (int) Math.ceil(adultFare / 2.0);</span>
+<span class="fc" id="L103">        double shortestDistance = associatedNetwork.distance(providedTicket.getEntryStation(), this.stationName);</span>
+<span class="fc" id="L104">        int adultFare = calculateFareForDistance(shortestDistance);</span>
+<span class="fc" id="L105">        int childFare = (int) Math.ceil(adultFare / 2.0);</span>
 
         // Vérification du solde du ticket
-<span class="fc bfc" id="L96" title="All 2 branches covered.">        if (providedTicket.isChild()) {</span>
-<span class="pc bpc" id="L97" title="1 of 2 branches missed.">            if (providedTicket.getAmount() &gt;= childFare) {</span>
-<span class="fc" id="L98">                providedTicket.invalidate();</span>
-<span class="fc" id="L99">                return true;</span>
+<span class="fc bfc" id="L108" title="All 2 branches covered.">        if (providedTicket.isChild()) {</span>
+<span class="pc bpc" id="L109" title="1 of 2 branches missed.">            if (providedTicket.getAmount() &lt; childFare) {</span>
+<span class="nc" id="L110">                return false; // Refuse la sortie si le solde est insuffisant</span>
             }
         } else {
-<span class="pc bpc" id="L102" title="1 of 2 branches missed.">            if (providedTicket.getAmount() &gt;= adultFare) {</span>
-<span class="fc" id="L103">                providedTicket.invalidate();</span>
-<span class="fc" id="L104">                return true;</span>
+<span class="fc bfc" id="L113" title="All 2 branches covered.">            if (providedTicket.getAmount() &lt; adultFare) {</span>
+<span class="fc" id="L114">                return false; // Refuse la sortie si le solde est insuffisant</span>
             }
         }
-
-<span class="nc" id="L108">        return false;</span>
+<span class="fc" id="L117">        providedTicket.invalidate();</span>
+<span class="fc" id="L118">        return true;</span>
     }
+
 
     /**
      * Calcule le tarif associé à une distance parcourue en utilisant la structure de tarification.
@@ -120,14 +131,14 @@ public class Barrier {
         // Ceci permet d'effectuer des opérations en chaîne sur cet ensemble.
         // Étape 2 : Filtrer le flux pour ne conserver que les distances inférieures ou égales à la distance parcourue.
         // Étape 3 : Trouver la plus grande distance parmi celles filtrées. Cette distance sert de seuil pour définir le tarif.
-<span class="fc" id="L123">        Double key = tariffStructure.keySet().stream()</span>
-<span class="fc bfc" id="L124" title="All 2 branches covered.">                .filter(distance -&gt; distance &lt;= traveledDistance)</span>
-<span class="fc" id="L125">                .max(Double::compareTo)</span>
-<span class="fc" id="L126">                .orElse(null);</span>
+<span class="fc" id="L134">        Double key = tariffStructure.keySet().stream()</span>
+<span class="fc bfc" id="L135" title="All 2 branches covered.">                .filter(distance -&gt; distance &lt;= traveledDistance)</span>
+<span class="fc" id="L136">                .max(Double::compareTo)</span>
+<span class="fc" id="L137">                .orElse(null);</span>
 
         // Étape 4 : Renvoyer le tarif associé à la distance/seuil trouvée.
         // Si aucune distance correspondante n'est trouvée, renvoyer une valeur par défaut (ici, Integer.MAX_VALUE).
-<span class="pc bpc" id="L130" title="1 of 2 branches missed.">        return key != null ? tariffStructure.get(key) : Integer.MAX_VALUE;</span>
+<span class="pc bpc" id="L141" title="1 of 2 branches missed.">        return key != null ? tariffStructure.get(key) : Integer.MAX_VALUE;</span>
     }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

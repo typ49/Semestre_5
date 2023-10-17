@@ -55,8 +55,20 @@ public class Barrier {
             return null;
         }
 
+        // vérification de l'augmentation croissante du tarif par rapport à la distance
+        double previousDistance = -1.0; // Initialisation à une valeur négative pour s'assurer que la première distance est toujours supérieure
+        int previousPrice = -1; // Initialisation à une valeur négative pour s'assurer que le premier prix est toujours supérieur
+        for (Map.Entry<Double, Integer> entry : tariffStructure.entrySet()) {
+            if (entry.getKey() <= previousDistance || entry.getValue() <= previousPrice) {
+                return null;
+            }
+            previousDistance = entry.getKey();
+            previousPrice = entry.getValue();
+        }
+
         return new Barrier(associatedNetwork, stationName, tariffStructure);
     }
+
 
     /**
      * Méthode pour entrer dans le réseau de métro.
@@ -94,19 +106,18 @@ public class Barrier {
 
         // Vérification du solde du ticket
         if (providedTicket.isChild()) {
-            if (providedTicket.getAmount() >= childFare) {
-                providedTicket.invalidate();
-                return true;
+            if (providedTicket.getAmount() < childFare) {
+                return false; // Refuse la sortie si le solde est insuffisant
             }
         } else {
-            if (providedTicket.getAmount() >= adultFare) {
-                providedTicket.invalidate();
-                return true;
+            if (providedTicket.getAmount() < adultFare) {
+                return false; // Refuse la sortie si le solde est insuffisant
             }
         }
-
-        return false;
+        providedTicket.invalidate();
+        return true;
     }
+
 
     /**
      * Calcule le tarif associé à une distance parcourue en utilisant la structure de tarification.

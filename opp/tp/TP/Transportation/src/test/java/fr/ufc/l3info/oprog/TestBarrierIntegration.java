@@ -168,4 +168,103 @@ public class TestBarrierIntegration {
         Barrier barrier = Barrier.build(network, "Station1", invalidPrices);
         assertNull(barrier);
     }
+
+    @Test
+    public void testExitWithChildTicketSufficientFundsLongDistance() {
+        // Initialisation
+        Network network = new Network();
+        Station station1 = new Station("Station1");
+        station1.addLine("A", 1, 0.0);
+        network.addStation(station1);
+        Map<Double, Integer> prices = new HashMap<>();
+        prices.put(0.0, 10);
+        prices.put(5.0, 20);
+        Barrier barrier = Barrier.build(network, "Station1", prices);
+
+        // Test
+        ITicket childTicket = new BaseTicket(true, 30); // Child ticket with 30 units
+        barrier.enter(childTicket);
+        boolean result = barrier.exit(childTicket);
+        assertTrue(result);
+        assertFalse(childTicket.isValid());
+    }
+
+    @Test
+    public void testExitWithAdultTicketInsufficientFundsLongDistance() {
+        // Initialisation
+        Network network = new Network();
+        Station station1 = new Station("Station1");
+        station1.addLine("A", 1, 0.0);
+        network.addStation(station1);
+
+        Station station2 = new Station("Station2");
+        station2.addLine("A", 2, 5.0); // Supposons que la distance entre Station1 et Station2 soit de 5.0
+        network.addStation(station2);
+
+        Map<Double, Integer> prices = new HashMap<>();
+        prices.put(0.0, 10);
+        prices.put(5.0, 20);
+        Barrier entryBarrier = Barrier.build(network, "Station1", prices);
+        Barrier exitBarrier = Barrier.build(network, "Station2", prices);
+
+        // Test
+        ITicket adultTicket = new BaseTicket(false, 15); // Adult ticket with 15 units
+        entryBarrier.enter(adultTicket);
+        boolean result = exitBarrier.exit(adultTicket); // L'utilisateur tente de sortir à la Station2
+        assertFalse(result);
+        assertTrue(adultTicket.isValid());
+    }
+
+
+    @Test
+    public void testBarrierBuildWithNonIncreasingPrices() {
+        // Initialisation
+        Network network = new Network();
+        Station station1 = new Station("Station1");
+        station1.addLine("A", 1, 0.0);
+        network.addStation(station1);
+
+        // Test
+        Map<Double, Integer> nonIncreasingPrices = new HashMap<>();
+        nonIncreasingPrices.put(0.0, 20);
+        nonIncreasingPrices.put(5.0, 10);
+        Barrier barrier = Barrier.build(network, "Station1", nonIncreasingPrices);
+        assertNull(barrier);
+    }
+
+    @Test
+    public void testBarrierBuildWithNonExistentStation() {
+        // Initialisation
+        Network network = new Network();
+        Station station1 = new Station("Station1");
+        station1.addLine("A", 1, 0.0);
+        network.addStation(station1);
+        Map<Double, Integer> prices = new HashMap<>();
+        prices.put(0.0, 10);
+        prices.put(5.0, 20);
+
+        // Test
+        Barrier barrier = Barrier.build(network, "NonExistentStation", prices);
+        assertNull(barrier);
+    }
+
+    @Test
+    public void testEnterWithAlreadyEnteredTicket() {
+        // Initialisation
+        Network network = new Network();
+        Station station1 = new Station("Station1");
+        station1.addLine("A", 1, 0.0);
+        network.addStation(station1);
+        Map<Double, Integer> prices = new HashMap<>();
+        prices.put(0.0, 10);
+        prices.put(5.0, 20);
+        Barrier barrier = Barrier.build(network, "Station1", prices);
+        ITicket adultTicket = new BaseTicket(false, 30); // Adult ticket with 30 units
+
+        // Test
+        barrier.enter(adultTicket);
+        boolean result = barrier.enter(adultTicket);
+        assertFalse(result);
+    }
+
 }

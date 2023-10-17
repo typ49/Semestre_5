@@ -24,9 +24,9 @@ public class Station {
 <span class="fc" id="L24">    }</span>
 
     public Station(String _name, String _line, int _number, double _dist) {
-<span class="fc" id="L27">        this(_name);</span>
-<span class="fc" id="L28">        addLine(_line, _number, _dist);</span>
-<span class="fc" id="L29">    }</span>
+<span class="nc" id="L27">        this(_name);</span>
+<span class="nc" id="L28">        addLine(_line, _number, _dist);</span>
+<span class="nc" id="L29">    }</span>
 
     public void addLine(String _line, int _number, double _dist) {
 <span class="fc bfc" id="L32" title="All 4 branches covered.">        if (_line == null || _line.trim().isEmpty()) {</span>
@@ -57,7 +57,7 @@ public class Station {
 <span class="fc" id="L57">            return 0;</span>
         }
 <span class="fc" id="L59">        LineInfo info = lines.get(l);</span>
-<span class="fc bfc" id="L60" title="All 2 branches covered.">        return info != null ? info.number : 0;</span>
+<span class="pc bpc" id="L60" title="1 of 2 branches missed.">        return info != null ? info.number : 0;</span>
     }
 
     public double getDistanceForLine(String l) {

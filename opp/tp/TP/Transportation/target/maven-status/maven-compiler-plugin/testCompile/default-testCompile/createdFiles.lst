@@ -1,3 +1,5 @@
 fr/ufc/l3info/oprog/TestStation.class
+fr/ufc/l3info/oprog/TestAdjustedTicket.class
 fr/ufc/l3info/oprog/TestBaseTicket.class
+fr/ufc/l3info/oprog/TestBarrierIntegration.class
 fr/ufc/l3info/oprog/TestNetwork.class
