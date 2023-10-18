@@ -18,7 +18,7 @@ int main()
 {
     // initialization
     gf::Window window("It moves", {640, 480});
-    window.setFullscreen(true);
+    // window.setFullscreen(true);
 
     gf::RenderWindow renderer(window);
 
