@@ -45,43 +45,61 @@ namespace hg
         target.draw(shape);
     }
 
+    // empeche le carré de traverser une plateforme
     void Square::collideWithPlateform(gf::Vector2f plateformPosition, float plateformHeight, float plateformLength)
     {
-        // colision par le dessus
-        if (m_position.y + m_size / 2 > plateformPosition.y - plateformHeight / 2 &&
-            m_position.y + m_size / 2 < plateformPosition.y + plateformHeight / 2 &&
-            m_position.x + m_size / 2 > plateformPosition.x - plateformLength / 2 &&
-            m_position.x - m_size / 2 < plateformPosition.x + plateformLength / 2)
+        // Supposons que la classe Square ait des membres m_position (position centrale du carré),
+        // m_size (longueur d'un côté du carré), et m_velocity (vecteur de mouvement du carré)
+
+        // Calculez les limites du carré en utilisant sa position centrale
+        float squareLeft = m_position.x - m_size / 2;
+        float squareRight = m_position.x + m_size / 2;
+        float squareTop = m_position.y - m_size / 2;
+        float squareBottom = m_position.y + m_size / 2;
+
+        // Calculez les limites de la plateforme en utilisant sa position centrale
+        float plateformLeft = plateformPosition.x - plateformLength / 2;
+        float plateformRight = plateformPosition.x + plateformLength / 2;
+        float plateformTop = plateformPosition.y - plateformHeight / 2;
+        float plateformBottom = plateformPosition.y + plateformHeight / 2;
+
+        // Vérifiez la collision
+        if (squareRight > plateformLeft && squareLeft < plateformRight &&
+            squareBottom > plateformTop && squareTop < plateformBottom)
         {
-            m_position.y = plateformPosition.y - plateformHeight / 2 - m_size / 2;
-            m_velocity.y = 0;
-        }
-        // colision par le dessous
-        if (m_position.y - m_size / 2 < plateformPosition.y + plateformHeight / 2 &&
-            m_position.y - m_size / 2 > plateformPosition.y - plateformHeight / 2 &&
-            m_position.x + m_size / 2 > plateformPosition.x - plateformLength / 2 &&
-            m_position.x - m_size / 2 < plateformPosition.x + plateformLength / 2)
-        {
-            m_position.y = plateformPosition.y + plateformHeight / 2 + m_size / 2;
-            m_velocity.y = 0;
-        }
-        // colision par la gauche
-        if (m_position.x + m_size / 2 > plateformPosition.x - plateformLength / 2 &&
-            m_position.x + m_size / 2 < plateformPosition.x + plateformLength / 2 &&
-            m_position.y + m_size / 2 > plateformPosition.y - plateformHeight / 2 &&
-            m_position.y - m_size / 2 < plateformPosition.y + plateformHeight / 2)
-        {
-            m_position.x = plateformPosition.x - plateformLength / 2 - m_size / 2;
-            m_velocity.x = 0;
-        }
-        // colision par la droite
-        if (m_position.x - m_size / 2 < plateformPosition.x + plateformLength / 2 &&
-            m_position.x - m_size / 2 > plateformPosition.x - plateformLength / 2 &&
-            m_position.y + m_size / 2 > plateformPosition.y - plateformHeight / 2 &&
-            m_position.y - m_size / 2 < plateformPosition.y + plateformHeight / 2)
-        {
-            m_position.x = plateformPosition.x + plateformLength / 2 + m_size / 2;
-            m_velocity.x = 0;
+
+            // Collision détectée. Maintenant, nous devons ajuster la position du carré.
+
+            // Vérifiez de quel côté le carré entre en collision
+            float overlapLeft = squareRight - plateformLeft;
+            float overlapRight = plateformRight - squareLeft;
+            float overlapTop = squareBottom - plateformTop;
+            float overlapBottom = plateformBottom - squareTop;
+
+            // Trouvez le chevauchement le plus petit
+            float minOverlap = std::min({overlapLeft, overlapRight, overlapTop, overlapBottom});
+
+            // Ajustez la position du carré en fonction du plus petit chevauchement
+            if (minOverlap == overlapLeft)
+            {
+                m_position.x -= overlapLeft;
+            }
+            else if (minOverlap == overlapRight)
+            {
+                m_position.x += overlapRight;
+            }
+            else if (minOverlap == overlapTop)
+            {
+                m_position.y -= overlapTop;
+            }
+            else if (minOverlap == overlapBottom)
+            {
+                m_position.y += overlapBottom;
+            }
+
+            // Optionnellement, arrêtez le mouvement du carré lors de la collision
+            m_velocity = gf::Vector2f(0, 0);
         }
     }
+
 } // namespace hg

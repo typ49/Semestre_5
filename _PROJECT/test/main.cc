@@ -17,18 +17,22 @@
 int main()
 {
     // initialization
-    static constexpr gf::Vector2i ScreenSize(500, 500);
-    gf::Window window("It moves", ScreenSize);
+    gf::Window window("It moves", {640, 480});
+    window.setFullscreen(true);
+
     gf::RenderWindow renderer(window);
+
+    // Get the screen size after setting fullscreen mode
+    gf::Vector2i ScreenSize = window.getSize();
 
     // create a square
     hg::Square square({100.0f, 100.0f}, 20.0f, gf::Color::Red);
 
-    // create a list of plateform
-    hg::StaticPlateform plateformUp({250.0f, 0.0f}, 20.0f, 500.0f, gf::Color::Blue);
-    hg::StaticPlateform plateformDown({250.0f, 500.0f}, 20.0f, 500.0f, gf::Color::Blue);
-    hg::StaticPlateform plateformLeft({0.0f, 250.0f}, 500.0f, 20.0f, gf::Color::Blue);
-    hg::StaticPlateform plateformRight({500.0f, 250.0f}, 500.0f, 20.0f, gf::Color::Blue);
+    // create a list of plateform using the ScreenSize
+    hg::StaticPlateform plateformUp({static_cast<float>(ScreenSize.width) / 2.0f, 0.0f}, 20.0f, static_cast<float>(ScreenSize.width), gf::Color::Blue);
+    hg::StaticPlateform plateformDown({static_cast<float>(ScreenSize.width) / 2.0f, static_cast<float>(ScreenSize.height)}, 20.0f, static_cast<float>(ScreenSize.width), gf::Color::Blue);
+    hg::StaticPlateform plateformLeft({0.0f, static_cast<float>(ScreenSize.height) / 2.0f}, static_cast<float>(ScreenSize.height), 20.0f, gf::Color::Blue);
+    hg::StaticPlateform plateformRight({static_cast<float>(ScreenSize.width), static_cast<float>(ScreenSize.height) / 2.0f}, static_cast<float>(ScreenSize.height), 20.0f, gf::Color::Blue);
 
     // game loop
     gf::Clock clock;
@@ -111,16 +115,16 @@ int main()
         square.setVelocity(velocity);
         square.update(dt, plateformUp);
         square.update(dt, plateformDown);
-        // square.update(dt, plateformLeft);
-        // square.update(dt, plateformRight);
+        square.update(dt, plateformLeft);
+        square.update(dt, plateformRight);
 
         // render
         renderer.clear(gf::Color::White);
         square.render(renderer);
         plateformUp.render(renderer);
         plateformDown.render(renderer);
-        // plateformLeft.render(renderer);
-        // plateformRight.render(renderer);
+        plateformLeft.render(renderer);
+        plateformRight.render(renderer);
         renderer.display();
     }
     return 0;
