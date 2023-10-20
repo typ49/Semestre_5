@@ -164,6 +164,21 @@ namespace fa
     bool isComplete() const;
 
     /**
+     * Create a mirror automaton
+     */
+    static Automaton createMirror(const Automaton &automaton);
+
+    /**
+     * Create a complete automaton, if not already complete
+     */
+    static Automaton createComplete(const Automaton &automaton);
+
+    /**
+     * Create a complement automaton
+     */
+    static Automaton createComplement(const Automaton &automaton);
+
+    /**
      * Make a transition from a set of states with a character.
      */
     std::set<int> makeTransition(const std::set<int> &origin, char alpha) const;
@@ -198,6 +213,10 @@ namespace fa
     bool isLanguageEmpty() const;
 
     /**
+     * TP n°4
+     */
+
+    /**
      * Tell if the intersection with another automaton is empty
      */
     bool hasEmptyIntersectionWith(const Automaton &other) const;
@@ -207,21 +226,6 @@ namespace fa
      * language accepted by the other automaton
      */
     bool isIncludedIn(const Automaton &other) const;
-
-    /**
-     * Create a mirror automaton
-     */
-    static Automaton createMirror(const Automaton &automaton);
-
-    /**
-     * Create a complete automaton, if not already complete
-     */
-    static Automaton createComplete(const Automaton &automaton);
-
-    /**
-     * Create a complement automaton
-     */
-    static Automaton createComplement(const Automaton &automaton);
 
     /**
      * Create the intersection of the languages of two automata

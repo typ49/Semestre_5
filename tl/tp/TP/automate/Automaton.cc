@@ -5,6 +5,8 @@
 #include <set>
 #include <cassert>
 #include <cctype>
+#include <functional>
+#include <cassert>
 
 namespace fa
 {
@@ -90,6 +92,7 @@ namespace fa
 
   std::size_t Automaton::countStates() const
   {
+    
     return states.size();
   }
 
@@ -255,6 +258,7 @@ namespace fa
 
   bool Automaton::isDeterministic() const
   {
+    
     // Vérifie si l'automate a des transitions epsilon
     if (hasEpsilonTransition())
     {
@@ -263,7 +267,7 @@ namespace fa
     }
 
     // Vérifie si l'automate a exactement un état initial
-    if (initialStates.size() != 1)
+    if (initialStates.size() > 1)
     {
       printf("\nn'a pas exactement un état initial\n");
       return false;
@@ -295,46 +299,45 @@ namespace fa
   }
 
   bool Automaton::isComplete() const
+{
+  // Parcourir chaque état de l'automate
+  for (int state : states)
   {
-    if (initialStates.size() != 1)
+    // Parcourir chaque symbole de l'alphabet
+    for (char symbol : alphabet)
     {
-      printf("\nn'a pas exactement un état initial\n");
-      return false;
-    }
-    // Parcourir chaque état de l'automate
-    for (int state : states)
-    {
-      // Parcourir chaque symbole de l'alphabet
-      for (char symbol : alphabet)
+      bool transitionExists = false;
+
+      // Vérifier s'il existe une transition pour cet état et ce symbole
+      for (int toState : states)
       {
-        bool transitionExists = false;
-
-        // Vérifier s'il existe une transition pour cet état et ce symbole
-        for (int toState : states)
+        if (hasTransition(state, symbol, toState))
         {
-          if (hasTransition(state, symbol, toState))
-          {
-            transitionExists = true;
-            break;
-          }
-        }
-
-        if (!transitionExists)
-        {
-          printf("\nn'est pas complet\n");
-          return false; // Si aucune transition n'est trouvée pour une combinaison état-symbole, l'automate n'est pas complet
+          transitionExists = true;
+          break;
         }
       }
+
+      // Si aucune transition n'est trouvée pour une combinaison état-symbole,
+      // l'automate n'est pas complet
+      if (!transitionExists)
+      {
+        return false;
+      }
     }
-    printf("\nest complet\n");
-    return true; // Si des transitions existent pour chaque combinaison état-symbole, l'automate est complet
   }
+
+  // Si des transitions existent pour chaque combinaison état-symbole,
+  // l'automate est complet
+  return true;
+}
+
 
   Automaton Automaton::createComplete(const Automaton &automaton)
   {
+    assert(automaton.isValid());
     Automaton completeAutomaton = automaton; // Copier l'automate donné
     // remove initialStates
-    completeAutomaton.initialStates.clear();
 
     int trapState = -1;          // Utiliser -1 comme état poubelle, mais vous pouvez choisir une autre valeur si nécessaire
     bool trapStateAdded = false; // Indicateur pour savoir si l'état poubelle a été ajouté
@@ -381,48 +384,12 @@ namespace fa
       }
     }
 
-    if (automaton.initialStates.size() > 1)
-    {
-      printf("\netat init ++\n");
-      // Créer un nouvel état initial
-      int newInitialState = completeAutomaton.addState(-2);
-      bool test = completeAutomaton.hasState(-2);
-      printf("\n%d\n", test);
-
-      // Connecter tous les anciens états initiaux au nouvel état initial avec des transitions epsilon
-      for (int initialState : automaton.initialStates)
-      {
-        completeAutomaton.addTransition(newInitialState, '\0', initialState);
-        printf("\nDONE\n");
-      }
-
-      // Définir le nouvel état initial
-      completeAutomaton.setStateInitial(newInitialState);
-      // affiche les états initiaux
-      for (auto state : completeAutomaton.initialStates)
-      {
-        printf("\n%d\n", state);
-      }
-    }
-    else if (automaton.initialStates.size() == 1)
-    {
-      printf("\netat init = 1\n");
-      // Définir l'unique état initial
-      completeAutomaton.setStateInitial(*automaton.initialStates.begin());
-    }
-    else
-    {
-      printf("\netat init = 0\n");
-      // Si aucune état initial n'existe dans l'automate donné, ajoutez un nouvel état initial
-      int newInitialState = completeAutomaton.addState(0);
-      completeAutomaton.setStateInitial(newInitialState);
-    }
-
     return completeAutomaton;
   }
 
   Automaton Automaton::createComplement(const Automaton &automaton)
   {
+    assert(automaton.isValid());
     Automaton complement;
     complement.alphabet = automaton.alphabet;
     complement.states = automaton.states;
@@ -439,8 +406,32 @@ namespace fa
 
   Automaton Automaton::createMirror(const Automaton &automaton)
   {
-    // TODO
-    return Automaton(); // Ajouté temporairement pour éviter les erreurs de compilation
+    assert(automaton.isValid());
+    Automaton mirroredAutomaton;
+
+    // Copy states and alphabet from the original automaton
+    mirroredAutomaton.states = automaton.states;
+    mirroredAutomaton.alphabet = automaton.alphabet;
+
+    // Swap initial and final states
+    mirroredAutomaton.initialStates = automaton.finalStates;
+    mirroredAutomaton.finalStates = automaton.initialStates;
+
+    // Reverse all transitions
+    for (const auto &fromStatePair : automaton.transitions)
+    {
+      int fromState = fromStatePair.first;
+      for (const auto &symbolPair : fromStatePair.second)
+      {
+        char symbol = symbolPair.first;
+        for (int toState : symbolPair.second)
+        {
+          mirroredAutomaton.addTransition(toState, symbol, fromState);
+        }
+      }
+    }
+
+    return mirroredAutomaton;
   }
 
   std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha) const
@@ -459,6 +450,70 @@ namespace fa
   {
     // TODO
     return false; // Ajouté temporairement pour éviter les erreurs de compilation
+  }
+
+  /**
+   * TP n°3
+   */
+
+  bool Automaton::isLanguageEmpty() const
+  {
+    
+    std::set<int> visited;
+
+    // Fonction récursive pour la recherche en profondeur
+    std::function<bool(int)> dfs = [&](int currentState) -> bool
+    {
+      // Si l'état a déjà été visité, retourner false
+      if (visited.find(currentState) != visited.end())
+      {
+        return false;
+      }
+
+      // Marquer l'état comme visité
+      visited.insert(currentState);
+
+      // Si l'état est final, retourner true
+      if (finalStates.find(currentState) != finalStates.end())
+      {
+        return true;
+      }
+
+      // Parcourir les transitions à partir de l'état actuel
+      for (const auto &symbolPair : transitions.at(currentState))
+      {
+        for (int nextState : symbolPair.second)
+        {
+          if (dfs(nextState))
+          {
+            return true;
+          }
+        }
+      }
+
+      return false;
+    };
+
+    // Lancer la recherche en profondeur à partir de chaque état initial
+    for (int initialState : initialStates)
+    {
+      if (dfs(initialState))
+      {
+        return false; // Le langage n'est pas vide
+      }
+    }
+
+    return true; // Le langage est vide
+  }
+
+  void removeNonAccessibleStates()
+  {
+    // TODO
+  }
+
+  void removeNonCoAccessibleStates()
+  {
+    // TODO
   }
 
 } // namespace fa

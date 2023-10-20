@@ -332,22 +332,6 @@ cxxabi.h
 acxx_demangle.h
 -
 
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.cc
-Automaton.h
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.h
-iostream
--
-vector
--
-map
--
-set
--
-cassert
--
-cctype
--
-
 /home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.h
 cstddef
 -

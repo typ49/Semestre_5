@@ -409,7 +409,7 @@ namespace fa
         EXPECT_FALSE(automaton.isComplete());
     }
 
-    TEST_F(AutomatonTest, TestIsComplete_FALSE_NoInitialState)
+    TEST_F(AutomatonTest, TestIsComplete_TRUE_NoInitialState)
     {
         // Ajout des symboles à l'alphabet
         automaton.addSymbol('0');
@@ -430,10 +430,10 @@ namespace fa
         automaton.addTransition(1, '1', 1); // Transition de l'état 1 à lui-même avec '1'
         automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
         automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
-        EXPECT_FALSE(automaton.isComplete());
+        EXPECT_TRUE(automaton.isComplete());
     }
 
-    TEST_F(AutomatonTest, TestIsComplete_FALSE_MultipleInitialState)
+    TEST_F(AutomatonTest, TestIsComplete_TRUE_MultipleInitialState)
     {
         // Ajout des symboles à l'alphabet
         automaton.addSymbol('0');
@@ -458,7 +458,7 @@ namespace fa
         automaton.addTransition(1, '1', 1); // Transition de l'état 1 à lui-même avec '1'
         automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
         automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
-        EXPECT_FALSE(automaton.isComplete());
+        EXPECT_TRUE(automaton.isComplete());
     }
 
     // test for createComplete()
@@ -587,8 +587,80 @@ namespace fa
     // Test pour createMirror()
     TEST_F(AutomatonTest, TestCreateMirror)
     {
-        automaton = automaton.createMirror(automaton);
-        // Assurez-vous de vérifier si l'automate inversé est correct ici.
+        // init automaton
+        Automaton automaton;
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(2);
+        automaton.addTransition(0, 'a', 1); // #1
+        automaton.addTransition(0, 'a', 2); // #2
+        automaton.addTransition(1, 'b', 2); // #3
+        automaton.addTransition(2, 'b', 2); // #4
+        automaton.addTransition(2, 'b', 0); // #5
+
+        // creating mirror of automaton
+        Automaton mirrorAutomaton;
+        mirrorAutomaton = automaton.createMirror(automaton);
+
+        // test
+        EXPECT_TRUE(mirrorAutomaton.hasSymbol('a'));
+        EXPECT_TRUE(mirrorAutomaton.hasSymbol('b'));
+        EXPECT_TRUE(mirrorAutomaton.hasState(0));
+        EXPECT_TRUE(mirrorAutomaton.hasState(1));
+        EXPECT_TRUE(mirrorAutomaton.hasState(2));
+        EXPECT_TRUE(mirrorAutomaton.isStateInitial(2));
+        EXPECT_TRUE(mirrorAutomaton.isStateFinal(0));
+        EXPECT_TRUE(mirrorAutomaton.hasTransition(1, 'a', 0)); // #1
+        EXPECT_TRUE(mirrorAutomaton.hasTransition(2, 'a', 0)); // #2
+        EXPECT_TRUE(mirrorAutomaton.hasTransition(2, 'b', 1)); // #3
+        EXPECT_TRUE(mirrorAutomaton.hasTransition(2, 'b', 2)); // #4
+        EXPECT_TRUE(mirrorAutomaton.hasTransition(0, 'b', 2)); // #5
+    }
+
+    // Test creation d'un mirroir de mirroir et donc retour à l'origine
+    TEST_F(AutomatonTest, TestCreateMirrorOfMirror)
+    {
+
+        // init automaton
+        Automaton automaton;
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(2);
+        automaton.addTransition(0, 'a', 1); // #1
+        automaton.addTransition(0, 'a', 2); // #2
+        automaton.addTransition(1, 'b', 2); // #3
+        automaton.addTransition(2, 'b', 2); // #4
+        automaton.addTransition(2, 'b', 0); // #5
+
+        // creating mirror of automaton
+        Automaton mirrorAutomaton;
+        mirrorAutomaton = automaton.createMirror(automaton);
+
+        // creating mirror of mirrorAutomaton
+        Automaton mirrorOfMirrorAutomaton;
+        mirrorOfMirrorAutomaton = mirrorAutomaton.createMirror(mirrorAutomaton);
+
+        // test
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasSymbol('a'));
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasSymbol('b'));
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasState(0));
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasState(1));
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasState(2));
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.isStateInitial(0));
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.isStateFinal(2));
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(0, 'a', 1)); // #1
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(0, 'a', 2)); // #2
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(1, 'b', 2)); // #3
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(2, 'b', 2)); // #4
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(2, 'b', 0)); // #5
     }
 
     // Test pour makeTransition()
@@ -654,6 +726,58 @@ namespace fa
 
         std::string input = "ba";
         EXPECT_FALSE(automaton.match(input));
+    }
+
+    // Test TP3 *******************************************************************************************************
+
+    // Test pour isLanguageEmpty()
+    TEST_F(AutomatonTest, TestIsLanguageEmpty_TRUE)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 0);
+        automaton.addTransition(0, 'b', 0);
+
+        EXPECT_TRUE(automaton.isLanguageEmpty());
+    }
+
+    TEST_F(AutomatonTest, TestIsLanguageEmpty_FALSE)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(0, 'b', 0);
+        automaton.addTransition(1, 'a', 1);
+        automaton.addTransition(1, 'b', 1);
+        automaton.addTransition(1, 'b', 0);
+
+        EXPECT_FALSE(automaton.isLanguageEmpty());
+    }
+
+    TEST_F(AutomatonTest, TestIsLanguageEmpty_NoFinalState)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(0, 'b', 0);
+        automaton.addTransition(1, 'a', 1);
+        automaton.addTransition(1, 'b', 1);
+        automaton.addTransition(1, 'b', 0);
+
+        EXPECT_TRUE(automaton.isLanguageEmpty());
     }
 
 } // namespace fa
