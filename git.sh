@@ -8,6 +8,6 @@ fi
 
 # Exécute les commandes Git
 git add .
-git commit -m "$1"
+git commit -m "save $1"
 git push
 git status
