@@ -1,1 +1,0 @@
-/usr/bin/c++ CMakeFiles/game.dir/main.cc.o CMakeFiles/game.dir/squareEntity.cc.o CMakeFiles/game.dir/plateforme.cc.o -o game  -Wl,-rpath,/usr/local/lib /usr/local/lib/libgf0.so.1.2.0 /usr/local/lib/libgfnet0.so.1.2.0 /usr/local/lib/libgfcore0.so.1.2.0 -lpthread /usr/lib/x86_64-linux-gnu/libz.so 
