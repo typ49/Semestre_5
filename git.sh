@@ -1,13 +1,11 @@
 #!/bin/bash
 
-# Vérifie si un message de commit a été fourni
-if [ -z "$1" ]; then
-  echo "Erreur : Aucun message de commit fourni."
-  exit 1
-fi
+# Générer le message de commit
+commit_message="save $(date +'%d-%b-%Y_%H%M' | tr '[:upper:]' '[:lower:]')"
 
-# Exécute les commandes Git
+# Exécuter les commandes Git
 git add .
-git commit -m "save $1"
+git commit -m "$commit_message"
 git push
 git status
+
