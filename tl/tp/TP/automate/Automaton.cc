@@ -267,7 +267,7 @@ namespace fa
     }
 
     // Vérifie si l'automate a exactement un état initial
-    if (initialStates.size() > 1)
+    if (initialStates.size() != 1)
     {
       printf("\nn'a pas exactement un état initial\n");
       return false;
