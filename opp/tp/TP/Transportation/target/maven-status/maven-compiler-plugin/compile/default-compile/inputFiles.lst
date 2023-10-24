@@ -1,6 +1,11 @@
+/home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/parser/ASTNode.java
+/home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/parser/ASTNodeVisitor.java
+/home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/parser/NetworkParserException.java
 /home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/ITicket.java
 /home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/AdjustedTicket.java
 /home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/Barrier.java
 /home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/BaseTicket.java
 /home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/Network.java
 /home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/Station.java
+/home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/parser/NetworkParser.java
+/home/juliengauthier410/l3/s5/opp/tp/TP/Transportation/src/main/java/fr/ufc/l3info/oprog/parser/NetworkBuilder.java
