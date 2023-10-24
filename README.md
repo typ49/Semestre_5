@@ -3,8 +3,8 @@ all my L3 work in progress
 
 
 **TODO :**
-> finir TP2 TL pour diamche 22 octobre
+> finir TP6 OPP pour vendredi 27 octobre
 
-> réviser TL pour lundi 23 octobre (CC1)
+> finir TP2 et TP3 TL pour vendredi 27 octobre 14 h 00
 
 > réviser SR et TP_SR pour lundi 6 novembre
