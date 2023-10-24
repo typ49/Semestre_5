@@ -79,7 +79,29 @@ public class NetworkParserTest {
         assertTrue(net.getStationByName("s3").getLines().contains("line1"));
     }
 
+    @Test(expected = NetworkParserException.class)
+    public void testParserKO1() throws NetworkParserException, IOException { // slash instead of semicolon
+        parser.parse(new File(path + "metro_slashInsteadOfSemicolon.txt"));
+    }
 
+    @Test(expected = NetworkParserException.class)
+    public void testParserKO2() throws NetworkParserException, IOException { // missing comma
+        parser.parse(new File(path + "metro_missingComma.txt"));
+    }
 
+    @Test(expected = NetworkParserException.class)
+    public void testParserKO3() throws NetworkParserException, IOException { // simple quote instead of double quote
+        parser.parse(new File(path + "metro_simpleQuoteInsteadOfDoubleQuote.txt"));
+    }
+
+    @Test(expected = NetworkParserException.class)
+    public void testParserKO4() throws NetworkParserException, IOException { // missing double quote
+        parser.parse(new File(path + "metro_missingDoubleQuote.txt"));
+    }
+
+    @Test(expected = NetworkParserException.class)
+    public void testParserKO5() throws NetworkParserException, IOException { // missing opening brace
+        parser.parse(new File(path + "metro_missingOpeningBrace.txt"));
+    }
 
 }
