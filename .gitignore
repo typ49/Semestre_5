@@ -1,0 +1,9 @@
+# Ignorer tous les fichier .log
+*.log
+
+# Ignorer tous les fichier .o
+*.o
+*.class
+*.exe
+*.iml
+
