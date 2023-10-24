@@ -64,7 +64,7 @@ public class NetworkBuilder implements ASTNodeVisitor {
 
     @Override
     public Object visit(ASTChaine n) {
-        return n.toString().substring(1, n.toString().length()-2);
+        return n.toString().substring(1, n.toString().length()-1);
     }
 
     @Override
