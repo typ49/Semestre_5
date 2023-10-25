@@ -1,0 +1,15 @@
+2 Protocoles applicatifs
+
+    2.1 Résolution de noms
+
+        2.1.1 : Identifier le serveur DNS configuré de l’ordinateur courant. Vérifier et expliquer le résultat obtenu.
+
+        Résultat Console :
+            $ cat /etc/resolv.conf
+            domain lxd
+            search lxd
+            nameserver 100.115.92.193
+
+        Explication :
+            Le fichier /etc/resolv.conf contient les adresses IP des serveurs DNS que votre système utilise pour la résolution de noms de domaine.
+            Si plusieurs serveurs DNS sont listés, votre système les utilisera dans l'ordre où ils apparaissent dans le fichier.

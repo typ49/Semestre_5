@@ -1,0 +1,83 @@
+1 configuration réseau :
+
+   1.1.1 : Obtenir la configuration de l’ordinateur courant - adresse(s) IPv4 et IPv6, masque(s) réseau :
+      Résultat Console :
+         $ ip addr show
+         1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+            link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+            inet 127.0.0.1/8 scope host lo
+               valid_lft forever preferred_lft forever
+            inet6 ::1/128 scope host 
+               valid_lft forever preferred_lft forever
+         5: eth0@if6: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc noqueue state UP group default qlen 1000
+            link/ether 00:16:3e:83:48:d1 brd ff:ff:ff:ff:ff:ff link-netnsid 0
+            inet 100.115.92.204/28 brd 100.115.92.207 scope global eth0
+               valid_lft forever preferred_lft forever
+            inet6 fe80::216:3eff:fe83:48d1/64 scope link 
+               valid_lft forever preferred_lft forever
+
+      Explication :
+         Interface lo (Loopback)
+         lo: Il s'agit de l'interface de bouclage (loopback), utilisée pour des communications internes au système.
+         mtu 65536: MTU (Maximum Transmission Unit) indique la taille maximale des paquets de données qui peuvent être envoyés. Ici, elle est de 65536 octets.
+         state UNKNOWN: L'état de l'interface. "UNKNOWN" signifie que l'état n'est pas clairement défini, ce qui est normal pour une interface de bouclage.
+         inet 127.0.0.1/8: C'est l'adresse IPv4 de l'interface de bouclage. Le /8 indique le masque de sous-réseau.
+         inet6 ::1/128: C'est l'adresse IPv6 de l'interface de bouclage.
+         Interface eth0
+         eth0@if6: Il s'agit de votre interface Ethernet. @if6 est un identifiant interne.
+         mtu 1500: La taille maximale des paquets de données qui peuvent être envoyés est de 1500 octets.
+         state UP: L'interface est active et prête à transmettre des données.
+         link/ether 00:16:3e:83:48:d1: C'est l'adresse MAC de votre interface Ethernet, une adresse physique unique.
+         inet 100.115.92.204/28: C'est l'adresse IPv4 de l'interface. Le /28 indique le masque de sous-réseau, ce qui signifie que les 28 premiers bits de l'adresse sont utilisés pour identifier le réseau.
+         brd 100.115.92.207: C'est l'adresse de diffusion (broadcast) pour cette interface.
+         inet6 fe80::216:3eff:fe83:48d1/64: C'est l'adresse IPv6 de l'interface. Le /64 indique le masque de sous-réseau.
+         Informations supplémentaires
+         valid_lft forever: La durée de vie "valide" de l'adresse est indéfinie.
+         preferred_lft forever: La durée de vie "préférée" de l'adresse est indéfinie.
+
+      Réponse : 
+         pour l'interface 'lo'
+            IPv4 : 127.0.0.1
+            Masque IPv4 : '/8'
+            IPv6 : ::1
+            Masque IPv6 : '/128'
+
+         pour l'interface 'eth0'
+            IPv4 : 100.115.92.204
+            Masque IPv4 : '/28'
+            IPv6 : fe80::216:3eff:fe83:48d1
+            Masque IPv6 : '/64'
+
+   1.1.2 : Quelle est l’adresse de diffusion ? Expliquer. 
+
+      Réponse : 
+         L'adresse de diffusion (broadcast) pour l'interface eth0 est indiquée par le mot-clé brd dans la sortie de la commande ip addr show. Dans votre cas, l'adresse de diffusion est 100.115.92.207.
+
+      Explication :
+         L'adresse de diffusion est utilisée pour envoyer des paquets de données à tous les appareils d'un réseau local. 
+         Elle est généralement la dernière adresse dans la plage d'adresses IP d'un sous-réseau. 
+         Dans un sous-réseau IPv4, l'adresse de diffusion est déterminée en prenant l'adresse réseau et en mettant tous les bits d'hôte à 1.
+   
+   1.1.3 : Quelle est la plage des adresses IP pouvant être affectées aux ordinateurs ?
+
+      Réponse : 
+         L'adresse IP sur l'interface eth0 est 100.115.92.204 avec un masque de sous-réseau de /28.
+         Cela signifie que les 28 premiers bits sont réservés pour l'identification du réseau, et les 4 bits restants sont utilisés pour les adresses d'hôte.
+         Pour déterminer la plage d'adresses IP, nous pouvons faire ce qui suit :
+            1. L'adresse réseau est 100.115.92.192 (les 28 premiers bits de votre adresse IP).
+            2. L'adresse de diffusion est 100.115.92.207 (dernière adresse du sous-réseau).
+         La plage des adresses IP qui peuvent être attribuées aux ordinateurs dans ce sous-réseau est donc de 100.115.92.193 à 100.115.92.206, en excluant l'adresse réseau et l'adresse de diffusion.
+
+
+   1.2 :  Demander à un.e collègue la configuration de son ordinateur. Comparer les configurations des deux ordinateurs. Conclure.
+
+   1.3 : Obtenir le nom court et le nom de domaine complètement qualifié pour l’hôte courant.
+
+      Résultat Console
+         nom court : 
+            $ hostname
+            penguin
+
+         nom de domaine complètement qualifié :
+            $ hostname -f
+            penguin

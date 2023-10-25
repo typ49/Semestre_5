@@ -682,6 +682,46 @@ namespace fa
         EXPECT_TRUE(resultState.count(2) > 0);
     }
 
+    TEST_F(AutomatonTest, TestMakeTransition_transitionFromOneState)
+    {
+        Automaton automaton;
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 2);
+        automaton.addTransition(2, 'a', 0);
+
+        // Test transition from one state
+        std::set<int> origin = {0};
+        std::set<int> expected = {1};
+        EXPECT_EQ(automaton.makeTransition(origin, 'a'), expected);
+    }
+    TEST_F(AutomatonTest, TestMakeTransition_transitionFromMultipleState)
+    {
+        Automaton automaton;
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 2);
+        automaton.addTransition(2, 'a', 0);
+
+        // Test transition from multiple states
+        std::set<int> origin = {0, 2};
+        std::set<int> expected = {0, 1};
+        EXPECT_EQ(automaton.makeTransition(origin, 'a'), expected);
+    }
+
+    TEST_F(AutomatonTest, TestMakeTransition_transitionWithNoMatchingSymbol)
+    {
+    
+        // Test transition with no matching symbols
+        std::set<int> origin = {1};
+        std::set<int> expected = {};
+        EXPECT_EQ(automaton.makeTransition(origin, 'a'), expected);
+    }
+
     // Test pour readString()
     TEST_F(AutomatonTest, TestReadString)
     {

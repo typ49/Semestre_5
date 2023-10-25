@@ -435,10 +435,28 @@ namespace fa
   }
 
   std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha) const
-  {
-    // TODO
-    return std::set<int>(); // Ajouté temporairement pour éviter les erreurs de compilation
-  }
+{
+    std::set<int> destinations;  // Ensemble pour stocker les états de destination
+
+    // Parcourir chaque état dans l'ensemble d'origine
+    for (int state : origin)
+    {
+        // Vérifier si l'état a des transitions pour le symbole donné
+        auto it = transitions.find(state);
+        if (it != transitions.end())
+        {
+            auto symbolIt = it->second.find(alpha);
+            if (symbolIt != it->second.end())
+            {
+                // Ajouter tous les états de destination à l'ensemble de destinations
+                destinations.insert(symbolIt->second.begin(), symbolIt->second.end());
+            }
+        }
+    }
+
+    return destinations;  // Retourner l'ensemble des états de destination
+}
+
 
   std::set<int> Automaton::readString(const std::string &word) const
   {
