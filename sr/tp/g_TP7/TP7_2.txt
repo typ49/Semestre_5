@@ -4,12 +4,35 @@
 
         2.1.1 : Identifier le serveur DNS configuré de l’ordinateur courant. Vérifier et expliquer le résultat obtenu.
 
-        Résultat Console :
-            $ cat /etc/resolv.conf
-            domain lxd
-            search lxd
-            nameserver 100.115.92.193
+            Résultat Console :
+                $ cat /etc/resolv.conf
+                domain lxd
+                search lxd
+                nameserver 100.115.92.193
 
-        Explication :
-            Le fichier /etc/resolv.conf contient les adresses IP des serveurs DNS que votre système utilise pour la résolution de noms de domaine.
-            Si plusieurs serveurs DNS sont listés, votre système les utilisera dans l'ordre où ils apparaissent dans le fichier.
+            Explication :
+                Le fichier /etc/resolv.conf contient les adresses IP des serveurs DNS que votre système utilise pour la résolution de noms de domaine.
+                Si plusieurs serveurs DNS sont listés, votre système les utilisera dans l'ordre où ils apparaissent dans le fichier.
+
+
+        2.1.2 : Déterminer l’adresse IP correspondant `a www.ldlc.com. S’agit-il d’un alias ou d’un nom canonique ? Expliquer. Dans un navigateur web, utiliser comme URL l’adresse IP obtenue. Conclure.
+            Résultat Console :
+                $ nslookup www.ldlc.com
+                Server:         100.115.92.193
+                Address:        100.115.92.193#53
+
+                Non-authoritative answer:
+                www.ldlc.com    canonical name = ldlc.com.
+                Name:   ldlc.com
+                Address: 91.211.165.65
+
+            Explication :
+                L'adresse IP correspondant à www.ldlc.com est 91.211.165.65
+                Il s'agit d'un nom canonique car il n'y a pas de redirection vers un autre nom de domaine.
+
+
+            L'addresse obtenue nous redirige bien vers la page web de ldlc
+
+        2.1.3 :
+
+            Réponse : www.ibm.com et www.microsoft.com appartiennent à la classe A

@@ -10,3 +10,5 @@ all my L3 work in progress
 > réviser SR et TP_SR pour lundi 6 novembre
 
 > finir TP6 OPP pour vendredi 12 novembre
+
+> finir TP7 SR pour vendredi 3 novembre
