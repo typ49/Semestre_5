@@ -666,19 +666,15 @@ namespace fa
     // Test pour makeTransition()
     TEST_F(AutomatonTest, TestMakeTransition)
     {
+        Automaton automaton;
         automaton.addSymbol('a');
         automaton.addSymbol('b');
+        automaton.addState(1);
         automaton.addState(2);
         automaton.addTransition(1, 'a', 2);
 
-        // Créez un ensemble d'origine pour représenter l'état de départ
-        std::set<int> originState;
-        originState.insert(1);
-
-        // Appelez la fonction makeTransition avec l'ensemble d'origine et le symbole 'a'
+        std::set<int> originState = {1};
         std::set<int> resultState = automaton.makeTransition(originState, 'a');
-
-        // Assurez-vous que le résultat contient l'état de destination attendu (2)
         EXPECT_TRUE(resultState.count(2) > 0);
     }
 
@@ -692,11 +688,11 @@ namespace fa
         automaton.addTransition(1, 'b', 2);
         automaton.addTransition(2, 'a', 0);
 
-        // Test transition from one state
         std::set<int> origin = {0};
         std::set<int> expected = {1};
         EXPECT_EQ(automaton.makeTransition(origin, 'a'), expected);
     }
+
     TEST_F(AutomatonTest, TestMakeTransition_transitionFromMultipleState)
     {
         Automaton automaton;
@@ -707,15 +703,15 @@ namespace fa
         automaton.addTransition(1, 'b', 2);
         automaton.addTransition(2, 'a', 0);
 
-        // Test transition from multiple states
         std::set<int> origin = {0, 2};
         std::set<int> expected = {0, 1};
+
         EXPECT_EQ(automaton.makeTransition(origin, 'a'), expected);
     }
 
     TEST_F(AutomatonTest, TestMakeTransition_transitionWithNoMatchingSymbol)
     {
-    
+
         // Test transition with no matching symbols
         std::set<int> origin = {1};
         std::set<int> expected = {};

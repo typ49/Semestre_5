@@ -92,7 +92,7 @@ namespace fa
 
   std::size_t Automaton::countStates() const
   {
-    
+
     return states.size();
   }
 
@@ -258,7 +258,7 @@ namespace fa
 
   bool Automaton::isDeterministic() const
   {
-    
+
     // Vérifie si l'automate a des transitions epsilon
     if (hasEpsilonTransition())
     {
@@ -299,39 +299,38 @@ namespace fa
   }
 
   bool Automaton::isComplete() const
-{
-  // Parcourir chaque état de l'automate
-  for (int state : states)
   {
-    // Parcourir chaque symbole de l'alphabet
-    for (char symbol : alphabet)
+    // Parcourir chaque état de l'automate
+    for (int state : states)
     {
-      bool transitionExists = false;
-
-      // Vérifier s'il existe une transition pour cet état et ce symbole
-      for (int toState : states)
+      // Parcourir chaque symbole de l'alphabet
+      for (char symbol : alphabet)
       {
-        if (hasTransition(state, symbol, toState))
+        bool transitionExists = false;
+
+        // Vérifier s'il existe une transition pour cet état et ce symbole
+        for (int toState : states)
         {
-          transitionExists = true;
-          break;
+          if (hasTransition(state, symbol, toState))
+          {
+            transitionExists = true;
+            break;
+          }
+        }
+
+        // Si aucune transition n'est trouvée pour une combinaison état-symbole,
+        // l'automate n'est pas complet
+        if (!transitionExists)
+        {
+          return false;
         }
       }
-
-      // Si aucune transition n'est trouvée pour une combinaison état-symbole,
-      // l'automate n'est pas complet
-      if (!transitionExists)
-      {
-        return false;
-      }
     }
+
+    // Si des transitions existent pour chaque combinaison état-symbole,
+    // l'automate est complet
+    return true;
   }
-
-  // Si des transitions existent pour chaque combinaison état-symbole,
-  // l'automate est complet
-  return true;
-}
-
 
   Automaton Automaton::createComplete(const Automaton &automaton)
   {
@@ -434,9 +433,9 @@ namespace fa
     return mirroredAutomaton;
   }
 
-  std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha) const
+std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha) const
 {
-    std::set<int> destinations;  // Ensemble pour stocker les états de destination
+    std::set<int> destinations; // Ensemble pour stocker les états de destination
 
     // Parcourir chaque état dans l'ensemble d'origine
     for (int state : origin)
@@ -454,7 +453,7 @@ namespace fa
         }
     }
 
-    return destinations;  // Retourner l'ensemble des états de destination
+    return destinations; // Retourner l'ensemble des états de destination
 }
 
 
@@ -476,7 +475,7 @@ namespace fa
 
   bool Automaton::isLanguageEmpty() const
   {
-    
+
     std::set<int> visited;
 
     // Fonction récursive pour la recherche en profondeur
