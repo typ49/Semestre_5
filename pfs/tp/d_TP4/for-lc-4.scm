@@ -28,8 +28,11 @@
 
 (define even? (complement odd?))
 
+(display '(> test even? <))
+(newline)
 (writeln/return (even? 2023)) ; Affiche #f (faux)
 (writeln/return (even? 2022)) ; Affiche #t (vrai)
+(newline)
 
 ;; fonction filter
 (define (filter pred lst)
@@ -48,13 +51,17 @@
 (define (is-even? n)
   (= (remainder n 2) 0))
 
+(display '(> test remove <))
+(newline)
 (writeln/return (remove is-even? '(1 2 3 4 5 6))) ; Affiche (1 3 5)
-
+(newline)
 
 
 ;;;  ==========================================================================
 ;;;  Multiple values
 
+(display '(> multiple values <))
+(newline)
 (writeln/return (call-with-values (lambda () (values 'L 3)) cons))
 
 (writeln/return (let ((a 'sure)
@@ -76,6 +83,7 @@
 (writeln/return (let-values (((first) (car '(very little players))) ; car => very
                              ((the-quotient the-remainder) (truncate/ 2000 9))) ; 222 2
                   (cons the-quotient (cons the-remainder first)))) ; resultat 222 2 . very
+(newline)
 
 (define (take n l)
   (if (zero? n) '() (cons (car l) (take (- n 1) (cdr l)))))
@@ -360,6 +368,7 @@
 
 (let-values (((result) (included-into? '(19 10 2023) '(2023 20 21 10))))
   (writeln/return result)) ; Expected output: #f
+(newline)
 
 (define (same-elts? l0 l1)
   (and (included-into? l0 l1) (included-into? l1 l0)))
@@ -368,12 +377,12 @@
 (let-values (((result) (same-elts? '(19 10 2023) '(2023 19 10))))
   (writeln/return result)) ; Expected output: #t
 
-(let-values (((result) (same-elts? '(19 10 2023) '(2023 20 21 10))))
+(let-values (((result) (same-elts? '(19 10 2023) '(2023 20 21))))
   (writeln/return result)) ; Expected output: #f
 
 (let-values (((result) (same-elts? '(19 10 2023) '(2023 19 21 10))))
   (writeln/return result)) ; Expected output: #f
-
+(newline)
 
 (define (find-tail p1? l)
   (cond
@@ -386,7 +395,9 @@
 (newline)
 (display (find-tail zero? '(19 21 10 2023))) ; Expected: #f
 (newline)
-
+(display (find-tail odd? '(20 19 20 22 2001))) ; Expected: (19 20 22 2001)
+(newline)
+(newline)
 
 ; memq-rd function
 (define (memq-rd item lst)
@@ -410,9 +421,23 @@
     (else (assq-ff pred (cdr alist)))))
 
 ; Test cases:
+(display '(> test memq-rd <))
+(newline)
 (display (memq-rd 'a '(b a c a d))) ; Expected: (a d)
 (newline)
+(display (memq-rd 'sleep '(delta sleep))) ; Expected (sleep)
+(newline)
+(newline)
+
+(display '(> test member-rd <))
+(newline)
 (display (member-rd (lambda (x) (> x 2)) '(1 2 3 4 3 2))) ; Expected: (3 2)
+(newline)
+(display (member-rd odd? '(1 2 3 4 5 6 7 8 9 9 10 12 14))) ; Expected (9 10 12 14)
+(newline)
+(newline)
+
+(display '(> test assq-ff <))
 (newline)
 (display (assq-ff (lambda (x) (> x 2)) '((1 . a) (3 . b) (2 . c)))) ; Expected: (3 . b)
 (newline)
@@ -421,3 +446,4 @@
 
 (let-values (((result) (assq-ff (lambda (key) (eq? key 'Titanic)) '((M . 2) (L . 3) (Nautilus . -20000)))))
   (writeln/return result)) ; Expected output: #f
+(display '(> end of the wilds <))
