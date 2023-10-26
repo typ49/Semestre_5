@@ -1,4 +1,5 @@
 #include "gtest/gtest.h"
+
 #include "Automaton.h"
 
 namespace fa
@@ -284,7 +285,6 @@ namespace fa
         automaton.addState(0);
         automaton.addState(1);
         automaton.addTransition(0, fa::Epsilon, 1);
-        automaton.prettyPrint(std::cout);
         EXPECT_TRUE(automaton.hasTransition(0, fa::Epsilon, 1));
     }
 
@@ -681,6 +681,8 @@ namespace fa
     TEST_F(AutomatonTest, TestMakeTransition_transitionFromOneState)
     {
         Automaton automaton;
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
         automaton.addState(2);
@@ -690,12 +692,15 @@ namespace fa
 
         std::set<int> origin = {0};
         std::set<int> expected = {1};
-        EXPECT_EQ(automaton.makeTransition(origin, 'a'), expected);
+        std::set<int> result = automaton.makeTransition(origin, 'a');
+        EXPECT_EQ(result, expected);
     }
 
     TEST_F(AutomatonTest, TestMakeTransition_transitionFromMultipleState)
     {
         Automaton automaton;
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
         automaton.addState(2);
@@ -705,8 +710,8 @@ namespace fa
 
         std::set<int> origin = {0, 2};
         std::set<int> expected = {0, 1};
-
-        EXPECT_EQ(automaton.makeTransition(origin, 'a'), expected);
+        std::set<int> result = automaton.makeTransition(origin, 'a');
+        EXPECT_EQ(result, expected);
     }
 
     TEST_F(AutomatonTest, TestMakeTransition_transitionWithNoMatchingSymbol)
@@ -721,9 +726,14 @@ namespace fa
     // Test pour readString()
     TEST_F(AutomatonTest, TestReadString)
     {
+        Automaton automaton;
         automaton.addSymbol('a');
         automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
         automaton.addState(2);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(2);
         automaton.addTransition(0, 'a', 1);
         automaton.addTransition(1, 'b', 2);
 
@@ -746,8 +756,13 @@ namespace fa
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
         automaton.addState(2);
-        automaton.addTransition(1, 'a', 2);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(2);
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 2);
 
         std::string input = "ab";
         EXPECT_TRUE(automaton.match(input));
@@ -814,6 +829,193 @@ namespace fa
         automaton.addTransition(1, 'b', 0);
 
         EXPECT_TRUE(automaton.isLanguageEmpty());
+    }
+
+    // test removeNonAccessibleStates
+    TEST_F(AutomatonTest, testRemoveAccessibleStates_hasNonAccessibleStates)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 0);
+
+        automaton.removeNonAccessibleStates();
+
+        EXPECT_TRUE(automaton.hasState(0));
+        EXPECT_TRUE(automaton.hasState(1));
+        EXPECT_FALSE(automaton.hasState(2));
+    }
+
+    TEST_F(AutomatonTest, testRemoveAccessibleStates_hasNoNonAccessibleStates)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 0);
+
+        automaton.removeNonAccessibleStates();
+
+        EXPECT_TRUE(automaton.hasState(0));
+        EXPECT_TRUE(automaton.hasState(1));
+    }
+
+    // Test when no states are accessible
+    TEST_F(AutomatonTest, testRemoveAccessibleStates_NoAccessibleStates)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.addState(3);
+
+        automaton.removeNonAccessibleStates();
+
+        EXPECT_FALSE(automaton.hasState(1));
+        EXPECT_FALSE(automaton.hasState(2));
+        EXPECT_FALSE(automaton.hasState(3));
+    }
+
+    // Test when all states are accessible
+    TEST_F(AutomatonTest, testRemoveAccessibleStates_AllStatesAccessible)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        automaton.setStateInitial(0);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 2);
+        automaton.addTransition(2, 'a', 0);
+
+        automaton.removeNonAccessibleStates();
+
+        EXPECT_TRUE(automaton.hasState(0));
+        EXPECT_TRUE(automaton.hasState(1));
+        EXPECT_TRUE(automaton.hasState(2));
+    }
+
+    // Test when only some states are accessible
+    TEST_F(AutomatonTest, testRemoveAccessibleStates_SomeStatesAccessible)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.addState(3);
+
+        automaton.setStateInitial(0);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 0);
+        // State 2 and 3 are not accessible
+
+        automaton.removeNonAccessibleStates();
+
+        EXPECT_TRUE(automaton.hasState(0));
+        EXPECT_TRUE(automaton.hasState(1));
+        EXPECT_FALSE(automaton.hasState(2));
+        EXPECT_FALSE(automaton.hasState(3));
+    }
+
+    // test removeNonCoAccessibleStates
+    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_hasNonCoAccessibleStates)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 0);
+
+        automaton.removeNonCoAccessibleStates();
+
+        EXPECT_TRUE(automaton.hasState(0));
+        EXPECT_TRUE(automaton.hasState(1));
+    }
+
+    // Test où aucun état n'est co-accessible
+    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_noCoAccessibleStates)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        automaton.setStateInitial(0);
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 2);
+
+        automaton.removeNonCoAccessibleStates();
+
+        EXPECT_FALSE(automaton.hasState(0));
+        EXPECT_FALSE(automaton.hasState(1));
+        EXPECT_FALSE(automaton.hasState(2));
+    }
+
+    // Test où tous les états sont co-accessibles
+    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_allCoAccessibleStates)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 0);
+
+        automaton.removeNonCoAccessibleStates();
+
+        EXPECT_TRUE(automaton.hasState(0));
+        EXPECT_TRUE(automaton.hasState(1));
+    }
+
+    // Test avec plusieurs états finaux
+    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_multipleFinalStates)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.setStateFinal(2);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 2);
+        automaton.addTransition(2, 'a', 0);
+
+        automaton.removeNonCoAccessibleStates();
+
+        EXPECT_TRUE(automaton.hasState(0));
+        EXPECT_TRUE(automaton.hasState(1));
+        EXPECT_TRUE(automaton.hasState(2));
     }
 
 } // namespace fa

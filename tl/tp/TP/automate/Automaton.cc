@@ -237,7 +237,46 @@ namespace fa
     os << std::endl;
   }
 
-  /**
+  void Automaton::dotPrint(std::ostream &os) const
+  {
+    os << "digraph Automaton {" << std::endl;
+    os << "  rankdir=LR;" << std::endl;
+    os << "  size=\"8,5\"" << std::endl;
+    os << "  node [shape = doublecircle];";
+
+    // Marquer les états finaux avec un double cercle
+    for (int finalState : finalStates)
+    {
+      os << " " << finalState;
+    }
+
+    os << ";" << std::endl;
+    os << "  node [shape = circle];" << std::endl;
+
+    // Marquer les états initiaux avec une flèche venant d'un point invisible
+    for (int initialState : initialStates)
+    {
+      os << "  init" << initialState << " [shape=point];" << std::endl;
+      os << "  init" << initialState << " -> " << initialState << ";" << std::endl;
+    }
+
+    // Afficher les transitions
+    for (const auto &fromState : transitions)
+    {
+      for (const auto &bySymbol : fromState.second)
+      {
+        for (int toState : bySymbol.second)
+        {
+          os << "  " << fromState.first << " -> " << toState;
+          os << " [ label = \"" << bySymbol.first << "\" ];" << std::endl;
+        }
+      }
+    }
+
+    os << "}" << std::endl;
+  }
+
+    /**
    * TP n°2
    */
 
@@ -262,14 +301,14 @@ namespace fa
     // Vérifie si l'automate a des transitions epsilon
     if (hasEpsilonTransition())
     {
-      printf("\na une epsilon transition\n");
+      // printf("\na une epsilon transition\n");
       return false;
     }
 
     // Vérifie si l'automate a exactement un état initial
     if (initialStates.size() != 1)
     {
-      printf("\nn'a pas exactement un état initial\n");
+      // printf("\nn'a pas exactement un état initial\n");
       return false;
     }
 
@@ -288,13 +327,13 @@ namespace fa
         }
         if (transitionCount > 1)
         {
-          printf("\nn'est pas déterministe\n");
+          // printf("\nn'est pas déterministe\n");
           return false;
         }
       }
     }
 
-    printf("\nest déterministe\n");
+    // printf("\nest déterministe\n");
     return true;
   }
 
@@ -433,40 +472,64 @@ namespace fa
     return mirroredAutomaton;
   }
 
-std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha) const
-{
+  std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha) const
+  {
     std::set<int> destinations; // Ensemble pour stocker les états de destination
 
     // Parcourir chaque état dans l'ensemble d'origine
     for (int state : origin)
     {
-        // Vérifier si l'état a des transitions pour le symbole donné
-        auto it = transitions.find(state);
-        if (it != transitions.end())
+      // Vérifier si l'état a des transitions pour le symbole donné
+      auto it = transitions.find(state);
+      if (it != transitions.end())
+      {
+        auto symbolIt = it->second.find(alpha);
+        if (symbolIt != it->second.end())
         {
-            auto symbolIt = it->second.find(alpha);
-            if (symbolIt != it->second.end())
-            {
-                // Ajouter tous les états de destination à l'ensemble de destinations
-                destinations.insert(symbolIt->second.begin(), symbolIt->second.end());
-            }
+          // Ajouter tous les états de destination à l'ensemble de destinations
+          destinations.insert(symbolIt->second.begin(), symbolIt->second.end());
         }
+      }
     }
-
     return destinations; // Retourner l'ensemble des états de destination
-}
-
+  }
 
   std::set<int> Automaton::readString(const std::string &word) const
   {
-    // TODO
-    return std::set<int>(); // Ajouté temporairement pour éviter les erreurs de compilation
+    std::set<int> currentStates = initialStates; // Ensemble pour stocker les états actuels
+    std::set<int> nextStates;                    // Ensemble pour stocker les états suivants
+
+    // Parcourir chaque symbole dans le mot
+    for (char alpha : word)
+    {
+      // Utiliser makeTransition pour obtenir l'ensemble d'états suivants
+      nextStates = makeTransition(currentStates, alpha);
+
+      // Mettre à jour l'ensemble d'états actuels pour le prochain tour de la boucle
+      currentStates = nextStates;
+
+      // Vous pouvez vider nextStates si vous le souhaitez, mais ce n'est pas strictement nécessaire
+      nextStates.clear();
+    }
+
+    return currentStates; // Retourner l'ensemble des états atteints après avoir lu le mot
   }
 
   bool Automaton::match(const std::string &word) const
   {
-    // TODO
-    return false; // Ajouté temporairement pour éviter les erreurs de compilation
+    // Utiliser readString pour obtenir l'ensemble d'états atteints après avoir lu le mot
+    std::set<int> finalStatesReached = readString(word);
+
+    // Vérifier si l'ensemble d'états atteints contient au moins un état final
+    for (int state : finalStatesReached)
+    {
+      if (finalStates.find(state) != finalStates.end())
+      {
+        return true; // Le mot est accepté par l'automate
+      }
+    }
+
+    return false; // Le mot n'est pas accepté par l'automate
   }
 
   /**
@@ -523,14 +586,120 @@ std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha)
     return true; // Le langage est vide
   }
 
-  void removeNonAccessibleStates()
+  void Automaton::removeNonAccessibleStates()
   {
-    // TODO
+    std::set<int> accessibleStates; // Ensemble des états accessibles
+    std::set<int> toExplore;        // Ensemble des états à explorer
+    std::set<int> toRemove;         // Ensemble des états à retirer
+
+    // Ajouter tous les états initiaux à l'ensemble des états à explorer
+    for (int initialState : initialStates)
+    {
+      toExplore.insert(initialState);
+      accessibleStates.insert(initialState);
+    }
+
+    // Tant qu'il y a des états à explorer
+    while (!toExplore.empty())
+    {
+      // Prendre un état à explorer
+      auto it = toExplore.begin();
+      int currentState = *it;
+      toExplore.erase(it);
+
+      // Trouver tous les états accessibles depuis cet état
+      for (const auto &symbol : alphabet)
+      {
+        std::set<int> nextStates = makeTransition({currentState}, symbol);
+
+        for (int nextState : nextStates)
+        {
+          // Si l'état n'a pas déjà été marqué comme accessible
+          if (accessibleStates.find(nextState) == accessibleStates.end())
+          {
+            accessibleStates.insert(nextState);
+            toExplore.insert(nextState);
+          }
+        }
+      }
+    }
+
+    // Identifier les états non accessibles
+    for (int state : states)
+    {
+      if (accessibleStates.find(state) == accessibleStates.end())
+      {
+        toRemove.insert(state);
+      }
+    }
+
+    // Supprimer les états non accessibles
+    for (int state : toRemove)
+    {
+      removeState(state);
+      states.erase(state);
+    }
   }
 
-  void removeNonCoAccessibleStates()
+  void Automaton::removeNonCoAccessibleStates()
   {
-    // TODO
+    std::set<int> coAccessibleStates; // Ensemble des états co-accessibles
+    std::set<int> toExplore;          // Ensemble des états à explorer
+    std::set<int> toRemove;           // Ensemble des états à supprimer
+
+    // Ajouter tous les états finaux à l'ensemble des états à explorer
+    for (int finalState : finalStates)
+    {
+      if (states.find(finalState) != states.end())
+      {
+        toExplore.insert(finalState);
+        coAccessibleStates.insert(finalState);
+      }
+    }
+
+    // Trouver les états co-accessibles
+    while (!toExplore.empty())
+    {
+      auto it = toExplore.begin();
+      int currentState = *it;
+      toExplore.erase(it);
+
+      for (const auto &pair : transitions)
+      {
+        if (states.find(pair.first) == states.end())
+          continue;
+
+        for (const auto &innerPair : pair.second)
+        {
+          if (innerPair.second.find(currentState) != innerPair.second.end())
+          {
+            int previousState = pair.first;
+
+            if (coAccessibleStates.find(previousState) == coAccessibleStates.end())
+            {
+              coAccessibleStates.insert(previousState);
+              toExplore.insert(previousState);
+            }
+          }
+        }
+      }
+    }
+
+    // Identifier les états à supprimer
+    for (const auto &state : states)
+    {
+      if (coAccessibleStates.find(state) == coAccessibleStates.end())
+      {
+        toRemove.insert(state);
+      }
+    }
+
+    // Supprimer les états non co-accessibles
+    for (const auto &state : toRemove)
+    {
+      removeState(state);
+      states.erase(state);
+    }
   }
 
 } // namespace fa

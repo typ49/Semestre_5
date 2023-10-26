@@ -142,7 +142,7 @@ namespace fa
     /**
      * Print the automaton with respect to the DOT specification
      */
-    // void dotPrint(std::ostream& os) const;
+    void dotPrint(std::ostream& os) const;
 
     /**
      * TP2
