@@ -26,6 +26,7 @@ namespace fa
 
   bool Automaton::addSymbol(char symbol)
   {
+    // vérifie si le symbole donné est valide et s'il n'existe pas déjà
     if (symbol != Epsilon && !hasSymbol(symbol))
     {
       alphabet.insert(symbol);
@@ -72,6 +73,7 @@ namespace fa
       states.erase(state);
       initialStates.erase(state);
       finalStates.erase(state);
+
       // supprime les transition associées à l'état supprimé
       for (auto from : transitions)
       {
@@ -128,9 +130,9 @@ namespace fa
     // peux ajouter une epsilon transition
     if (!hasTransition(from, alpha, to))
     {
-      if (hasState(from) && hasState(to))
+      if (hasState(from) && hasState(to)) // les états doivent exister
       {
-        if (hasSymbol(alpha) || alpha == Epsilon)
+        if (hasSymbol(alpha) || alpha == Epsilon) // le symbole doit exister ou être un epsilon
         {
           transitions[from][alpha].insert(to);
           return true;
@@ -142,9 +144,22 @@ namespace fa
 
   bool Automaton::removeTransition(int from, char alpha, int to)
   {
-    if (hasState(from) && hasState(to) && hasSymbol(alpha) && hasTransition(from, alpha, to))
+    if (hasState(from) && hasState(to) && (hasSymbol(alpha) || alpha == Epsilon) && hasTransition(from, alpha, to))
     {
       transitions[from][alpha].erase(to);
+
+      // Supprime l'entrée [from][alpha] si l'ensemble est vide
+      if (transitions[from][alpha].empty())
+      {
+        transitions[from].erase(alpha);
+
+        // Optionnel: Supprimer également la clé 'from' si elle ne contient plus de transitions
+        if (transitions[from].empty())
+        {
+          transitions.erase(from);
+        }
+      }
+
       return true;
     }
     return false;
@@ -152,9 +167,9 @@ namespace fa
 
   bool Automaton::hasTransition(int from, char alpha, int to) const
   {
-    if (hasState(from) && hasState(to))
+    if (hasState(from) && hasState(to)) // les états doivent exister
     {
-      if (hasSymbol(alpha) || alpha == Epsilon)
+      if (hasSymbol(alpha) || alpha == Epsilon) // le symbole doit exister ou être un epsilon
       {
         return transitions.find(from) != transitions.end() && transitions.at(from).find(alpha) != transitions.at(from).end() && transitions.at(from).at(alpha).find(to) != transitions.at(from).at(alpha).end();
       }
@@ -276,7 +291,7 @@ namespace fa
     os << "}" << std::endl;
   }
 
-    /**
+  /**
    * TP n°2
    */
 
@@ -375,9 +390,8 @@ namespace fa
   {
     assert(automaton.isValid());
     Automaton completeAutomaton = automaton; // Copier l'automate donné
-    // remove initialStates
 
-    int trapState = -1;          // Utiliser -1 comme état poubelle, mais vous pouvez choisir une autre valeur si nécessaire
+    int trapState = -1;          // Utiliser -1 comme état poubelle
     bool trapStateAdded = false; // Indicateur pour savoir si l'état poubelle a été ajouté
 
     // Parcourir chaque état de l'automate
@@ -700,6 +714,56 @@ namespace fa
       removeState(state);
       states.erase(state);
     }
+  }
+
+  /**
+   * TP n°4
+   */
+
+  static Automaton createIntersection(const Automaton &lhs, const Automaton &rhs)
+  {
+    // TODO
+    Automaton intersection;
+    return intersection;
+  }
+
+  bool hasEmptyIntersectionWith(const Automaton &other) //const
+  {
+    // TODO
+    return false;
+  }
+
+  /**
+   * TP n°5
+   */
+
+  bool isIncludedIn(const Automaton &other) //const
+  {
+    // TODO
+    return false;
+  }
+
+  static Automaton createDeterministic(const Automaton &other)
+  {
+    // TODO
+    Automaton deterministic;
+    return deterministic;
+  }
+
+  /**
+   * TP n°6
+   */
+
+  static Automaton createMinimalMoore(const Automaton &other) {
+    // TODO
+    Automaton minimalMoore;
+    return minimalMoore;
+  }
+
+  static Automaton createMinimalBrzozowski(const Automaton &other) {
+    // TODO
+    Automaton minimalBrzozowski;
+    return minimalBrzozowski;
   }
 
 } // namespace fa

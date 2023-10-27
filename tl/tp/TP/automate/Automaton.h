@@ -142,7 +142,7 @@ namespace fa
     /**
      * Print the automaton with respect to the DOT specification
      */
-    void dotPrint(std::ostream& os) const;
+    void dotPrint(std::ostream &os) const;
 
     /**
      * TP2
@@ -217,9 +217,18 @@ namespace fa
      */
 
     /**
+     * Create the intersection of the languages of two automata
+     */
+    static Automaton createIntersection(const Automaton &lhs, const Automaton &rhs);
+
+    /**
      * Tell if the intersection with another automaton is empty
      */
     bool hasEmptyIntersectionWith(const Automaton &other) const;
+
+    /**
+     * TP n°5
+     */
 
     /**
      * Tell if the langage accepted by the automaton is included in the
@@ -228,14 +237,13 @@ namespace fa
     bool isIncludedIn(const Automaton &other) const;
 
     /**
-     * Create the intersection of the languages of two automata
-     */
-    static Automaton createIntersection(const Automaton &lhs, const Automaton &rhs);
-
-    /**
      * Create a deterministic automaton, if not already deterministic
      */
     static Automaton createDeterministic(const Automaton &other);
+
+    /**
+     * TP n°6
+     */
 
     /**
      * Create an equivalent minimal automaton with the Moore algorithm
