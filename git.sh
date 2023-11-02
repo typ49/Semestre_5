@@ -7,5 +7,7 @@ commit_message="save $(date +'%d-%b-%Y_%H%M' | tr '[:upper:]' '[:lower:]')"
 git add .
 git commit -m "$commit_message"
 git push
+echo "git status :"
+echo "-----------------------------------------------------------------------"
 git status
 
