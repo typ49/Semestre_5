@@ -12,3 +12,6 @@ all my L3 work in progress
 > finir TP6 OPP pour vendredi 12 novembre
 
 > finir TP7 SR pour vendredi 3 novembre
+
+**CONTROL :**
+> CC1 SR
