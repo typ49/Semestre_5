@@ -11,3 +11,6 @@ echo "git status :"
 echo "-----------------------------------------------------------------------"
 git status
 
+# Affichez la taille du répertoire courant en gigaoctets
+echo "Taille du répertoire courant :"
+du -sh --block-size=1G .
