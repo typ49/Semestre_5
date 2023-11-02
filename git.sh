@@ -13,4 +13,4 @@ git status
 
 # Affichez la taille du répertoire courant en gigaoctets
 echo "Taille du répertoire courant :"
-du -sh ./
+du -sh
