@@ -1,0 +1,157 @@
+-- The CXX compiler identification is GNU 12.2.0
+-- The C compiler identification is GNU 12.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/build
+[ 25%] Building CXX object CMakeFiles/testfa.dir/Automaton.cc.o
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc: In function ‘fa::Automaton fa::createIntersection(const Automaton&, const Automaton&)’:
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:723:56: warning: unused parameter ‘lhs’ [-Wunused-parameter]
+  723 |   static Automaton createIntersection(const Automaton &lhs, const Automaton &rhs)
+      |                                       ~~~~~~~~~~~~~~~~~^~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:723:78: warning: unused parameter ‘rhs’ [-Wunused-parameter]
+  723 |   static Automaton createIntersection(const Automaton &lhs, const Automaton &rhs)
+      |                                                             ~~~~~~~~~~~~~~~~~^~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc: In function ‘bool fa::hasEmptyIntersectionWith(const Automaton&)’:
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:730:50: warning: unused parameter ‘other’ [-Wunused-parameter]
+  730 |   bool hasEmptyIntersectionWith(const Automaton &other) //const
+      |                                 ~~~~~~~~~~~~~~~~~^~~~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc: In function ‘bool fa::isIncludedIn(const Automaton&)’:
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:740:38: warning: unused parameter ‘other’ [-Wunused-parameter]
+  740 |   bool isIncludedIn(const Automaton &other) //const
+      |                     ~~~~~~~~~~~~~~~~~^~~~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc: In function ‘fa::Automaton fa::createDeterministic(const Automaton&)’:
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:746:57: warning: unused parameter ‘other’ [-Wunused-parameter]
+  746 |   static Automaton createDeterministic(const Automaton &other)
+      |                                        ~~~~~~~~~~~~~~~~~^~~~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc: In function ‘fa::Automaton fa::createMinimalMoore(const Automaton&)’:
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:757:56: warning: unused parameter ‘other’ [-Wunused-parameter]
+  757 |   static Automaton createMinimalMoore(const Automaton &other) {
+      |                                       ~~~~~~~~~~~~~~~~~^~~~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc: In function ‘fa::Automaton fa::createMinimalBrzozowski(const Automaton&)’:
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:763:61: warning: unused parameter ‘other’ [-Wunused-parameter]
+  763 |   static Automaton createMinimalBrzozowski(const Automaton &other) {
+      |                                            ~~~~~~~~~~~~~~~~~^~~~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc: At global scope:
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:763:20: warning: ‘fa::Automaton fa::createMinimalBrzozowski(const Automaton&)’ defined but not used [-Wunused-function]
+  763 |   static Automaton createMinimalBrzozowski(const Automaton &other) {
+      |                    ^~~~~~~~~~~~~~~~~~~~~~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:757:20: warning: ‘fa::Automaton fa::createMinimalMoore(const Automaton&)’ defined but not used [-Wunused-function]
+  757 |   static Automaton createMinimalMoore(const Automaton &other) {
+      |                    ^~~~~~~~~~~~~~~~~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:746:20: warning: ‘fa::Automaton fa::createDeterministic(const Automaton&)’ defined but not used [-Wunused-function]
+  746 |   static Automaton createDeterministic(const Automaton &other)
+      |                    ^~~~~~~~~~~~~~~~~~~
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/Automaton.cc:723:20: warning: ‘fa::Automaton fa::createIntersection(const Automaton&, const Automaton&)’ defined but not used [-Wunused-function]
+  723 |   static Automaton createIntersection(const Automaton &lhs, const Automaton &rhs)
+      |                    ^~~~~~~~~~~~~~~~~~
+[ 50%] Building CXX object CMakeFiles/testfa.dir/testfa.cc.o
+[ 75%] Building CXX object CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o
+[100%] Linking CXX executable testfa
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateIntersectionTest_WithEmpty_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3145 : référence indéfinie vers « fa::Automaton::createIntersection(fa::Automaton const&, fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateIntersectionTest_DifferentSymbolsPoguet_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3295 : référence indéfinie vers « fa::Automaton::createIntersection(fa::Automaton const&, fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonHasEmptyIntersectionWithTest_NotEmpty_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3336 : référence indéfinie vers « fa::Automaton::hasEmptyIntersectionWith(fa::Automaton const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3337 : référence indéfinie vers « fa::Automaton::hasEmptyIntersectionWith(fa::Automaton const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonHasEmptyIntersectionWithTest_Empty_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3372 : référence indéfinie vers « fa::Automaton::hasEmptyIntersectionWith(fa::Automaton const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3373 : référence indéfinie vers « fa::Automaton::hasEmptyIntersectionWith(fa::Automaton const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsIncludedInTest_Same_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3718 : référence indéfinie vers « fa::Automaton::isIncludedIn(fa::Automaton const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsIncludedInTest_False_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3752 : référence indéfinie vers « fa::Automaton::isIncludedIn(fa::Automaton const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3753 : référence indéfinie vers « fa::Automaton::isIncludedIn(fa::Automaton const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsIncludedInTest_True_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3788 : référence indéfinie vers « fa::Automaton::isIncludedIn(fa::Automaton const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3789 : référence indéfinie vers « fa::Automaton::isIncludedIn(fa::Automaton const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3808 : encore plus de références indéfinies suivent vers « fa::Automaton::isIncludedIn(fa::Automaton const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateDeterministicTest_Empty_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3593 : référence indéfinie vers « fa::Automaton::createDeterministic(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateIntersectionTest_Demougin2_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3255 : référence indéfinie vers « fa::Automaton::createIntersection(fa::Automaton const&, fa::Automaton const&) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3275 : référence indéfinie vers « fa::Automaton::createIntersection(fa::Automaton const&, fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateIntersectionTest_NonDeterministic_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3232 : référence indéfinie vers « fa::Automaton::createIntersection(fa::Automaton const&, fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateIntersectionTest_ManyInitialStates_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3187 : référence indéfinie vers « fa::Automaton::createIntersection(fa::Automaton const&, fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateIntersectionTest_Different_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3086 : référence indéfinie vers « fa::Automaton::createIntersection(fa::Automaton const&, fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateDeterministicTest_InitialFinalJeandenansLionnet_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3694 : référence indéfinie vers « fa::Automaton::createDeterministic(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateDeterministicTest_NoFinalState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3658 : référence indéfinie vers « fa::Automaton::createDeterministic(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateDeterministicTest_NoInitialState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3625 : référence indéfinie vers « fa::Automaton::createDeterministic(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateDeterministicTest_AlreadyDeterministic_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3579 : référence indéfinie vers « fa::Automaton::createDeterministic(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateDeterministicTest_Exponential_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3550 : référence indéfinie vers « fa::Automaton::createDeterministic(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3517 : encore plus de références indéfinies suivent vers « fa::Automaton::createDeterministic(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateIntersectionTest_Same_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:3107 : référence indéfinie vers « fa::Automaton::createIntersection(fa::Automaton const&, fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_NonAccessibleStateGasca_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4599 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_WithNonAccessibleState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4649 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_EmptyRolletViprey_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4587 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_EmptyRolletViprey_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4637 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_Leonard_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4591 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_Leonard_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4641 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_NotMinimal2_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4571 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_NotMinimal2_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4621 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_Gasca_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4595 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_Gasca_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4645 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_NotMinimal1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4567 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_NotMinimal1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4617 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_NotMinimal3_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4575 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_NotMinimal3_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4625 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_NotMinimal4Buronfosse_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4579 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_NotMinimal4Buronfosse_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4629 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_NotMinimal5Pirolley_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4583 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_NotMinimal5Pirolley_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4633 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_AlreadyMinimal2_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4563 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_AlreadyMinimal2_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4613 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_AlreadyMinimal1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4559 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_AlreadyMinimal1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4609 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalMooreTest_NonAccessibleStatePereiraGehant_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4603 : référence indéfinie vers « fa::Automaton::createMinimalMoore(fa::Automaton const&) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateMinimalBrzozowskiTest_NonAccessibleStatePereiraGehant_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:4653 : référence indéfinie vers « fa::Automaton::createMinimalBrzozowski(fa::Automaton const&) »
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/testfa.dir/build.make:129 : testfa] Erreur 1
+make[1]: *** [CMakeFiles/Makefile2:83 : CMakeFiles/testfa.dir/all] Erreur 2
+make: *** [Makefile:91 : all] Erreur 2
