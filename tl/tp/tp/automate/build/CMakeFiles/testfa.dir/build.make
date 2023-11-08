@@ -62,10 +62,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/juliengauthier410/l3/s5/tl/tp/TP/automate
+CMAKE_SOURCE_DIR = /home/juliengauthier410/l3/s5/tl/tp/tp/automate
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/juliengauthier410/l3/s5/tl/tp/TP/automate/build
+CMAKE_BINARY_DIR = /home/juliengauthier410/l3/s5/tl/tp/tp/automate/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/testfa.dir/depend.make
@@ -78,42 +78,42 @@ include CMakeFiles/testfa.dir/flags.make
 
 CMakeFiles/testfa.dir/Automaton.cc.o: CMakeFiles/testfa.dir/flags.make
 CMakeFiles/testfa.dir/Automaton.cc.o: ../Automaton.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/tl/tp/TP/automate/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testfa.dir/Automaton.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testfa.dir/Automaton.cc.o -c /home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/tl/tp/tp/automate/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/testfa.dir/Automaton.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testfa.dir/Automaton.cc.o -c /home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.cc
 
 CMakeFiles/testfa.dir/Automaton.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testfa.dir/Automaton.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.cc > CMakeFiles/testfa.dir/Automaton.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.cc > CMakeFiles/testfa.dir/Automaton.cc.i
 
 CMakeFiles/testfa.dir/Automaton.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testfa.dir/Automaton.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.cc -o CMakeFiles/testfa.dir/Automaton.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.cc -o CMakeFiles/testfa.dir/Automaton.cc.s
 
 CMakeFiles/testfa.dir/testfa.cc.o: CMakeFiles/testfa.dir/flags.make
 CMakeFiles/testfa.dir/testfa.cc.o: ../testfa.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/tl/tp/TP/automate/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/testfa.dir/testfa.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testfa.dir/testfa.cc.o -c /home/juliengauthier410/l3/s5/tl/tp/TP/automate/testfa.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/tl/tp/tp/automate/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/testfa.dir/testfa.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testfa.dir/testfa.cc.o -c /home/juliengauthier410/l3/s5/tl/tp/tp/automate/testfa.cc
 
 CMakeFiles/testfa.dir/testfa.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testfa.dir/testfa.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/tl/tp/TP/automate/testfa.cc > CMakeFiles/testfa.dir/testfa.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/tl/tp/tp/automate/testfa.cc > CMakeFiles/testfa.dir/testfa.cc.i
 
 CMakeFiles/testfa.dir/testfa.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testfa.dir/testfa.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/tl/tp/TP/automate/testfa.cc -o CMakeFiles/testfa.dir/testfa.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/tl/tp/tp/automate/testfa.cc -o CMakeFiles/testfa.dir/testfa.cc.s
 
 CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o: CMakeFiles/testfa.dir/flags.make
 CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o: ../googletest/googletest/src/gtest-all.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/tl/tp/TP/automate/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o -c /home/juliengauthier410/l3/s5/tl/tp/TP/automate/googletest/googletest/src/gtest-all.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/tl/tp/tp/automate/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o -c /home/juliengauthier410/l3/s5/tl/tp/tp/automate/googletest/googletest/src/gtest-all.cc
 
 CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/tl/tp/TP/automate/googletest/googletest/src/gtest-all.cc > CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.i
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/tl/tp/tp/automate/googletest/googletest/src/gtest-all.cc > CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.i
 
 CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/tl/tp/TP/automate/googletest/googletest/src/gtest-all.cc -o CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.s
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/tl/tp/tp/automate/googletest/googletest/src/gtest-all.cc -o CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.s
 
 # Object files for target testfa
 testfa_OBJECTS = \
@@ -129,7 +129,7 @@ testfa: CMakeFiles/testfa.dir/testfa.cc.o
 testfa: CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o
 testfa: CMakeFiles/testfa.dir/build.make
 testfa: CMakeFiles/testfa.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/juliengauthier410/l3/s5/tl/tp/TP/automate/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable testfa"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/home/juliengauthier410/l3/s5/tl/tp/tp/automate/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable testfa"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/testfa.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -142,6 +142,6 @@ CMakeFiles/testfa.dir/clean:
 .PHONY : CMakeFiles/testfa.dir/clean
 
 CMakeFiles/testfa.dir/depend:
-	cd /home/juliengauthier410/l3/s5/tl/tp/TP/automate/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/juliengauthier410/l3/s5/tl/tp/TP/automate /home/juliengauthier410/l3/s5/tl/tp/TP/automate /home/juliengauthier410/l3/s5/tl/tp/TP/automate/build /home/juliengauthier410/l3/s5/tl/tp/TP/automate/build /home/juliengauthier410/l3/s5/tl/tp/TP/automate/build/CMakeFiles/testfa.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/juliengauthier410/l3/s5/tl/tp/tp/automate/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/juliengauthier410/l3/s5/tl/tp/tp/automate /home/juliengauthier410/l3/s5/tl/tp/tp/automate /home/juliengauthier410/l3/s5/tl/tp/tp/automate/build /home/juliengauthier410/l3/s5/tl/tp/tp/automate/build /home/juliengauthier410/l3/s5/tl/tp/tp/automate/build/CMakeFiles/testfa.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/testfa.dir/depend
 

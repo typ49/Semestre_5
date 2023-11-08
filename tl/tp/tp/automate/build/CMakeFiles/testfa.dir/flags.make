@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/home/juliengauthier410/l3/s5/tl/tp/TP/automate/googletest/googletest/include -I/home/juliengauthier410/l3/s5/tl/tp/TP/automate/googletest/googletest
+CXX_INCLUDES = -I/home/juliengauthier410/l3/s5/tl/tp/tp/automate/googletest/googletest/include -I/home/juliengauthier410/l3/s5/tl/tp/tp/automate/googletest/googletest
 
 CXX_FLAGS = -Wall -Wextra -pedantic -g -O2 -std=c++17
 

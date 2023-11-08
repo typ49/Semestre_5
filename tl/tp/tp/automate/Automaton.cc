@@ -297,6 +297,7 @@ namespace fa
 
   bool Automaton::hasEpsilonTransition() const
   {
+    assert(isValid());
     for (auto from : transitions)
     {
       for (auto alpha : from.second)
@@ -312,6 +313,7 @@ namespace fa
 
   bool Automaton::isDeterministic() const
   {
+    assert(isValid());
 
     // Vérifie si l'automate a des transitions epsilon
     if (hasEpsilonTransition())
@@ -354,6 +356,7 @@ namespace fa
 
   bool Automaton::isComplete() const
   {
+    assert(isValid());
     // Parcourir chaque état de l'automate
     for (int state : states)
     {
@@ -488,6 +491,7 @@ namespace fa
 
   std::set<int> Automaton::makeTransition(const std::set<int> &origin, char alpha) const
   {
+    assert(isValid());
     std::set<int> destinations; // Ensemble pour stocker les états de destination
 
     // Parcourir chaque état dans l'ensemble d'origine
@@ -510,6 +514,7 @@ namespace fa
 
   std::set<int> Automaton::readString(const std::string &word) const
   {
+    assert(isValid());
     std::set<int> currentStates = initialStates; // Ensemble pour stocker les états actuels
     std::set<int> nextStates;                    // Ensemble pour stocker les états suivants
 
@@ -531,6 +536,7 @@ namespace fa
 
   bool Automaton::match(const std::string &word) const
   {
+    assert(isValid());
     // Utiliser readString pour obtenir l'ensemble d'états atteints après avoir lu le mot
     std::set<int> finalStatesReached = readString(word);
 
@@ -552,6 +558,7 @@ namespace fa
 
   bool Automaton::isLanguageEmpty() const
   {
+    assert(isValid());
 
     std::set<int> visited;
 
@@ -602,6 +609,7 @@ namespace fa
 
   void Automaton::removeNonAccessibleStates()
   {
+    assert(isValid());
     std::set<int> accessibleStates; // Ensemble des états accessibles
     std::set<int> toExplore;        // Ensemble des états à explorer
     std::set<int> toRemove;         // Ensemble des états à retirer
@@ -657,6 +665,7 @@ namespace fa
 
   void Automaton::removeNonCoAccessibleStates()
   {
+    assert(isValid());
     std::set<int> coAccessibleStates; // Ensemble des états co-accessibles
     std::set<int> toExplore;          // Ensemble des états à explorer
     std::set<int> toRemove;           // Ensemble des états à supprimer
@@ -720,14 +729,14 @@ namespace fa
    * TP n°4
    */
 
-  static Automaton createIntersection(const Automaton &lhs, const Automaton &rhs)
+  Automaton Automaton::createIntersection(const Automaton &lhs, const Automaton &rhs)
   {
     // TODO
     Automaton intersection;
     return intersection;
   }
 
-  bool hasEmptyIntersectionWith(const Automaton &other) //const
+  bool Automaton::hasEmptyIntersectionWith(const Automaton &other) const
   {
     // TODO
     return false;
@@ -737,13 +746,13 @@ namespace fa
    * TP n°5
    */
 
-  bool isIncludedIn(const Automaton &other) //const
+  bool Automaton::isIncludedIn(const Automaton &other) const
   {
     // TODO
     return false;
   }
 
-  static Automaton createDeterministic(const Automaton &other)
+  Automaton Automaton::createDeterministic(const Automaton &other)
   {
     // TODO
     Automaton deterministic;
@@ -754,13 +763,8 @@ namespace fa
    * TP n°6
    */
 
-  static Automaton createMinimalMoore(const Automaton &other) {
-    // TODO
-    Automaton minimalMoore;
-    return minimalMoore;
-  }
-
-  static Automaton createMinimalBrzozowski(const Automaton &other) {
+  Automaton Automaton::createMinimalBrzozowski(const Automaton &other)
+  {
     // TODO
     Automaton minimalBrzozowski;
     return minimalBrzozowski;

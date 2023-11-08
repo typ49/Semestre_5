@@ -332,27 +332,7 @@ cxxabi.h
 acxx_demangle.h
 -
 
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.cc
-Automaton.h
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.h
-iostream
--
-vector
--
-map
--
-set
--
-cassert
--
-cctype
--
-functional
--
-cassert
--
-
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.h
+/home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.h
 cstddef
 -
 iosfwd
@@ -370,9 +350,9 @@ cassert
 cctype
 -
 
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/testfa.cc
+/home/juliengauthier410/l3/s5/tl/tp/tp/automate/testfa.cc
 gtest/gtest.h
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/gtest/gtest.h
+/home/juliengauthier410/l3/s5/tl/tp/tp/automate/gtest/gtest.h
 Automaton.h
-/home/juliengauthier410/l3/s5/tl/tp/TP/automate/Automaton.h
+/home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.h
 

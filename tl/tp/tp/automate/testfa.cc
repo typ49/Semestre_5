@@ -274,6 +274,7 @@ namespace fa
     }
 
     TEST_F(AutomatonTest, TestRemoveTransition_TRUE_EpsilonTranstion) {
+        automaton.addSymbol('a');
         automaton.addState(0);
         automaton.addState(1);
         automaton.addTransition(0, fa::Epsilon, 1);
@@ -364,6 +365,7 @@ namespace fa
 
     TEST_F(AutomatonTest, TestHasEpsilonTransition_TRUE_usingHasTransition)
     {
+        automaton.addSymbol('a');
         automaton.addState(0);
         automaton.addState(1);
         automaton.addTransition(0, fa::Epsilon, 1);
@@ -372,6 +374,7 @@ namespace fa
 
     TEST_F(AutomatonTest, TestHasEpsilonTransition_TRUE_usingHasEpsilonTransition)
     {
+        automaton.addSymbol('a');
         automaton.addState(0);
         automaton.addState(1);
         automaton.addTransition(0, fa::Epsilon, 1);
@@ -832,11 +835,15 @@ namespace fa
 
     TEST_F(AutomatonTest, TestMakeTransition_transitionWithNoMatchingSymbol)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.addTransition(1, 'a', 2);
 
-        // Test transition with no matching symbols
-        std::set<int> origin = {1};
-        std::set<int> expected = {};
-        EXPECT_EQ(automaton.makeTransition(origin, 'a'), expected);
+        std::set<int> originState = {1};
+        std::set<int> resultState = automaton.makeTransition(originState, 'b');
+        EXPECT_TRUE(resultState.empty());
     }
 
     // Test pour readString()
