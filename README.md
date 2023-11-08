@@ -3,15 +3,13 @@ all my L3 work in progress
 
 
 **TODO :**
-> finir TP6 OPP pour vendredi 27 octobre
 
-> finir TP2 et TP3 TL pour vendredi 27 octobre 14 h 00
+> finir TP5-2 OPP pour vendredi 12 novembre
 
-> réviser SR et TP_SR pour lundi 6 novembre
+> finir TP6 OPP pour dimanche 14 novembre
 
-> finir TP6 OPP pour vendredi 12 novembre
+> finir TP WEB pour lundi 15 novembre
 
-> finir TP7 SR pour vendredi 3 novembre
+> finir TP7 SR pour vendredi 10 novembre
 
-**CONTROL :**
-> CC1 SR
+> finir TP8 SR pour vendredi 10 novembre
