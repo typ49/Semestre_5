@@ -1,0 +1,21 @@
+enum class Input{
+	Up,
+	Down,
+	Left,
+	Right,
+	Z,
+	Q,
+	S,
+	D,
+	Closed,
+	Resized,
+	Escape,
+	UpReleased,
+	DownReleased,
+	LeftReleased,
+	RightReleased,
+	Z_Released,
+	Q_Released,
+	S_Released,
+	D_Released
+};

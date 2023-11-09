@@ -1,0 +1,5 @@
+taille écran : 320 x 480
+taille pixel : 1 x 1
+
+taille tilesheet : 20 x 30
+taille pixel tilesheet : 16 x 16

@@ -1,0 +1,95 @@
+{
+    "Map/SizeTest": {
+        "height": 4300,
+        "width": 2
+    },
+    "activeFile": "level/level_1.tmx",
+    "expandedProjectPaths": [
+        "level",
+        "."
+    ],
+    "fileStates": {
+        "TILESET_FUTURISTIC_CITY.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "font.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "hero.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "level/TILESET_FUTURISTIC_CITY.tsx": {
+            "scaleInDock": 3
+        },
+        "level/font.tsx": {
+            "dynamicWrapping": true,
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "level/hero.tsx": {
+            "scaleInDock": 1
+        },
+        "level/level_1.tmx": {
+            "scale": 3,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 927.6666666666666,
+                "y": 318
+            }
+        },
+        "niveau_1.tmx": {
+            "scale": 2.2107291666666664,
+            "selectedLayer": 3,
+            "viewCenter": {
+                "x": 238.83522593412812,
+                "y": 160.12816284219952
+            }
+        },
+        "tileset.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "tileset/TILESET_FUTURISTIC_CITY.tsx": {
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "tileset/font.tsx": {
+            "dynamicWrapping": false,
+            "scaleInDock": 3,
+            "scaleInEditor": 1
+        },
+        "tileset/hero.tsx": {
+            "scaleInDock": 4,
+            "scaleInEditor": 1
+        }
+    },
+    "last.externalTilesetPath": "/home/juliengauthier410/l3/s5/_projet/tiles/tileset",
+    "last.imagePath": "/home/juliengauthier410/l3/s5/_projet/tiles/image",
+    "map.lastUsedFormat": "tmx",
+    "map.tileHeight": 16,
+    "map.tileWidth": 16,
+    "openFiles": [
+        "level/level_1.tmx"
+    ],
+    "project": "switness.tiled-project",
+    "recentFiles": [
+        "level/level_1.tmx",
+        "tileset/TILESET_FUTURISTIC_CITY.tsx",
+        "tileset/font.tsx",
+        "tileset/hero.tsx",
+        "level/font.tsx",
+        "niveau_1.tmx",
+        "font.tsx",
+        "hero.tsx",
+        "TILESET_FUTURISTIC_CITY.tsx",
+        "tileset.tsx"
+    ],
+    "tileset.lastUsedFormat": "tsx",
+    "tileset.tileSize": {
+        "height": 16,
+        "width": 16
+    }
+}
