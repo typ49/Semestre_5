@@ -1,8 +1,9 @@
 # Semestre_5
 all my L3 work in progress
 
-
 **TODO :**
+
+> **toujours avancer le projet !!**
 
 > finir TP5-2 OPP pour vendredi 12 novembre
 
