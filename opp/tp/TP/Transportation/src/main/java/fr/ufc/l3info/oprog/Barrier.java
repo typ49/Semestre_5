@@ -94,6 +94,10 @@ public class Barrier {
      * @return true si la sortie est autorisée, sinon false
      */
     public boolean exit(ITicket providedTicket) {
+        // verifie que la station existe sur le réseau
+        if (associatedNetwork.getStationByName(this.stationName) == null) {
+            return false;
+        }
         // Vérifications de base pour la sortie
         if (providedTicket == null || !providedTicket.isValid() || providedTicket.getEntryStation() == null) {
             return false;
