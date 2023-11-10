@@ -332,6 +332,28 @@ cxxabi.h
 acxx_demangle.h
 -
 
+/home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.cc
+Automaton.h
+/home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.h
+iostream
+-
+vector
+-
+map
+-
+set
+-
+cassert
+-
+cctype
+-
+functional
+-
+cassert
+-
+utility
+-
+
 /home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.h
 cstddef
 -
@@ -348,6 +370,8 @@ map
 cassert
 -
 cctype
+-
+utility
 -
 
 /home/juliengauthier410/l3/s5/tl/tp/tp/automate/testfa.cc

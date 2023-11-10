@@ -37,13 +37,13 @@ namespace fa
     TEST_F(AutomatonTest, TestIsValid_TRUE_ASCII)
     {
         automaton.addState(0);
-        for (char c = 33 ; c < 127 ; ++c) {
+        for (char c = 33; c < 127; ++c)
+        {
             automaton.addSymbol(c);
         }
 
         EXPECT_TRUE(automaton.isValid());
     }
-
 
     TEST_F(AutomatonTest, TestHasSymbol_TRUE)
     {
@@ -51,11 +51,13 @@ namespace fa
         EXPECT_TRUE(automaton.hasSymbol('a'));
     }
 
-    TEST_F(AutomatonTest, TestHasSymbol_FALSE_NoSymbolAdded) {
+    TEST_F(AutomatonTest, TestHasSymbol_FALSE_NoSymbolAdded)
+    {
         EXPECT_FALSE(automaton.hasSymbol('a'));
     }
 
-    TEST_F (AutomatonTest, TestHasSymbol_FALSE_InvalidChar) {
+    TEST_F(AutomatonTest, TestHasSymbol_FALSE_InvalidChar)
+    {
         automaton.addState(0);
         automaton.addState(1);
         automaton.addTransition(0, fa::Epsilon, 1);
@@ -149,21 +151,24 @@ namespace fa
         EXPECT_FALSE(automaton.removeState(2));
     }
 
-    TEST_F(AutomatonTest, TestRemoveState_TRUE_StateOnInitialState) {
+    TEST_F(AutomatonTest, TestRemoveState_TRUE_StateOnInitialState)
+    {
         automaton.addState(0);
         automaton.setStateInitial(0);
         EXPECT_TRUE(automaton.removeState(0));
         EXPECT_FALSE(automaton.hasState(0));
     }
 
-    TEST_F(AutomatonTest, TestRemoveState_TRUE_StateOnFinalState) {
+    TEST_F(AutomatonTest, TestRemoveState_TRUE_StateOnFinalState)
+    {
         automaton.addState(0);
         automaton.setStateFinal(0);
         EXPECT_TRUE(automaton.removeState(0));
         EXPECT_FALSE(automaton.hasState(0));
     }
 
-    TEST_F (AutomatonTest, TestRemoveState_TRUE_StateTransition) {
+    TEST_F(AutomatonTest, TestRemoveState_TRUE_StateTransition)
+    {
         automaton.addSymbol('a');
         automaton.addState(0);
         automaton.addState(1);
@@ -273,7 +278,8 @@ namespace fa
         EXPECT_EQ(1, transition);
     }
 
-    TEST_F(AutomatonTest, TestRemoveTransition_TRUE_EpsilonTranstion) {
+    TEST_F(AutomatonTest, TestRemoveTransition_TRUE_EpsilonTranstion)
+    {
         automaton.addSymbol('a');
         automaton.addState(0);
         automaton.addState(1);
@@ -441,18 +447,6 @@ namespace fa
         EXPECT_FALSE(automaton.isDeterministic());
     }
 
-    // TEST_F(AutomatonTest, TestIsDeterministic_FALSE_WithEpsilonTransition)
-    // {
-    //     automaton.addSymbol('a');
-    //     automaton.addState(0);
-    //     automaton.addState(1);
-    //     automaton.setStateInitial(0);
-    //     automaton.setStateFinal(1);
-    //     automaton.addTransition(0, 'a', 1);
-    //     automaton.addTransition(0, fa::Epsilon, 1);
-    //     EXPECT_FALSE(automaton.isDeterministic());
-    // }
-
     TEST_F(AutomatonTest, TestIsComplete_TRUE)
     {
 
@@ -558,7 +552,8 @@ namespace fa
         EXPECT_TRUE(automaton.isComplete());
     }
 
-    TEST_F(AutomatonTest, TestIsComplete_TRUE_MultipleTransition) {
+    TEST_F(AutomatonTest, TestIsComplete_TRUE_MultipleTransition)
+    {
         // Ajout des symboles à l'alphabet
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1138,6 +1133,102 @@ namespace fa
         EXPECT_TRUE(automaton.hasState(0));
         EXPECT_TRUE(automaton.hasState(1));
         EXPECT_TRUE(automaton.hasState(2));
+    }
+
+    // Test avec un état final non co-accessible
+    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_nonCoAccessibleFinalState)
+    {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(1, 'b', 0);
+
+        automaton.removeNonCoAccessibleStates();
+
+        EXPECT_TRUE(automaton.hasState(0));
+        EXPECT_TRUE(automaton.hasState(1));
+    }
+
+    /* test createIntersection */
+
+    // Test Intersection d'Automates avec des Langages Disjoints
+    TEST_F(AutomatonTest, testCreateIntersection_DisjointLanguages)
+    {
+        Automaton automaton1;
+        Automaton automaton2;
+
+        // initialisation de l'automate 1
+        automaton1.addSymbol('a');
+        automaton1.addState(0);
+        automaton1.addState(1);
+        automaton1.addState(2);
+        automaton1.setStateInitial(0);
+        automaton1.setStateFinal(2);
+        automaton1.addTransition(0, 'a', 1);
+        automaton1.addTransition(1, 'a', 2);
+        automaton1.addTransition(2, 'a', 0);
+
+        // initialisation de l'automate 2
+        automaton2.addSymbol('b');
+        automaton2.addState(0);
+        automaton2.addState(1);
+        automaton2.addState(2);
+        automaton2.setStateInitial(0);
+        automaton2.setStateFinal(2);
+        automaton2.addTransition(0, 'b', 1);
+        automaton2.addTransition(1, 'b', 2);
+        automaton2.addTransition(2, 'b', 0);
+
+        // initialisation de l'automate intersection
+        Automaton intersectionAutomaton;
+        intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
+        EXPECT_TRUE(intersectionAutomaton.isLanguageEmpty());
+        intersectionAutomaton.prettyPrint(std::cout);
+        EXPECT_TRUE(intersectionAutomaton.finalStates.empty());
+        EXPECT_TRUE(intersectionAutomaton.transitions.empty());
+    }
+
+    // Test Intersection d'Automates avec des Langages Non Disjoints
+    TEST_F(AutomatonTest, testCreateIntersection_NonDisjointLanguages)
+    {
+        Automaton automaton1;
+        Automaton automaton2;
+
+        // initialisation de l'automate 1
+        automaton1.addSymbol('a');
+        automaton1.addState(0);
+        automaton1.addState(1);
+        automaton1.addState(2);
+        automaton1.setStateInitial(0);
+        automaton1.setStateFinal(2);
+        automaton1.addTransition(0, 'a', 1);
+        automaton1.addTransition(1, 'a', 2);
+        automaton1.addTransition(2, 'a', 0);
+
+        // initialisation de l'automate 2
+        automaton2.addSymbol('a');
+        automaton2.addState(0);
+        automaton2.addState(1);
+        automaton2.addState(2);
+        automaton2.setStateInitial(0);
+        automaton2.setStateFinal(2);
+        automaton2.addTransition(0, 'a', 1);
+        automaton2.addTransition(1, 'a', 2);
+        automaton2.addTransition(2, 'a', 0);
+
+        // initialisation de l'automate intersection
+        Automaton intersectionAutomaton;
+        intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
+        EXPECT_FALSE(intersectionAutomaton.isLanguageEmpty());
+        intersectionAutomaton.prettyPrint(std::cout);
+        EXPECT_TRUE(intersectionAutomaton.finalStates.size() == 2);
+        EXPECT_TRUE(intersectionAutomaton.transitions.size() == 6);
     }
 
 } // namespace fa

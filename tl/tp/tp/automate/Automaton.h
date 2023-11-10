@@ -9,6 +9,7 @@
 #include <map>
 #include <cassert>
 #include <cctype>
+#include <utility> // std::pair
 
 namespace fa
 {
@@ -70,7 +71,6 @@ namespace fa
      * Returns true if the state was effectively added and false otherwise.
      */
     bool addState(int state);
-
     /**
      * Remove a state from the automaton.
      *
