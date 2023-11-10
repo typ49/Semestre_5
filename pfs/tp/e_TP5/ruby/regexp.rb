@@ -35,9 +35,39 @@ def match_french_department_number(str)
   end
   
   def target_p(str)
-    match = str.match(/(\((?:[^()]*+|\((?:[^()]*+|\([^()]*+\))*+\))*+\)\.)/)
+    match = str.match(/(\((?:[^()]+|\g<1>)*\)\.)/)
     match ? match[1] : nil
   end
+  
+  
+  def target_p_noRegexp(str)
+    depth = 0
+    start_index = nil
+    extracted_string = ""
+  
+    str.each_char.with_index do |char, index|
+      if char == '('
+        depth += 1
+        start_index = index if depth == 1
+      end
+  
+      extracted_string += char if start_index && depth >= 1
+  
+      if char == ')'
+        depth -= 1
+        if depth == 0 && str[index + 1] == '.'
+          extracted_string += '.'
+          break
+        end
+      end
+    end
+  
+    start_index ? extracted_string : nil
+  end
+  
+  
+  
+  
   
   
 
@@ -85,6 +115,13 @@ puts "-------------------------"
 
 # Test pour target_p
 puts "Test pour target_p"
-puts target_p('(He Could Stop the World). (The Man of Bronze) (Meteor Menace). Doc Savage.')  # Devrait afficher "(He Could Stop the World). (The Man of Bronze) (Meteor Menace)."
-puts target_p('(The Polar Treasure) (The Lost Oasis). (Fear Cay)')  # Devrait afficher nil
-puts target_p('(Yeah! (I (really) enjoy (programming in) Ruby). Don\'t you?')  # Devrait afficher "(I (really) enjoy (programming in) Ruby)."
+puts target_p('(He Could Stop the World). (The Man of Bronze) (Meteor Menace). Doc Savage.') # Doit retourner "(He Could Stop the World)."
+puts target_p('(The Polar Treasure) (The Lost Oasis). (Fear Cay)')  # Doit retourner "(The Polar Treasure)"
+puts target_p('(Yeah! (I (really) enjoy (programming in) Ruby). Don\'t you?')  # Doit retourner "(Yeah! (I (really) enjoy (programming in) Ruby)"
+puts "-------------------------"
+
+# Test pour target_p_noRegexp
+puts "Test pour target_p_noRegexp"
+puts target_p_noRegexp('(He Could Stop the World). (The Man of Bronze) (Meteor Menace). Doc Savage.') # Doit retourner "(He Could Stop the World)."
+puts target_p_noRegexp('(The Polar Treasure) (The Lost Oasis). (Fear Cay)')  # Doit retourner "(The Polar Treasure)(the Lost Oasis)."
+puts target_p_noRegexp('(Yeah! (I (really) enjoy (programming in) Ruby). Don\'t you?')  # Doit retourner "(Yeah! (I (really) enjoy (programming in) Ruby)"
