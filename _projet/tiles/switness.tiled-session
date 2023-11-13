@@ -3,11 +3,11 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "tileset/background.tsx",
+    "activeFile": "level/level_1.tmx",
     "expandedProjectPaths": [
         ".",
-        "tileset",
-        "level"
+        "level",
+        "tileset"
     ],
     "fileStates": {
         "TILESET_FUTURISTIC_CITY.tsx": {
@@ -37,8 +37,8 @@
             "scale": 1.5,
             "selectedLayer": 4,
             "viewCenter": {
-                "x": 192.66666666666666,
-                "y": 366
+                "x": 135.33333333333331,
+                "y": 277.33333333333326
             }
         },
         "niveau_1.tmx": {
@@ -62,20 +62,20 @@
             "scaleInEditor": 1
         },
         "tileset/TILESET_FUTURISTIC_CITY.tsx": {
-            "scaleInDock": 3,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "tileset/background.tsx": {
-            "scaleInDock": 3,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "tileset/font.tsx": {
             "dynamicWrapping": false,
-            "scaleInDock": 3,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         },
         "tileset/hero.tsx": {
-            "scaleInDock": 16,
+            "scaleInDock": 1,
             "scaleInEditor": 1
         }
     },
@@ -90,8 +90,8 @@
     ],
     "project": "switness.tiled-project",
     "recentFiles": [
-        "level/level_1.tmx",
         "tileset/background.tsx",
+        "level/level_1.tmx",
         "tileset/820-0.tsx",
         "tileset/800.tsx",
         "tileset/TILESET_FUTURISTIC_CITY.tsx",
