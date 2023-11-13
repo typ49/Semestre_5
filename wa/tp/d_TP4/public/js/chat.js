@@ -71,33 +71,37 @@ document.addEventListener("DOMContentLoaded", function () {
   });
 
   // Fonction pour afficher un message
-  function afficherMessage(msg) {
-    const date = new Date(msg.date);
-    const formattedDate = `[${date.getHours()}:${date
-      .getMinutes()
-      .toString()
-      .padStart(2, "0")}]`;
-    let messageClass = "";
+function afficherMessage(msg) {
+  const date = new Date(msg.date);
+  const formattedDate = `[${date.getHours()}:${date
+    .getMinutes()
+    .toString()
+    .padStart(2, "0")}]`;
+  let messageClass = "";
+  let messageContent = msg.text;
 
-    if (msg.from === "Serveur") {
-      messageClass = "system"; // Classe CSS pour les messages du serveur
-    } else if (msg.from === userId) {
-      messageClass = "moi"; // Classe CSS pour les messages de l'utilisateur actuel
-    } else if (msg.text.startsWith("@")) {
-      messageClass = "mp"; // Classe CSS pour les messages tagués
-    } else if (msg.from === "[admin]") {
-      messageClass = "admin"; // Classe CSS pour les messages de l'administrateur
-    }
-
-    const messageContent =
-      msg.type === "image"
-        ? `<img src="${msg.text}" alt="Image" style="max-width: 200px; max-height: 200px;" />`
-        : msg.text;
-
-    const messageElement = `<p class="${messageClass}">${formattedDate} ${msg.from}: ${messageContent}</p>`;
-    main.innerHTML += messageElement;
-    main.scrollTop = main.scrollHeight; // Défilement automatique vers le bas
+  if (msg.from === "Serveur") {
+    messageClass = "system"; // Classe CSS pour les messages du serveur
+  } else if (msg.from === userId) {
+    messageClass = "moi"; // Classe CSS pour les messages de l'utilisateur actuel
+  } else if (msg.text.startsWith("@")) {
+    messageClass = "mp"; // Classe CSS pour les messages tagués
+    const nameEndIndex = msg.text.indexOf(' ');
+    const name = nameEndIndex !== -1 ? msg.text.substring(1, nameEndIndex) : msg.text.substring(1);
+    messageContent = `(to ${name}) : ` + (nameEndIndex !== -1 ? msg.text.substring(nameEndIndex + 1) : '');
+  } else if (msg.from === "[admin]") {
+    messageClass = "admin"; // Classe CSS pour les messages de l'administrateur
   }
+
+  if (msg.type === "image") {
+    messageContent = `<img src="${msg.text}" alt="Image" style="max-width: 200px; max-height: 200px;" />`;
+  }
+
+  const messageElement = `<p class="${messageClass}">${formattedDate} ${msg.from}: ${messageContent}</p>`;
+  main.innerHTML += messageElement;
+  main.scrollTop = main.scrollHeight; // Défilement automatique vers le bas
+}
+
 
   // Envoyer un message
   btnEnvoyer.addEventListener("click", function () {
