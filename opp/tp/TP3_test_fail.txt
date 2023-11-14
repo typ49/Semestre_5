@@ -1,6 +1,0 @@
-testIsChildAfterInvalidate
-
-testSwitchingStationsWithoutInvalidation
-
-testEnteringAfterInvalidate
-
