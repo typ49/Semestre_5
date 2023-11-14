@@ -3,13 +3,36 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "level/level_1.tmx",
+    "activeFile": "level/level01.tmx",
     "expandedProjectPaths": [
         ".",
-        "level",
-        "tileset"
+        "tileset",
+        "level"
     ],
+    "file.lastUsedOpenFilter": "Tous les Fichiers (*)",
     "fileStates": {
+        "/home/juliengauthier410/game/ggj2022-main/data/hag/level01.tmx": {
+            "scale": 0.8358886718749999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 512.0299082890356,
+                "y": 512.0299082890356
+            }
+        },
+        "/home/juliengauthier410/game/ggj2022-main/data/hag/level01.tmx#tileset": {
+            "scaleInDock": 1
+        },
+        "/home/juliengauthier410/game/ggj2022-main/data/hag/level02.tmx": {
+            "scale": 0.8358886718749999,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 512.0299082890356,
+                "y": 512.0299082890356
+            }
+        },
+        "/home/juliengauthier410/game/ggj2022-main/data/hag/level02.tmx#tileset": {
+            "scaleInDock": 1
+        },
         "TILESET_FUTURISTIC_CITY.tsx": {
             "scaleInDock": 3,
             "scaleInEditor": 1
@@ -33,12 +56,20 @@
         "level/hero.tsx": {
             "scaleInDock": 1
         },
-        "level/level_1.tmx": {
+        "level/level01.tmx": {
             "scale": 1.5,
-            "selectedLayer": 4,
+            "selectedLayer": 0,
             "viewCenter": {
-                "x": 135.33333333333331,
-                "y": 277.33333333333326
+                "x": 800,
+                "y": 387.33333333333326
+            }
+        },
+        "level/level_1.tmx": {
+            "scale": 1,
+            "selectedLayer": 0,
+            "viewCenter": {
+                "x": 481,
+                "y": 397
             }
         },
         "niveau_1.tmx": {
@@ -85,23 +116,22 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
-        "level/level_1.tmx",
-        "tileset/background.tsx"
+        "level/level01.tmx"
     ],
     "project": "switness.tiled-project",
     "recentFiles": [
-        "tileset/background.tsx",
+        "level/level01.tmx",
         "level/level_1.tmx",
+        "/home/juliengauthier410/game/ggj2022-main/data/hag/level02.tmx",
+        "/home/juliengauthier410/game/ggj2022-main/data/hag/level01.tmx",
+        "tileset/background.tsx",
         "tileset/820-0.tsx",
         "tileset/800.tsx",
         "tileset/TILESET_FUTURISTIC_CITY.tsx",
         "tileset/font.tsx",
         "tileset/hero.tsx",
         "level/font.tsx",
-        "niveau_1.tmx",
-        "font.tsx",
-        "hero.tsx",
-        "TILESET_FUTURISTIC_CITY.tsx"
+        "niveau_1.tmx"
     ],
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
