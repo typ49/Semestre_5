@@ -5,9 +5,9 @@
     },
     "activeFile": "level/level01.tmx",
     "expandedProjectPaths": [
-        ".",
         "tileset",
-        "level"
+        "level",
+        "."
     ],
     "file.lastUsedOpenFilter": "Tous les Fichiers (*)",
     "fileStates": {
@@ -58,10 +58,10 @@
         },
         "level/level01.tmx": {
             "scale": 1.5,
-            "selectedLayer": 0,
+            "selectedLayer": 2,
             "viewCenter": {
-                "x": 800,
-                "y": 387.33333333333326
+                "x": 751.3333333333333,
+                "y": 329.33333333333326
             }
         },
         "level/level_1.tmx": {
