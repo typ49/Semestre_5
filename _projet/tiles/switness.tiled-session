@@ -58,10 +58,10 @@
         },
         "level/level01.tmx": {
             "scale": 1.5,
-            "selectedLayer": 3,
+            "selectedLayer": 4,
             "viewCenter": {
-                "x": 186.66666666666666,
-                "y": 327.33333333333326
+                "x": 744,
+                "y": 325.33333333333326
             }
         },
         "level/level_1.tmx": {
