@@ -1188,14 +1188,52 @@ namespace fa
         // initialisation de l'automate intersection
         Automaton intersectionAutomaton;
         intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
-        EXPECT_TRUE(intersectionAutomaton.isLanguageEmpty());
-        intersectionAutomaton.prettyPrint(std::cout);
+        EXPECT_TRUE(intersectionAutomaton.isLanguageEmpty());   
         EXPECT_TRUE(intersectionAutomaton.finalStates.empty());
         EXPECT_TRUE(intersectionAutomaton.transitions.empty());
     }
 
     // Test Intersection d'Automates avec des Langages Non Disjoints
     TEST_F(AutomatonTest, testCreateIntersection_NonDisjointLanguages)
+    {
+        Automaton automaton1;
+        Automaton automaton2;
+
+        // initialisation de l'automate 1
+        automaton1.addSymbol('a');
+        automaton1.addSymbol('b');
+        automaton1.addState(0);
+        automaton1.addState(1);
+        automaton1.setStateInitial(0);
+        automaton1.setStateFinal(1);
+        automaton1.addTransition(0, 'a', 0);
+        automaton1.addTransition(0, 'a', 1);
+        automaton1.addTransition(1, 'b', 1);
+
+        // initialisation de l'automate 2
+        automaton2.addSymbol('a');
+        automaton2.addSymbol('b');
+        automaton2.addState(0);
+        automaton2.addState(1);
+        automaton2.addState(2);
+        automaton2.setStateInitial(0);
+        automaton2.setStateFinal(2);
+        automaton2.addTransition(0, 'a', 1);
+        automaton2.addTransition(1, 'a', 2);
+        automaton2.addTransition(2, 'b', 2);
+
+        // initialisation de l'automate intersection
+        Automaton intersectionAutomaton;
+        intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
+        EXPECT_FALSE(intersectionAutomaton.isLanguageEmpty());
+
+        EXPECT_TRUE(intersectionAutomaton.initialStates.size() == 1);
+        EXPECT_TRUE(intersectionAutomaton.finalStates.size() == 1);
+        EXPECT_TRUE(intersectionAutomaton.countTransitions() == 5);
+    }
+
+    // test hasEmpty intersection with
+    TEST_F(AutomatonTest, testHasEmptyIntersectionWith_True)
     {
         Automaton automaton1;
         Automaton automaton2;
@@ -1212,7 +1250,38 @@ namespace fa
         automaton1.addTransition(2, 'a', 0);
 
         // initialisation de l'automate 2
+        automaton2.addSymbol('b');
+        automaton2.addState(0);
+        automaton2.addState(1);
+        automaton2.addState(2);
+        automaton2.setStateInitial(0);
+        automaton2.setStateFinal(2);
+        automaton2.addTransition(0, 'b', 1);
+        automaton2.addTransition(1, 'b', 2);
+        automaton2.addTransition(2, 'b', 0);
+
+        EXPECT_TRUE(automaton1.hasEmptyIntersectionWith(automaton2));
+    }
+
+    TEST_F(AutomatonTest, testHasEmptyIntersectionWith_False)
+    {
+        Automaton automaton1;
+        Automaton automaton2;
+
+        // initialisation de l'automate 1
+        automaton1.addSymbol('a');
+        automaton1.addSymbol('b');
+        automaton1.addState(0);
+        automaton1.addState(1);
+        automaton1.setStateInitial(0);
+        automaton1.setStateFinal(1);
+        automaton1.addTransition(0, 'a', 0);
+        automaton1.addTransition(0, 'a', 1);
+        automaton1.addTransition(1, 'b', 1);
+
+        // initialisation de l'automate 2
         automaton2.addSymbol('a');
+        automaton2.addSymbol('b');
         automaton2.addState(0);
         automaton2.addState(1);
         automaton2.addState(2);
@@ -1220,15 +1289,9 @@ namespace fa
         automaton2.setStateFinal(2);
         automaton2.addTransition(0, 'a', 1);
         automaton2.addTransition(1, 'a', 2);
-        automaton2.addTransition(2, 'a', 0);
+        automaton2.addTransition(2, 'b', 2);
 
-        // initialisation de l'automate intersection
-        Automaton intersectionAutomaton;
-        intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
-        EXPECT_FALSE(intersectionAutomaton.isLanguageEmpty());
-        intersectionAutomaton.prettyPrint(std::cout);
-        EXPECT_TRUE(intersectionAutomaton.finalStates.size() == 2);
-        EXPECT_TRUE(intersectionAutomaton.transitions.size() == 6);
+        EXPECT_FALSE(automaton2.hasEmptyIntersectionWith(automaton1));
     }
 
 } // namespace fa

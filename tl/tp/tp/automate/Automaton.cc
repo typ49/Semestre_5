@@ -557,50 +557,60 @@ namespace fa
    * TP n°3
    */
 
-  bool Automaton::isLanguageEmpty() const {
+  bool Automaton::isLanguageEmpty() const
+  {
     assert(isValid());
 
     std::set<int> visited;
 
     // Fonction récursive pour la recherche en profondeur (DFS)
-    std::function<bool(int)> dfs = [&](int currentState) -> bool {
-        // Si l'état a déjà été visité, retourner false
-        if (visited.find(currentState) != visited.end()) {
-            return false;
-        }
-
-        // Marquer l'état comme visité
-        visited.insert(currentState);
-
-        // Si l'état est final, retourner true
-        if (finalStates.find(currentState) != finalStates.end()) {
-            return true;
-        }
-
-        // Vérifier l'existence de transitions pour l'état actuel avant de parcourir
-        if (transitions.find(currentState) != transitions.end()) {
-            // Parcourir les transitions à partir de l'état actuel
-            for (const auto &symbolPair : transitions.at(currentState)) {
-                for (int nextState : symbolPair.second) {
-                    if (dfs(nextState)) {
-                        return true;
-                    }
-                }
-            }
-        }
-
+    std::function<bool(int)> dfs = [&](int currentState) -> bool
+    {
+      // Si l'état a déjà été visité, retourner false
+      if (visited.find(currentState) != visited.end())
+      {
         return false;
+      }
+
+      // Marquer l'état comme visité
+      visited.insert(currentState);
+
+      // Si l'état est final, retourner true
+      if (finalStates.find(currentState) != finalStates.end())
+      {
+        return true;
+      }
+
+      // Vérifier l'existence de transitions pour l'état actuel avant de parcourir
+      if (transitions.find(currentState) != transitions.end())
+      {
+        // Parcourir les transitions à partir de l'état actuel
+        for (const auto &symbolPair : transitions.at(currentState))
+        {
+          for (int nextState : symbolPair.second)
+          {
+            if (dfs(nextState))
+            {
+              return true;
+            }
+          }
+        }
+      }
+
+      return false;
     };
 
     // Lancer la recherche en profondeur à partir de chaque état initial
-    for (int initialState : initialStates) {
-        if (dfs(initialState)) {
-            return false; // Le langage n'est pas vide
-        }
+    for (int initialState : initialStates)
+    {
+      if (dfs(initialState))
+      {
+        return false; // Le langage n'est pas vide
+      }
     }
 
     return true; // Le langage est vide
-}
+  }
 
   void Automaton::removeNonAccessibleStates()
   {
@@ -724,92 +734,106 @@ namespace fa
    * TP n°4
    */
 
-  Automaton Automaton::createIntersection(const Automaton &lhs, const Automaton &rhs) {
+  Automaton Automaton::createIntersection(const Automaton &lhs, const Automaton &rhs)
+  {
     assert(lhs.isValid());
     assert(rhs.isValid());
 
-    Automaton intersectionAutomaton;
-    std::map<std::pair<int, int>, int> statePairsMap;
-    int newStateIndex = 0;
-
-    // vérification langage disjoint
     bool disjoint = true;
-    for (char lhsSymbol : lhs.alphabet) {
-        for (char rhsSymbol : rhs.alphabet) {
-            // vérifie si les deux symboles ne sont pas égaux
-            if (lhsSymbol == rhsSymbol) {
-                disjoint = false;
-            }
+
+    // vérifie si le language est disjoint
+
+    for (auto lhsSymbol : lhs.alphabet)
+    {
+      for (auto rhsSymbol : rhs.alphabet)
+      {
+        if (lhsSymbol == rhsSymbol)
+        {
+          disjoint = false;
         }
+      }
     }
 
-    // Unifier les alphabets des deux automates
-    intersectionAutomaton.alphabet = lhs.alphabet;
-    for (auto symbol : rhs.alphabet) {
-        intersectionAutomaton.addSymbol(symbol);
+
+    Automaton intersectionAutomaton;
+    std::map<std::pair<int, int>, int> productStates;
+    int newState = 0;
+
+    // crée l'alphabet de l'automate intersection
+    for (char symbol : lhs.alphabet)
+    {
+      intersectionAutomaton.addSymbol(symbol);
+    }
+    for (char symbol : rhs.alphabet)
+    {
+      intersectionAutomaton.addSymbol(symbol);
     }
 
-    // Parcourir chaque paire d'états initiaux de lhs et rhs
-    for (auto lhsInitState : lhs.initialStates) {
-        for (auto rhsInitState : rhs.initialStates) {
-            int combinedInitialState = newStateIndex++;
-            intersectionAutomaton.addState(combinedInitialState);
-            intersectionAutomaton.setStateInitial(combinedInitialState);
-            statePairsMap[std::make_pair(lhsInitState, rhsInitState)] = combinedInitialState;
+    // crée le produit cartésien des états
+    for (int lhsState : lhs.states)
+    {
+      for (int rhsState : rhs.states)
+      {
+        productStates[std::make_pair(lhsState, rhsState)] = newState;
+        intersectionAutomaton.addState(newState);
+        newState++;
+      }
+    }
+
+    // crée les états initiaux
+    for (int lhsState : lhs.initialStates)
+    {
+      for (int rhsState : rhs.initialStates)
+      {
+        intersectionAutomaton.setStateInitial(productStates[std::make_pair(lhsState, rhsState)]);
+      }
+    }
+
+    // crée les états finaux
+    if (!disjoint) {
+      for (int lhsState : lhs.finalStates)
+      {
+        for (int rhsState : rhs.finalStates)
+        {
+          intersectionAutomaton.setStateFinal(productStates[std::make_pair(lhsState, rhsState)]);
         }
+      }
     }
 
-    // Parcourir toutes les combinaisons d'états de lhs et rhs
-    for (auto lhsState : lhs.states) {
-        for (auto rhsState : rhs.states) {
-            auto statePair = std::make_pair(lhsState, rhsState);
-
-            if (statePairsMap.find(statePair) == statePairsMap.end()) {
-                int combinedState = newStateIndex++;
-                intersectionAutomaton.addState(combinedState);
-                statePairsMap[statePair] = combinedState;
-            }
-            int combinedState = statePairsMap[statePair];
-
-            // Marquer comme état final uniquement si les deux états sont finaux
-            if (lhs.finalStates.find(lhsState) != lhs.finalStates.end() && rhs.finalStates.find(rhsState) != rhs.finalStates.end() && disjoint == false) {
-                intersectionAutomaton.setStateFinal(combinedState);
-            }
-
-            // Créer des transitions pour les symboles communs
-            for (char symbol : intersectionAutomaton.alphabet) {
-                if (!lhs.hasSymbol(symbol) || !rhs.hasSymbol(symbol)) {
-                    continue; // Ignorer les symboles non communs
+    // crée les transitions
+    for (const auto &lhsStatePair : lhs.transitions)
+    { // lhsStatePair = (état, (symbole, ensemble d'états))
+      for (const auto &lhsSymbolPair : lhsStatePair.second)
+      { // lhsSymbolPair = (symbole, ensemble d'états)
+        for (const auto &rhsStatePair : rhs.transitions)
+        { // rhsStatePair = (état, (symbole, ensemble d'états))
+          for (const auto &rhsSymbolPair : rhsStatePair.second)
+          { // rhsSymbolPair = (symbole, ensemble d'états)
+            if (lhsSymbolPair.first == rhsSymbolPair.first)
+            {
+              for (int lhsToState : lhsSymbolPair.second)
+              {
+                for (int rhsToState : rhsSymbolPair.second)
+                {
+                  intersectionAutomaton.addTransition(
+                      productStates[std::make_pair(lhsStatePair.first, rhsStatePair.first)],
+                      lhsSymbolPair.first,
+                      productStates[std::make_pair(lhsToState, rhsToState)]);
                 }
-
-                std::set<int> nextLhsStates = lhs.makeTransition({lhsState}, symbol);
-                std::set<int> nextRhsStates = rhs.makeTransition({rhsState}, symbol);
-
-                for (int nextLhsState : nextLhsStates) {
-                    for (int nextRhsState : nextRhsStates) {
-                        auto nextStatePair = std::make_pair(nextLhsState, nextRhsState);
-                        if (statePairsMap.find(nextStatePair) == statePairsMap.end()) {
-                            int nextState = newStateIndex++;
-                            intersectionAutomaton.addState(nextState);
-                            statePairsMap[nextStatePair] = nextState;
-                        }
-                        int nextState = statePairsMap[nextStatePair];
-
-                        intersectionAutomaton.addTransition(combinedState, symbol, nextState);
-                    }
-                }
+              }
             }
+          }
         }
+      }
     }
 
     return intersectionAutomaton;
-}
-
+  }
 
   bool Automaton::hasEmptyIntersectionWith(const Automaton &other) const
   {
-    // TODO
-    return false;
+    Automaton intersection = createIntersection(*this, other);
+    return intersection.isLanguageEmpty();
   }
 
   /**
