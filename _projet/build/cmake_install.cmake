@@ -1,4 +1,4 @@
-# Install script for directory: /home/juliengauthier410/l3/s5/_projet/build
+# Install script for directory: /home/juliengauthier410/l3/s5/_projet
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

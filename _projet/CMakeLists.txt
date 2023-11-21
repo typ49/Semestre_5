@@ -8,9 +8,9 @@ find_package(gf REQUIRED)
 
 add_executable(game
  ../data/main.cc
-  ../data/squareEntity.cc
-  ../data/staticPlateforme.cc
-  ../data/Input.cc)
+ ../data/squareEntity.cc
+ ../data/staticPlateforme.cc
+ ../data/Input.cc)
 
 target_include_directories(game
 PRIVATE

@@ -67,7 +67,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/juliengauthier410/l3/s5/_projet/build
+CMAKE_SOURCE_DIR = /home/juliengauthier410/l3/s5/_projet
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/juliengauthier410/l3/s5/_projet/build
@@ -142,113 +142,113 @@ game/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/build
 .PHONY : game/fast
 
-home/juliengauthier410/l3/s5/_projet/data/Input.o: home/juliengauthier410/l3/s5/_projet/data/Input.cc.o
+data/Input.o: data/Input.cc.o
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/Input.o
-
-# target to build an object file
-home/juliengauthier410/l3/s5/_projet/data/Input.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.o
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/Input.cc.o
-
-home/juliengauthier410/l3/s5/_projet/data/Input.i: home/juliengauthier410/l3/s5/_projet/data/Input.cc.i
-
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/Input.i
-
-# target to preprocess a source file
-home/juliengauthier410/l3/s5/_projet/data/Input.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.i
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/Input.cc.i
-
-home/juliengauthier410/l3/s5/_projet/data/Input.s: home/juliengauthier410/l3/s5/_projet/data/Input.cc.s
-
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/Input.s
-
-# target to generate assembly for a file
-home/juliengauthier410/l3/s5/_projet/data/Input.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.s
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/Input.cc.s
-
-home/juliengauthier410/l3/s5/_projet/data/main.o: home/juliengauthier410/l3/s5/_projet/data/main.cc.o
-
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/main.o
+.PHONY : data/Input.o
 
 # target to build an object file
-home/juliengauthier410/l3/s5/_projet/data/main.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.o
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/main.cc.o
+data/Input.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/Input.cc.o
+.PHONY : data/Input.cc.o
 
-home/juliengauthier410/l3/s5/_projet/data/main.i: home/juliengauthier410/l3/s5/_projet/data/main.cc.i
+data/Input.i: data/Input.cc.i
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/main.i
+.PHONY : data/Input.i
 
 # target to preprocess a source file
-home/juliengauthier410/l3/s5/_projet/data/main.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.i
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/main.cc.i
+data/Input.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/Input.cc.i
+.PHONY : data/Input.cc.i
 
-home/juliengauthier410/l3/s5/_projet/data/main.s: home/juliengauthier410/l3/s5/_projet/data/main.cc.s
+data/Input.s: data/Input.cc.s
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/main.s
+.PHONY : data/Input.s
 
 # target to generate assembly for a file
-home/juliengauthier410/l3/s5/_projet/data/main.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.s
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/main.cc.s
+data/Input.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/Input.cc.s
+.PHONY : data/Input.cc.s
 
-home/juliengauthier410/l3/s5/_projet/data/squareEntity.o: home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o
+data/main.o: data/main.cc.o
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/squareEntity.o
+.PHONY : data/main.o
 
 # target to build an object file
-home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o
+data/main.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/main.cc.o
+.PHONY : data/main.cc.o
 
-home/juliengauthier410/l3/s5/_projet/data/squareEntity.i: home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.i
+data/main.i: data/main.cc.i
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/squareEntity.i
+.PHONY : data/main.i
 
 # target to preprocess a source file
-home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.i
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.i
+data/main.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/main.cc.i
+.PHONY : data/main.cc.i
 
-home/juliengauthier410/l3/s5/_projet/data/squareEntity.s: home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.s
+data/main.s: data/main.cc.s
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/squareEntity.s
+.PHONY : data/main.s
 
 # target to generate assembly for a file
-home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.s
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.s
+data/main.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/main.cc.s
+.PHONY : data/main.cc.s
 
-home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.o: home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o
+data/squareEntity.o: data/squareEntity.cc.o
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.o
+.PHONY : data/squareEntity.o
 
 # target to build an object file
-home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o
+data/squareEntity.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/squareEntity.cc.o
+.PHONY : data/squareEntity.cc.o
 
-home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.i: home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.i
+data/squareEntity.i: data/squareEntity.cc.i
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.i
+.PHONY : data/squareEntity.i
 
 # target to preprocess a source file
-home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.i
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.i
+data/squareEntity.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/squareEntity.cc.i
+.PHONY : data/squareEntity.cc.i
 
-home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.s: home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.s
+data/squareEntity.s: data/squareEntity.cc.s
 
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.s
+.PHONY : data/squareEntity.s
 
 # target to generate assembly for a file
-home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.s
-.PHONY : home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.s
+data/squareEntity.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/squareEntity.cc.s
+.PHONY : data/squareEntity.cc.s
+
+data/staticPlateforme.o: data/staticPlateforme.cc.o
+
+.PHONY : data/staticPlateforme.o
+
+# target to build an object file
+data/staticPlateforme.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/staticPlateforme.cc.o
+.PHONY : data/staticPlateforme.cc.o
+
+data/staticPlateforme.i: data/staticPlateforme.cc.i
+
+.PHONY : data/staticPlateforme.i
+
+# target to preprocess a source file
+data/staticPlateforme.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/staticPlateforme.cc.i
+.PHONY : data/staticPlateforme.cc.i
+
+data/staticPlateforme.s: data/staticPlateforme.cc.s
+
+.PHONY : data/staticPlateforme.s
+
+# target to generate assembly for a file
+data/staticPlateforme.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/data/staticPlateforme.cc.s
+.PHONY : data/staticPlateforme.cc.s
 
 # Help Target
 help:
@@ -259,18 +259,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... game"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/Input.o"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/Input.i"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/Input.s"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/main.o"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/main.i"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/main.s"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/squareEntity.o"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/squareEntity.i"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/squareEntity.s"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.o"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.i"
-	@echo "... home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.s"
+	@echo "... data/Input.o"
+	@echo "... data/Input.i"
+	@echo "... data/Input.s"
+	@echo "... data/main.o"
+	@echo "... data/main.i"
+	@echo "... data/main.s"
+	@echo "... data/squareEntity.o"
+	@echo "... data/squareEntity.i"
+	@echo "... data/squareEntity.s"
+	@echo "... data/staticPlateforme.o"
+	@echo "... data/staticPlateforme.i"
+	@echo "... data/staticPlateforme.s"
 .PHONY : help
 
 

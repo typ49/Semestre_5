@@ -1,8 +1,8 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.o"
-  "CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.o"
-  "CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o"
-  "CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o"
+  "CMakeFiles/game.dir/data/Input.cc.o"
+  "CMakeFiles/game.dir/data/main.cc.o"
+  "CMakeFiles/game.dir/data/squareEntity.cc.o"
+  "CMakeFiles/game.dir/data/staticPlateforme.cc.o"
   "game"
   "game.pdb"
 )

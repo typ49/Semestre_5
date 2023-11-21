@@ -40,6 +40,28 @@ stdlib.h
 vector
 -
 
+/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc
+squareEntity.h
+/home/juliengauthier410/l3/s5/_projet/data/squareEntity.h
+staticPlateforme.h
+/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.h
+gf/Vector.h
+-
+gf/Views.h
+-
+gf/Color.h
+-
+gf/RenderTarget.h
+-
+gf/Shapes.h
+-
+map
+-
+vector
+-
+iostream
+-
+
 /home/juliengauthier410/l3/s5/_projet/data/squareEntity.h
 gf/Vector.h
 -
@@ -57,6 +79,10 @@ Input.cc
 /home/juliengauthier410/l3/s5/_projet/data/Input.cc
 vector
 -
+
+/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc
+staticPlateforme.h
+/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.h
 
 /home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.h
 gf/Vector.h

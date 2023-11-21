@@ -62,7 +62,7 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/juliengauthier410/l3/s5/_projet/build
+CMAKE_SOURCE_DIR = /home/juliengauthier410/l3/s5/_projet
 
 # The top-level build directory on which CMake was run.
 CMAKE_BINARY_DIR = /home/juliengauthier410/l3/s5/_projet/build
@@ -76,72 +76,72 @@ include CMakeFiles/game.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/game.dir/flags.make
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.o: CMakeFiles/game.dir/flags.make
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.o: /home/juliengauthier410/l3/s5/_projet/data/main.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/_projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.o -c /home/juliengauthier410/l3/s5/_projet/data/main.cc
+CMakeFiles/game.dir/data/main.cc.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/data/main.cc.o: ../data/main.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/_projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building CXX object CMakeFiles/game.dir/data/main.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game.dir/data/main.cc.o -c /home/juliengauthier410/l3/s5/_projet/data/main.cc
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/_projet/data/main.cc > CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.i
+CMakeFiles/game.dir/data/main.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game.dir/data/main.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/_projet/data/main.cc > CMakeFiles/game.dir/data/main.cc.i
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/_projet/data/main.cc -o CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.s
+CMakeFiles/game.dir/data/main.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game.dir/data/main.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/_projet/data/main.cc -o CMakeFiles/game.dir/data/main.cc.s
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o: CMakeFiles/game.dir/flags.make
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o: /home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/_projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o -c /home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc
+CMakeFiles/game.dir/data/squareEntity.cc.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/data/squareEntity.cc.o: ../data/squareEntity.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/_projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building CXX object CMakeFiles/game.dir/data/squareEntity.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game.dir/data/squareEntity.cc.o -c /home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc > CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.i
+CMakeFiles/game.dir/data/squareEntity.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game.dir/data/squareEntity.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc > CMakeFiles/game.dir/data/squareEntity.cc.i
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc -o CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.s
+CMakeFiles/game.dir/data/squareEntity.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game.dir/data/squareEntity.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc -o CMakeFiles/game.dir/data/squareEntity.cc.s
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o: CMakeFiles/game.dir/flags.make
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o: /home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/_projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o -c /home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc
+CMakeFiles/game.dir/data/staticPlateforme.cc.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/data/staticPlateforme.cc.o: ../data/staticPlateforme.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/_projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building CXX object CMakeFiles/game.dir/data/staticPlateforme.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game.dir/data/staticPlateforme.cc.o -c /home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc > CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.i
+CMakeFiles/game.dir/data/staticPlateforme.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game.dir/data/staticPlateforme.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc > CMakeFiles/game.dir/data/staticPlateforme.cc.i
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc -o CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.s
+CMakeFiles/game.dir/data/staticPlateforme.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game.dir/data/staticPlateforme.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc -o CMakeFiles/game.dir/data/staticPlateforme.cc.s
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.o: CMakeFiles/game.dir/flags.make
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.o: /home/juliengauthier410/l3/s5/_projet/data/Input.cc
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/_projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.o"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.o -c /home/juliengauthier410/l3/s5/_projet/data/Input.cc
+CMakeFiles/game.dir/data/Input.cc.o: CMakeFiles/game.dir/flags.make
+CMakeFiles/game.dir/data/Input.cc.o: ../data/Input.cc
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/home/juliengauthier410/l3/s5/_projet/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building CXX object CMakeFiles/game.dir/data/Input.cc.o"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -o CMakeFiles/game.dir/data/Input.cc.o -c /home/juliengauthier410/l3/s5/_projet/data/Input.cc
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.i: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.i"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/_projet/data/Input.cc > CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.i
+CMakeFiles/game.dir/data/Input.cc.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing CXX source to CMakeFiles/game.dir/data/Input.cc.i"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -E /home/juliengauthier410/l3/s5/_projet/data/Input.cc > CMakeFiles/game.dir/data/Input.cc.i
 
-CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.s: cmake_force
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.s"
-	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/_projet/data/Input.cc -o CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.s
+CMakeFiles/game.dir/data/Input.cc.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling CXX source to assembly CMakeFiles/game.dir/data/Input.cc.s"
+	/usr/bin/c++ $(CXX_DEFINES) $(CXX_INCLUDES) $(CXX_FLAGS) -S /home/juliengauthier410/l3/s5/_projet/data/Input.cc -o CMakeFiles/game.dir/data/Input.cc.s
 
 # Object files for target game
 game_OBJECTS = \
-"CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.o" \
-"CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o" \
-"CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o" \
-"CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.o"
+"CMakeFiles/game.dir/data/main.cc.o" \
+"CMakeFiles/game.dir/data/squareEntity.cc.o" \
+"CMakeFiles/game.dir/data/staticPlateforme.cc.o" \
+"CMakeFiles/game.dir/data/Input.cc.o"
 
 # External object files for target game
 game_EXTERNAL_OBJECTS =
 
-game: CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/main.cc.o
-game: CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/squareEntity.cc.o
-game: CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/staticPlateforme.cc.o
-game: CMakeFiles/game.dir/home/juliengauthier410/l3/s5/_projet/data/Input.cc.o
+game: CMakeFiles/game.dir/data/main.cc.o
+game: CMakeFiles/game.dir/data/squareEntity.cc.o
+game: CMakeFiles/game.dir/data/staticPlateforme.cc.o
+game: CMakeFiles/game.dir/data/Input.cc.o
 game: CMakeFiles/game.dir/build.make
 game: /usr/local/lib/libgf0.so.1.2.0
 game: /usr/local/lib/libgfnet0.so.1.2.0
@@ -161,6 +161,6 @@ CMakeFiles/game.dir/clean:
 .PHONY : CMakeFiles/game.dir/clean
 
 CMakeFiles/game.dir/depend:
-	cd /home/juliengauthier410/l3/s5/_projet/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/juliengauthier410/l3/s5/_projet/build /home/juliengauthier410/l3/s5/_projet/build /home/juliengauthier410/l3/s5/_projet/build /home/juliengauthier410/l3/s5/_projet/build /home/juliengauthier410/l3/s5/_projet/build/CMakeFiles/game.dir/DependInfo.cmake --color=$(COLOR)
+	cd /home/juliengauthier410/l3/s5/_projet/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/juliengauthier410/l3/s5/_projet /home/juliengauthier410/l3/s5/_projet /home/juliengauthier410/l3/s5/_projet/build /home/juliengauthier410/l3/s5/_projet/build /home/juliengauthier410/l3/s5/_projet/build/CMakeFiles/game.dir/DependInfo.cmake --color=$(COLOR)
 .PHONY : CMakeFiles/game.dir/depend
 

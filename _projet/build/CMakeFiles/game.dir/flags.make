@@ -4,7 +4,7 @@
 # compile CXX with /usr/bin/c++
 CXX_DEFINES = -DBOOST_ALL_NO_LIB -D_POSIX_C_SOURCE=200809L
 
-CXX_INCLUDES = -I/home/juliengauthier410/l3/s5/_projet/build
+CXX_INCLUDES = -I/home/juliengauthier410/l3/s5/_projet
 
 CXX_FLAGS = -std=gnu++17
 
