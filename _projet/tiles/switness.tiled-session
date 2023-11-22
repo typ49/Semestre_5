@@ -3,7 +3,7 @@
         "height": 4300,
         "width": 2
     },
-    "activeFile": "",
+    "activeFile": "level/level01.tmx",
     "expandedProjectPaths": [
         "level",
         ".",
@@ -60,16 +60,16 @@
             "scale": 1.5,
             "selectedLayer": 2,
             "viewCenter": {
-                "x": -25.666666666666657,
-                "y": 364
+                "x": 300.99999999999994,
+                "y": 292
             }
         },
         "level/level_1.tmx": {
             "scale": 1,
             "selectedLayer": 0,
             "viewCenter": {
-                "x": 481,
-                "y": 397
+                "x": 479.5,
+                "y": 396
             }
         },
         "niveau_1.tmx": {
@@ -116,13 +116,14 @@
     "map.tileHeight": 16,
     "map.tileWidth": 16,
     "openFiles": [
+        "level/level01.tmx"
     ],
     "project": "switness.tiled-project",
     "recentFiles": [
         "level/level01.tmx",
+        "level/level_1.tmx",
         "tileset/background.tsx",
         "tileset/TILESET_FUTURISTIC_CITY.tsx",
-        "level/level_1.tmx",
         "/home/juliengauthier410/game/ggj2022-main/data/hag/level02.tmx",
         "/home/juliengauthier410/game/ggj2022-main/data/hag/level01.tmx",
         "tileset/820-0.tsx",
