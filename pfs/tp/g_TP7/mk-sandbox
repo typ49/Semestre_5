@@ -1,0 +1,13 @@
+##  Crée des répertoires vides avec des noms permettant d'utiliser les
+##  fonctions du 7e TP de Ruby.
+
+mkdir ./n\ importe\ quoi
+mkdir ./n\ importe\ quoî
+mkdir ./nomtroplongencoreplusbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplongbeaucouptroplong
+mkdir ./Télévision\ à\ domicile
+mkdir ./Television-à-domicile
+mkdir ./viruses
+mkdir ./viruses-1
+mkdir ./viruses_2
+mkdir ./virûses
+
