@@ -11,6 +11,7 @@ namespace fa
         Automaton automaton;
         Automaton notAnAutomaton;
         Automaton forPrint;
+        Automaton automatonDeterministic;
     };
 
     // Test TP1 *******************************************************************************************************
@@ -37,6 +38,9 @@ namespace fa
     TEST_F(AutomatonTest, TestIsValid_TRUE_ASCII)
     {
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         for (char c = 33; c < 127; ++c)
         {
             automaton.addSymbol(c);
@@ -48,35 +52,71 @@ namespace fa
     TEST_F(AutomatonTest, TestHasSymbol_TRUE)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.hasSymbol('a'));
     }
 
     TEST_F(AutomatonTest, TestHasSymbol_FALSE_NoSymbolAdded)
     {
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, fa::Epsilon, 1);
         EXPECT_FALSE(automaton.hasSymbol('a'));
     }
 
     TEST_F(AutomatonTest, TestHasSymbol_FALSE_InvalidChar)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         automaton.addTransition(0, fa::Epsilon, 1);
         EXPECT_FALSE(automaton.hasSymbol(fa::Epsilon));
     }
 
-    TEST_F(AutomatonTest, TestHasSymbol_FALSE)
+    TEST_F(AutomatonTest, AutomatonTest_TestHasSymbol_FALSE_NotThisSymbol)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.hasSymbol('c'));
     }
 
     TEST_F(AutomatonTest, TestAddSymbol_TRUE)
-    {
+    {   
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.addSymbol('c'));
     }
 
     TEST_F(AutomatonTest, TestAddSymbol_FALSE_InvalidChar)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.addSymbol('\0'));
         EXPECT_FALSE(automaton.addSymbol(fa::Epsilon));
     }
@@ -84,19 +124,37 @@ namespace fa
     TEST_F(AutomatonTest, TestAddSymbol_FALSE_AlreadyPresent)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.addSymbol('a'));
     }
 
     TEST_F(AutomatonTest, TestRemoveSymbol_TRUE)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.removeSymbol('a'));
         EXPECT_FALSE(automaton.hasSymbol('a'));
     }
 
     TEST_F(AutomatonTest, TestRemoveSymbol_FALSE_InvalidChar)
-    {
+    {   
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.removeSymbol('\0'));
         EXPECT_FALSE(automaton.removeSymbol(fa::Epsilon));
         EXPECT_TRUE(automaton.hasSymbol('a'));
@@ -105,6 +163,12 @@ namespace fa
     TEST_F(AutomatonTest, TestRemoveSymbol_FALSE_NotPresent)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.removeSymbol('c'));
         EXPECT_TRUE(automaton.hasSymbol('a'));
     }
@@ -113,58 +177,114 @@ namespace fa
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         std::size_t expectedCount = 2;
-        EXPECT_EQ(expectedCount, automaton.countSymbols());
+        EXPECT_EQ(automaton.countSymbols(), expectedCount);
     }
 
     TEST_F(AutomatonTest, TestHasState_TRUE)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.hasState(0));
     }
 
     TEST_F(AutomatonTest, TestHasState_FALSE)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.hasState(2));
     }
 
     TEST_F(AutomatonTest, TestAddState_TRUE)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.addState(2));
     }
 
     TEST_F(AutomatonTest, TestAddState_FALSE_AlreadyPresent)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.addState(0));
     }
 
     TEST_F(AutomatonTest, TestRemoveState_TRUE)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.removeState(0));
         EXPECT_FALSE(automaton.hasState(0));
     }
 
     TEST_F(AutomatonTest, TestRemoveState_FALSE_NotPresent)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.removeState(2));
     }
 
     TEST_F(AutomatonTest, TestRemoveState_TRUE_StateOnInitialState)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
         automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.removeState(0));
         EXPECT_FALSE(automaton.hasState(0));
+        EXPECT_FALSE(automaton.isStateInitial(0));
     }
 
     TEST_F(AutomatonTest, TestRemoveState_TRUE_StateOnFinalState)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
-        automaton.setStateFinal(0);
-        EXPECT_TRUE(automaton.removeState(0));
-        EXPECT_FALSE(automaton.hasState(0));
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
+        EXPECT_TRUE(automaton.removeState(1));
+        EXPECT_FALSE(automaton.hasState(1));
+        EXPECT_FALSE(automaton.isStateFinal(1));
     }
 
     TEST_F(AutomatonTest, TestRemoveState_TRUE_StateTransition)
@@ -185,35 +305,53 @@ namespace fa
     }
     TEST_F(AutomatonTest, TestCountStates)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         std::size_t expectedCount = 2;
         EXPECT_EQ(expectedCount, automaton.countStates());
     }
 
     TEST_F(AutomatonTest, TestSetAndGetStateInitial)
     {
-        automaton.addState(1);
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         automaton.setStateInitial(1);
         EXPECT_TRUE(automaton.isStateInitial(1));
-        EXPECT_FALSE(automaton.isStateInitial(0));
+        EXPECT_TRUE(automaton.isStateInitial(0));
     }
 
     TEST_F(AutomatonTest, TestSetAndGetStateFinal)
     {
-        automaton.addState(1);
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+        automaton.addTransition(0, 'a', 1);
         automaton.setStateFinal(0);
         EXPECT_TRUE(automaton.isStateFinal(0));
-        EXPECT_FALSE(automaton.isStateFinal(1));
+        EXPECT_TRUE(automaton.isStateFinal(1));
     }
 
     TEST_F(AutomatonTest, TestAddTransition_TRUE)
     {
+        automaton.addSymbol('a');
         automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         EXPECT_TRUE(automaton.addTransition(0, 'b', 1));
         EXPECT_TRUE(automaton.hasTransition(0, 'b', 1));
     }
@@ -221,8 +359,11 @@ namespace fa
     TEST_F(AutomatonTest, TestAddTransition_FALSE_AlreadyPresent)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         automaton.addTransition(0, 'a', 1);
         EXPECT_FALSE(automaton.addTransition(0, 'a', 1));
     }
@@ -230,37 +371,56 @@ namespace fa
     TEST_F(AutomatonTest, TestAddTransition_FALSE_StateNotPresent)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         EXPECT_FALSE(automaton.addTransition(0, 'a', 2));
         EXPECT_FALSE(automaton.addTransition(2, 'a', 0));
     }
 
     TEST_F(AutomatonTest, TestAddTransition_FALSE_SymbolNotPresent)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         EXPECT_FALSE(automaton.addTransition(0, 'c', 1));
     }
 
     TEST_F(AutomatonTest, TestAddTransition_TRUE_SameState)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         EXPECT_TRUE(automaton.addTransition(0, 'a', 0));
     }
 
     TEST_F(AutomatonTest, TestAddTransition_TRUE_EPSILON)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         EXPECT_TRUE(automaton.addTransition(0, fa::Epsilon, 1));
     }
 
     TEST_F(AutomatonTest, TestRemoveTransition_TRUE)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         automaton.addTransition(0, 'a', 1);
         EXPECT_TRUE(automaton.removeTransition(0, 'a', 1));
     }
@@ -272,7 +432,7 @@ namespace fa
         automaton.addState(0);
         automaton.addState(1);
         automaton.addTransition(0, 'a', 1);
-        automaton.removeTransition(0, 'b', 1);
+        EXPECT_FALSE(automaton.removeTransition(0, 'b', 1));
         EXPECT_TRUE(automaton.hasTransition(0, 'a', 1));
         int transition = automaton.countTransitions();
         EXPECT_EQ(1, transition);
@@ -284,8 +444,7 @@ namespace fa
         automaton.addState(0);
         automaton.addState(1);
         automaton.addTransition(0, fa::Epsilon, 1);
-        automaton.removeTransition(0, fa::Epsilon, 1);
-        automaton.prettyPrint(std::cout);
+        EXPECT_TRUE(automaton.removeTransition(0, fa::Epsilon, 1));
         EXPECT_FALSE(automaton.hasEpsilonTransition());
         int transition = automaton.countTransitions();
         EXPECT_EQ(0, transition);
@@ -329,13 +488,23 @@ namespace fa
 
     TEST_F(AutomatonTest, TestHasTransition_FALSE_transitionEmpty)
     {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         EXPECT_FALSE(automaton.hasTransition(0, 'a', 1));
     }
 
     TEST_F(AutomatonTest, TestHasTransition_FALSE_StateNotPresent)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         automaton.addTransition(0, 'a', 2);
         EXPECT_FALSE(automaton.hasTransition(0, 'a', 2));
     }
@@ -343,8 +512,11 @@ namespace fa
     TEST_F(AutomatonTest, TestHasTransition_FALSE_SymbolNotPresent)
     {
         automaton.addSymbol('a');
+        automaton.addSymbol('b');
         automaton.addState(0);
         automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
         automaton.addTransition(0, 'c', 1);
         EXPECT_FALSE(automaton.hasTransition(0, 'c', 1));
     }
@@ -1155,7 +1327,7 @@ namespace fa
         EXPECT_TRUE(automaton.hasState(1));
     }
 
-    /* test createIntersection */
+    // Test TP4 *******************************************************************************************************
 
     // Test Intersection d'Automates avec des Langages Disjoints
     TEST_F(AutomatonTest, testCreateIntersection_DisjointLanguages)
@@ -1188,9 +1360,15 @@ namespace fa
         // initialisation de l'automate intersection
         Automaton intersectionAutomaton;
         intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
-        EXPECT_TRUE(intersectionAutomaton.isLanguageEmpty());   
-        EXPECT_TRUE(intersectionAutomaton.finalStates.empty());
-        EXPECT_TRUE(intersectionAutomaton.transitions.empty());
+
+        EXPECT_TRUE(intersectionAutomaton.isLanguageEmpty());
+        int nbState = intersectionAutomaton.countStates();
+        for (int i = 0; i < nbState; i++)
+        {
+            EXPECT_FALSE(intersectionAutomaton.isStateFinal(i));
+        }
+        size_t nbTransitionsExpected = 0;
+        EXPECT_EQ(intersectionAutomaton.countTransitions(), nbTransitionsExpected);
     }
 
     // Test Intersection d'Automates avec des Langages Non Disjoints
@@ -1225,10 +1403,25 @@ namespace fa
         // initialisation de l'automate intersection
         Automaton intersectionAutomaton;
         intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
-        EXPECT_FALSE(intersectionAutomaton.isLanguageEmpty());
 
-        EXPECT_TRUE(intersectionAutomaton.initialStates.size() == 1);
-        EXPECT_TRUE(intersectionAutomaton.finalStates.size() == 1);
+        EXPECT_FALSE(intersectionAutomaton.isLanguageEmpty());
+        int nbStatesI = 0;
+        int nbStatesF = 0;
+        int nbStates = intersectionAutomaton.countStates();
+        for (int i = 0; i < nbStates; i++)
+        {
+            if (intersectionAutomaton.isStateFinal(i))
+            {
+                nbStatesF++;
+            }
+            if (intersectionAutomaton.isStateInitial(i))
+            {
+                nbStatesI++;
+            }
+        }
+
+        EXPECT_EQ(nbStatesI, 1);
+        EXPECT_EQ(nbStatesF, 1);
         EXPECT_TRUE(intersectionAutomaton.countTransitions() == 5);
     }
 
@@ -1292,6 +1485,62 @@ namespace fa
         automaton2.addTransition(2, 'b', 2);
 
         EXPECT_FALSE(automaton2.hasEmptyIntersectionWith(automaton1));
+    }
+
+    // Test TP5 *******************************************************************************************************
+
+
+    // test createDeterministic
+    TEST_F(AutomatonTest, TestCreateDeterministic_True) {
+        
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.addState(2);
+        automaton.addState(3);
+        automaton.addState(4);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(4);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(0, 'b', 2);
+        
+        automaton.addTransition(1, 'a', 0);
+        automaton.addTransition(1, 'b', 3);
+        automaton.addTransition(1, 'a', 4);
+        
+        automaton.addTransition(2, 'b', 0);
+        automaton.addTransition(2, 'a', 3);
+        automaton.addTransition(2, 'b', 4);
+
+        automaton.addTransition(3, 'b', 1);
+        automaton.addTransition(3, 'a', 2);
+
+        automatonDeterministic = automaton.createDeterministic(automaton);
+        EXPECT_TRUE(automaton.isDeterministic());
+
+    }
+
+    TEST_F(AutomatonTest, TestCreateDeterministic_AlreadyDeterministic) {
+        automaton.addSymbol('a');
+        automaton.addSymbol('b');
+        automaton.addState(0);
+        automaton.addState(1);
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+
+        automaton.addTransition(0, 'a', 1);
+        automaton.addTransition(0, 'b', 0); // Une seule transition possible pour 'b'
+        automaton.addTransition(1, 'a', 1);
+        automaton.addTransition(1, 'b', 1);
+
+        automatonDeterministic = automaton.createDeterministic(automaton);
+        automatonDeterministic.prettyPrint(std::cout);
+        EXPECT_TRUE(automatonDeterministic.isDeterministic());
+        EXPECT_EQ(automaton.countStates(), automatonDeterministic.countStates());
+        EXPECT_EQ(automaton.countSymbols(), automatonDeterministic.countSymbols());
+        EXPECT_EQ(automaton.countTransitions(), automatonDeterministic.countTransitions());
     }
 
 } // namespace fa

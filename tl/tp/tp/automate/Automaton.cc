@@ -846,16 +846,85 @@ namespace fa
     return false;
   }
 
-  Automaton Automaton::createDeterministic(const Automaton &other)
-  {
-    // TODO
-    Automaton deterministic;
-    return deterministic;
-  }
+  Automaton Automaton::createDeterministic(const Automaton &other) {
+        if (other.isDeterministic()) {
+            return other;
+        }
 
+        Automaton deterministic;
+        deterministic.alphabet = other.alphabet;
+
+        // Mappage d'ensembles d'états à des états dans l'automate déterministe
+        std::map<std::set<int>, int> stateMapping;
+
+        // File d'attente pour les ensembles d'états à traiter
+        std::queue<std::set<int>> waitList;
+
+        // Initialiser avec l'ensemble des états initiaux
+        std::set<int> initialStates = other.initialStates;
+        waitList.push(initialStates);
+        deterministic.addState(0); // Ajouter l'état initial
+        deterministic.setStateInitial(0); // Définir l'état initial
+        stateMapping[initialStates] = 0; // Ajouter l'ensemble d'états initiaux à la table de mappage
+
+        while (!waitList.empty()) {
+            std::set<int> currentStates = waitList.front();
+            waitList.pop();
+
+            // Vérifier si l'ensemble d'états actuel est final
+            for (int state : currentStates) {
+                if (other.isStateFinal(state)) {
+                    deterministic.setStateFinal(stateMapping[currentStates]);
+                    break;
+                }
+            }
+
+            // Parcourir chaque symbole de l'alphabet
+            for (char symbol : deterministic.alphabet) {
+                std::set<int> nextStates;
+
+                // Parcourir chaque état de l'ensemble d'états actuel
+                for (int state : currentStates) {
+                    // Ajouter les états de destination pour le symbole actuel
+                    std::set<int> states = other.makeTransition({state}, symbol);
+                    nextStates.insert(states.begin(), states.end());
+                }
+
+                // Si l'ensemble d'états de destination n'est pas vide
+                if (!nextStates.empty()) {
+                    // Si l'ensemble d'états de destination n'a pas encore été traité
+                    if (stateMapping.find(nextStates) == stateMapping.end()) {
+                        // Ajouter l'ensemble d'états de destination à la file d'attente
+                        waitList.push(nextStates);
+
+                        // Ajouter un nouvel état à l'automate déterministe
+                        int newState = deterministic.countStates();
+                        deterministic.addState(newState);
+
+                        // Ajouter l'ensemble d'états de destination à la table de mappage
+                        stateMapping[nextStates] = newState;
+                    }
+
+                    // Ajouter une transition de l'état actuel vers l'état de destination
+                    deterministic.addTransition(stateMapping[currentStates], symbol, stateMapping[nextStates]);
+                }
+            }
+
+            
+        }
+        return deterministic;
+  }
+  
   /**
    * TP n°6
    */
+
+  Automaton Automaton::createMinimalMoore(const Automaton &other) {
+    // TODO
+    Automaton minimalMoore;
+    return minimalMoore;
+  
+  }
 
   Automaton Automaton::createMinimalBrzozowski(const Automaton &other)
   {

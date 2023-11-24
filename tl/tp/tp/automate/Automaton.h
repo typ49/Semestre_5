@@ -10,6 +10,7 @@
 #include <cassert>
 #include <cctype>
 #include <utility> // std::pair
+#include <queue>
 
 namespace fa
 {
