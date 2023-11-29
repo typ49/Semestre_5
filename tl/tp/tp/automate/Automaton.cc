@@ -28,7 +28,7 @@ namespace fa
   bool Automaton::addSymbol(char symbol)
   {
     // vérifie si le symbole donné est valide et s'il n'existe pas déjà
-    if (symbol != Epsilon && !hasSymbol(symbol))
+    if (isgraph(symbol) && !hasSymbol(symbol))
     {
       alphabet.insert(symbol);
       return true;

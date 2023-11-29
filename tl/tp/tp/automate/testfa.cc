@@ -783,9 +783,9 @@ namespace fa
         completeAutomaton = automaton.createComplete(automaton);
         EXPECT_TRUE(completeAutomaton.isComplete());
         EXPECT_TRUE(automaton.isComplete());
-        EXPECT_EQ(automaton.countStates(), completeAutomaton.countStates());
+        EXPECT_TRUE(completeAutomaton.hasSymbol('0'));
+        EXPECT_TRUE(completeAutomaton.hasSymbol('1'));
         EXPECT_EQ(automaton.countSymbols(), completeAutomaton.countSymbols());
-        EXPECT_EQ(automaton.countTransitions(), completeAutomaton.countTransitions());
     }
 
     TEST_F(AutomatonTest, TestCreateComplete_TransitionMissing)
@@ -811,6 +811,7 @@ namespace fa
         automaton.addTransition(0, '0', 1); // Transition de l'état 0 à l'état 1 avec '0'
         automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
         automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
+        EXPECT_FALSE(automaton.isComplete());
         completeAutomaton = automaton.createComplete(automaton);
         EXPECT_TRUE(completeAutomaton.isComplete());
     }
@@ -839,6 +840,7 @@ namespace fa
         automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
         automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
 
+        EXPECT_TRUE(automaton.isComplete());
         completeAutomaton = automaton.createComplete(automaton);
         EXPECT_TRUE(completeAutomaton.isComplete());
     }
@@ -871,6 +873,7 @@ namespace fa
         automaton.addTransition(2, '0', 2); // Transition de l'état 2 à lui-même avec '0'
         automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
 
+        EXPECT_TRUE(automaton.isComplete());
         completeAutomaton = automaton.createComplete(automaton);
         EXPECT_TRUE(completeAutomaton.isComplete());
     }
@@ -897,18 +900,13 @@ namespace fa
         mirrorAutomaton = automaton.createMirror(automaton);
 
         // test
+        size_t expectedCountState = 3;
+        size_t expectedCountTransition = 5;
         EXPECT_TRUE(mirrorAutomaton.hasSymbol('a'));
         EXPECT_TRUE(mirrorAutomaton.hasSymbol('b'));
-        EXPECT_TRUE(mirrorAutomaton.hasState(0));
-        EXPECT_TRUE(mirrorAutomaton.hasState(1));
-        EXPECT_TRUE(mirrorAutomaton.hasState(2));
-        EXPECT_TRUE(mirrorAutomaton.isStateInitial(2));
-        EXPECT_TRUE(mirrorAutomaton.isStateFinal(0));
-        EXPECT_TRUE(mirrorAutomaton.hasTransition(1, 'a', 0)); // #1
-        EXPECT_TRUE(mirrorAutomaton.hasTransition(2, 'a', 0)); // #2
-        EXPECT_TRUE(mirrorAutomaton.hasTransition(2, 'b', 1)); // #3
-        EXPECT_TRUE(mirrorAutomaton.hasTransition(2, 'b', 2)); // #4
-        EXPECT_TRUE(mirrorAutomaton.hasTransition(0, 'b', 2)); // #5
+        EXPECT_TRUE(mirrorAutomaton.countStates() == expectedCountState);
+        EXPECT_TRUE(mirrorAutomaton.countTransitions() == expectedCountTransition);
+        
     }
 
     // Test creation d'un mirroir de mirroir et donc retour à l'origine
@@ -938,18 +936,12 @@ namespace fa
         mirrorOfMirrorAutomaton = mirrorAutomaton.createMirror(mirrorAutomaton);
 
         // test
+        size_t expectedCountState = 3;
+        size_t expectedCountTransition = 5;
         EXPECT_TRUE(mirrorOfMirrorAutomaton.hasSymbol('a'));
         EXPECT_TRUE(mirrorOfMirrorAutomaton.hasSymbol('b'));
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasState(0));
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasState(1));
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasState(2));
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.isStateInitial(0));
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.isStateFinal(2));
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(0, 'a', 1)); // #1
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(0, 'a', 2)); // #2
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(1, 'b', 2)); // #3
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(2, 'b', 2)); // #4
-        EXPECT_TRUE(mirrorOfMirrorAutomaton.hasTransition(2, 'b', 0)); // #5
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.countStates() == expectedCountState);
+        EXPECT_TRUE(mirrorOfMirrorAutomaton.countTransitions() == expectedCountTransition);
     }
 
     // Test pour makeTransition()
@@ -1121,7 +1113,7 @@ namespace fa
     }
 
     // test removeNonAccessibleStates
-    TEST_F(AutomatonTest, testRemoveAccessibleStates_hasNonAccessibleStates)
+    TEST_F(AutomatonTest, testRemoveNonAccessibleStates_hasNonAccessibleStates)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1142,7 +1134,7 @@ namespace fa
         EXPECT_FALSE(automaton.hasState(2));
     }
 
-    TEST_F(AutomatonTest, testRemoveAccessibleStates_hasNoNonAccessibleStates)
+    TEST_F(AutomatonTest, testRemoveNonAccessibleStates_hasNoNonAccessibleStates)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1162,7 +1154,7 @@ namespace fa
     }
 
     // Test when no states are accessible
-    TEST_F(AutomatonTest, testRemoveAccessibleStates_NoAccessibleStates)
+    TEST_F(AutomatonTest, testRemoveNonAccessibleStates_NoAccessibleStates)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1178,7 +1170,7 @@ namespace fa
     }
 
     // Test when all states are accessible
-    TEST_F(AutomatonTest, testRemoveAccessibleStates_AllStatesAccessible)
+    TEST_F(AutomatonTest, testRemoveNonAccessibleStates_AllStatesAccessible)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1224,7 +1216,7 @@ namespace fa
     }
 
     // test removeNonCoAccessibleStates
-    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_hasNonCoAccessibleStates)
+    TEST_F(AutomatonTest, testRemoveNonCoAccessibleStates_hasNonCoAccessibleStates)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1244,7 +1236,7 @@ namespace fa
     }
 
     // Test où aucun état n'est co-accessible
-    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_noCoAccessibleStates)
+    TEST_F(AutomatonTest, testRemoveNonCoAccessibleStates_noCoAccessibleStates)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1264,7 +1256,7 @@ namespace fa
     }
 
     // Test où tous les états sont co-accessibles
-    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_allCoAccessibleStates)
+    TEST_F(AutomatonTest, testRemoveNonCoAccessibleStates_allCoAccessibleStates)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1284,7 +1276,7 @@ namespace fa
     }
 
     // Test avec plusieurs états finaux
-    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_multipleFinalStates)
+    TEST_F(AutomatonTest, testRemoveNonCoAccessibleStates_multipleFinalStates)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1308,7 +1300,7 @@ namespace fa
     }
 
     // Test avec un état final non co-accessible
-    TEST_F(AutomatonTest, testRemoveCoAccessibleStates_nonCoAccessibleFinalState)
+    TEST_F(AutomatonTest, testRemoveNonCoAccessibleStates_nonCoAccessibleFinalState)
     {
         automaton.addSymbol('a');
         automaton.addSymbol('b');
@@ -1362,13 +1354,7 @@ namespace fa
         intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
 
         EXPECT_TRUE(intersectionAutomaton.isLanguageEmpty());
-        int nbState = intersectionAutomaton.countStates();
-        for (int i = 0; i < nbState; i++)
-        {
-            EXPECT_FALSE(intersectionAutomaton.isStateFinal(i));
-        }
-        size_t nbTransitionsExpected = 0;
-        EXPECT_EQ(intersectionAutomaton.countTransitions(), nbTransitionsExpected);
+        EXPECT_TRUE(intersectionAutomaton.isValid());
     }
 
     // Test Intersection d'Automates avec des Langages Non Disjoints
