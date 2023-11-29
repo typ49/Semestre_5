@@ -340,6 +340,7 @@ namespace fa
         {
           if (hasTransition(state, symbol, toState))
           {
+            // printf("state n°%d, symbol %c, toState n°%d\n", state, symbol, toState);
             transitionCount++;
           }
         }
@@ -752,6 +753,14 @@ namespace fa
           disjoint = false;
         }
       }
+    }
+
+    if (disjoint)
+    {
+      Automaton intersectionAutomaton;
+      intersectionAutomaton.addSymbol('a');
+      intersectionAutomaton.addState(0);
+      return intersectionAutomaton;
     }
 
 

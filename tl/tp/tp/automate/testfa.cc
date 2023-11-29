@@ -1355,6 +1355,8 @@ namespace fa
 
         EXPECT_TRUE(intersectionAutomaton.isLanguageEmpty());
         EXPECT_TRUE(intersectionAutomaton.isValid());
+        EXPECT_FALSE(intersectionAutomaton.match("aa"));
+        EXPECT_FALSE(intersectionAutomaton.match("bb"));
     }
 
     // Test Intersection d'Automates avec des Langages Non Disjoints
@@ -1390,25 +1392,17 @@ namespace fa
         Automaton intersectionAutomaton;
         intersectionAutomaton = Automaton::createIntersection(automaton1, automaton2);
 
-        EXPECT_FALSE(intersectionAutomaton.isLanguageEmpty());
-        int nbStatesI = 0;
-        int nbStatesF = 0;
-        int nbStates = intersectionAutomaton.countStates();
-        for (int i = 0; i < nbStates; i++)
-        {
-            if (intersectionAutomaton.isStateFinal(i))
-            {
-                nbStatesF++;
-            }
-            if (intersectionAutomaton.isStateInitial(i))
-            {
-                nbStatesI++;
-            }
-        }
+        intersectionAutomaton.prettyPrint(std::cout);
 
-        EXPECT_EQ(nbStatesI, 1);
-        EXPECT_EQ(nbStatesF, 1);
-        EXPECT_TRUE(intersectionAutomaton.countTransitions() == 5);
+        EXPECT_FALSE(intersectionAutomaton.isLanguageEmpty());
+        EXPECT_TRUE(intersectionAutomaton.isValid());
+        EXPECT_TRUE(intersectionAutomaton.match("aa"));
+        EXPECT_FALSE(intersectionAutomaton.match("bb"));
+        EXPECT_TRUE(intersectionAutomaton.match("aab"));
+        EXPECT_TRUE(intersectionAutomaton.match("aabb"));
+        EXPECT_FALSE(intersectionAutomaton.match("ab"));
+        EXPECT_FALSE(intersectionAutomaton.match("ba"));
+        EXPECT_FALSE(intersectionAutomaton.match("aaabbbbbbbb"));
     }
 
     // test hasEmpty intersection with
@@ -1503,8 +1497,10 @@ namespace fa
         automaton.addTransition(3, 'b', 1);
         automaton.addTransition(3, 'a', 2);
 
+
         automatonDeterministic = automaton.createDeterministic(automaton);
-        EXPECT_TRUE(automaton.isDeterministic());
+        automatonDeterministic.prettyPrint(std::cout);
+        EXPECT_TRUE(automatonDeterministic.isDeterministic());
 
     }
 
@@ -1522,7 +1518,7 @@ namespace fa
         automaton.addTransition(1, 'b', 1);
 
         automatonDeterministic = automaton.createDeterministic(automaton);
-        automatonDeterministic.prettyPrint(std::cout);
+        // automatonDeterministic.prettyPrint(std::cout);
         EXPECT_TRUE(automatonDeterministic.isDeterministic());
         EXPECT_EQ(automaton.countStates(), automatonDeterministic.countStates());
         EXPECT_EQ(automaton.countSymbols(), automatonDeterministic.countSymbols());
