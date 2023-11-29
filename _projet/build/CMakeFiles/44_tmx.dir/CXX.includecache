@@ -1,0 +1,42 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/home/juliengauthier410/l3/s5/_projet/data/44_tmx.cc
+cstdlib
+-
+iostream
+-
+gf/Event.h
+-
+gf/Log.h
+-
+gf/Math.h
+-
+gf/Paths.h
+-
+gf/RenderWindow.h
+-
+gf/ResourceManager.h
+-
+gf/Texture.h
+-
+gf/TileLayer.h
+-
+gf/Tmx.h
+-
+gf/TmxOps.h
+-
+gf/VectorOps.h
+-
+gf/Views.h
+-
+gf/ViewContainer.h
+-
+gf/Window.h
+-
+

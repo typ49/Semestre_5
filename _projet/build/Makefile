@@ -130,6 +130,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named example
+
+# Build rule for target.
+example: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 example
+.PHONY : example
+
+# fast build rule for target.
+example/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/build
+.PHONY : example/fast
+
+#=============================================================================
 # Target rules for targets named game
 
 # Build rule for target.
@@ -141,6 +154,33 @@ game: cmake_check_build_system
 game/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/game.dir/build.make CMakeFiles/game.dir/build
 .PHONY : game/fast
+
+data/44_tmx.o: data/44_tmx.cc.o
+
+.PHONY : data/44_tmx.o
+
+# target to build an object file
+data/44_tmx.cc.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/data/44_tmx.cc.o
+.PHONY : data/44_tmx.cc.o
+
+data/44_tmx.i: data/44_tmx.cc.i
+
+.PHONY : data/44_tmx.i
+
+# target to preprocess a source file
+data/44_tmx.cc.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/data/44_tmx.cc.i
+.PHONY : data/44_tmx.cc.i
+
+data/44_tmx.s: data/44_tmx.cc.s
+
+.PHONY : data/44_tmx.s
+
+# target to generate assembly for a file
+data/44_tmx.cc.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/example.dir/build.make CMakeFiles/example.dir/data/44_tmx.cc.s
+.PHONY : data/44_tmx.cc.s
 
 data/Input.o: data/Input.cc.o
 
@@ -258,7 +298,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... example"
 	@echo "... game"
+	@echo "... data/44_tmx.o"
+	@echo "... data/44_tmx.i"
+	@echo "... data/44_tmx.s"
 	@echo "... data/Input.o"
 	@echo "... data/Input.i"
 	@echo "... data/Input.s"
