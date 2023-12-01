@@ -41,6 +41,17 @@ namespace fa
     if (hasSymbol(symbol))
     {
       alphabet.erase(symbol);
+      for (auto from : transitions)
+      {
+        for (auto alpha : from.second)
+        {
+          if (alpha.first == symbol)
+          {
+            //supprime toute la map associé au symbole
+            alpha.second.clear();
+          }
+        }
+      }
       return true;
     }
     return false;
@@ -76,13 +87,28 @@ namespace fa
       finalStates.erase(state);
 
       // supprime les transition associées à l'état supprimé
-      for (auto from : transitions)
+      std::vector<std::pair<int, char>> keysToRemove;
+      for (auto &from : transitions)
       {
-        for (auto alpha : from.second)
+        for (auto &alpha : from.second)
         {
           alpha.second.erase(state);
+          if (alpha.second.empty())
+          {
+            keysToRemove.emplace_back(from.first, alpha.first);
+          }
         }
       }
+
+      for (auto &key : keysToRemove)
+      {
+        transitions[key.first].erase(key.second);
+        if (transitions[key.first].empty())
+        {
+          transitions.erase(key.first);
+        }
+      }
+
       return true;
     }
     return false;
@@ -180,11 +206,12 @@ namespace fa
 
   std::size_t Automaton::countTransitions() const
   {
+    // int count = transitions.size();
     std::size_t count = 0;
     for (auto from : transitions)
     {
       for (auto alpha : from.second)
-      {
+      { 
         count += alpha.second.size();
       }
     }
@@ -514,6 +541,39 @@ namespace fa
     return destinations; // Retourner l'ensemble des états de destination
   }
 
+  std::set<int> Automaton::makeTransition_reverse(const std::set<int> &destination, char alpha) const 
+  {
+    assert(isValid());
+
+    std::set<int> origins; // Ensemble pour stocker les états d'origine
+
+    // Parcourir chaque état
+    for (int state : states)
+    {
+      // Vérifier si l'état a des transitions pour le symbole donné
+      auto it = transitions.find(state);
+      if (it != transitions.end())
+      {
+        auto symbolIt = it->second.find(alpha);
+        if (symbolIt != it->second.end())
+        {
+          // Vérifier si l'état de destination de la transition est dans l'ensemble de destination
+          for (int dest : symbolIt->second)
+          {
+            if (destination.find(dest) != destination.end())
+            {
+              // Ajouter l'état d'origine à l'ensemble des états d'origine
+              origins.insert(state);
+              break;
+            }
+          }
+        }
+      }
+    }
+
+    return origins;
+  }
+
   std::set<int> Automaton::readString(const std::string &word) const
   {
     assert(isValid());
@@ -620,7 +680,7 @@ namespace fa
     std::set<int> toExplore;        // Ensemble des états à explorer
     std::set<int> toRemove;         // Ensemble des états à retirer
 
-    // Ajouter tous les états initiaux à l'ensemble des états à explorer
+    // Ajouter tous les états initiaux à l'ensemble des états à explorer et à l'ensemble des états accessibles
     for (int initialState : initialStates)
     {
       toExplore.insert(initialState);
@@ -667,6 +727,12 @@ namespace fa
       removeState(state);
       states.erase(state);
     }
+
+    if (!isValid())
+    {
+      addState(0);
+      addSymbol('a');
+    }
   }
 
   void Automaton::removeNonCoAccessibleStates()
@@ -676,7 +742,7 @@ namespace fa
     std::set<int> toExplore;          // Ensemble des états à explorer
     std::set<int> toRemove;           // Ensemble des états à supprimer
 
-    // Ajouter tous les états finaux à l'ensemble des états à explorer
+    // Ajouter tous les états finaux à l'ensemble des états à explorer et à l'ensemble des états co-accessibles
     for (int finalState : finalStates)
     {
       if (states.find(finalState) != states.end())
@@ -693,41 +759,43 @@ namespace fa
       int currentState = *it;
       toExplore.erase(it);
 
-      for (const auto &pair : transitions)
+      // Trouver tous les états co-accessibles vers cet état
+      for (auto &symbol : alphabet)
       {
-        if (states.find(pair.first) == states.end())
-          continue;
+        std::set<int> nextStates = makeTransition_reverse({currentState}, symbol);
 
-        for (const auto &innerPair : pair.second)
+        for (int nextState : nextStates)
         {
-          if (innerPair.second.find(currentState) != innerPair.second.end())
+          // Si l'état n'a pas déjà été marqué comme co-accessible
+          if (coAccessibleStates.find(nextState) == coAccessibleStates.end())
           {
-            int previousState = pair.first;
-
-            if (coAccessibleStates.find(previousState) == coAccessibleStates.end())
-            {
-              coAccessibleStates.insert(previousState);
-              toExplore.insert(previousState);
-            }
+            coAccessibleStates.insert(nextState);
+            toExplore.insert(nextState);
           }
         }
       }
     }
 
-    // Identifier les états à supprimer
-    for (const auto &state : states)
+    // Identifier les états non co-accessibles
+    for (int state : states)
     {
       if (coAccessibleStates.find(state) == coAccessibleStates.end())
       {
         toRemove.insert(state);
+        printf("state to remove %d\n", state);
       }
     }
 
-    // Supprimer les états non co-accessibles
-    for (const auto &state : toRemove)
+    for (int state : toRemove)
     {
       removeState(state);
       states.erase(state);
+    }
+
+    if (!isValid())
+    {
+      addState(0);
+      addSymbol('a');
     }
   }
 
@@ -762,7 +830,6 @@ namespace fa
       intersectionAutomaton.addState(0);
       return intersectionAutomaton;
     }
-
 
     Automaton intersectionAutomaton;
     std::map<std::pair<int, int>, int> productStates;
@@ -799,7 +866,8 @@ namespace fa
     }
 
     // crée les états finaux
-    if (!disjoint) {
+    if (!disjoint)
+    {
       for (int lhsState : lhs.finalStates)
       {
         for (int rhsState : rhs.finalStates)
@@ -855,84 +923,91 @@ namespace fa
     return false;
   }
 
-  Automaton Automaton::createDeterministic(const Automaton &other) {
-        if (other.isDeterministic()) {
-            return other;
+  Automaton Automaton::createDeterministic(const Automaton &other)
+  {
+    if (other.isDeterministic())
+    {
+      return other;
+    }
+
+    Automaton deterministic;
+    deterministic.alphabet = other.alphabet;
+
+    // Mappage d'ensembles d'états à des états dans l'automate déterministe
+    std::map<std::set<int>, int> stateMapping;
+
+    // File d'attente pour les ensembles d'états à traiter
+    std::queue<std::set<int>> waitList;
+
+    // Initialiser avec l'ensemble des états initiaux
+    std::set<int> initialStates = other.initialStates;
+    waitList.push(initialStates);
+    deterministic.addState(0);        // Ajouter l'état initial
+    deterministic.setStateInitial(0); // Définir l'état initial
+    stateMapping[initialStates] = 0;  // Ajouter l'ensemble d'états initiaux à la table de mappage
+
+    while (!waitList.empty())
+    {
+      std::set<int> currentStates = waitList.front();
+      waitList.pop();
+
+      // Vérifier si l'ensemble d'états actuel est final
+      for (int state : currentStates)
+      {
+        if (other.isStateFinal(state))
+        {
+          deterministic.setStateFinal(stateMapping[currentStates]);
+          break;
+        }
+      }
+
+      // Parcourir chaque symbole de l'alphabet
+      for (char symbol : deterministic.alphabet)
+      {
+        std::set<int> nextStates;
+
+        // Parcourir chaque état de l'ensemble d'états actuel
+        for (int state : currentStates)
+        {
+          // Ajouter les états de destination pour le symbole actuel
+          std::set<int> states = other.makeTransition({state}, symbol);
+          nextStates.insert(states.begin(), states.end());
         }
 
-        Automaton deterministic;
-        deterministic.alphabet = other.alphabet;
+        // Si l'ensemble d'états de destination n'est pas vide
+        if (!nextStates.empty())
+        {
+          // Si l'ensemble d'états de destination n'a pas encore été traité
+          if (stateMapping.find(nextStates) == stateMapping.end())
+          {
+            // Ajouter l'ensemble d'états de destination à la file d'attente
+            waitList.push(nextStates);
 
-        // Mappage d'ensembles d'états à des états dans l'automate déterministe
-        std::map<std::set<int>, int> stateMapping;
+            // Ajouter un nouvel état à l'automate déterministe
+            int newState = deterministic.countStates();
+            deterministic.addState(newState);
 
-        // File d'attente pour les ensembles d'états à traiter
-        std::queue<std::set<int>> waitList;
+            // Ajouter l'ensemble d'états de destination à la table de mappage
+            stateMapping[nextStates] = newState;
+          }
 
-        // Initialiser avec l'ensemble des états initiaux
-        std::set<int> initialStates = other.initialStates;
-        waitList.push(initialStates);
-        deterministic.addState(0); // Ajouter l'état initial
-        deterministic.setStateInitial(0); // Définir l'état initial
-        stateMapping[initialStates] = 0; // Ajouter l'ensemble d'états initiaux à la table de mappage
-
-        while (!waitList.empty()) {
-            std::set<int> currentStates = waitList.front();
-            waitList.pop();
-
-            // Vérifier si l'ensemble d'états actuel est final
-            for (int state : currentStates) {
-                if (other.isStateFinal(state)) {
-                    deterministic.setStateFinal(stateMapping[currentStates]);
-                    break;
-                }
-            }
-
-            // Parcourir chaque symbole de l'alphabet
-            for (char symbol : deterministic.alphabet) {
-                std::set<int> nextStates;
-
-                // Parcourir chaque état de l'ensemble d'états actuel
-                for (int state : currentStates) {
-                    // Ajouter les états de destination pour le symbole actuel
-                    std::set<int> states = other.makeTransition({state}, symbol);
-                    nextStates.insert(states.begin(), states.end());
-                }
-
-                // Si l'ensemble d'états de destination n'est pas vide
-                if (!nextStates.empty()) {
-                    // Si l'ensemble d'états de destination n'a pas encore été traité
-                    if (stateMapping.find(nextStates) == stateMapping.end()) {
-                        // Ajouter l'ensemble d'états de destination à la file d'attente
-                        waitList.push(nextStates);
-
-                        // Ajouter un nouvel état à l'automate déterministe
-                        int newState = deterministic.countStates();
-                        deterministic.addState(newState);
-
-                        // Ajouter l'ensemble d'états de destination à la table de mappage
-                        stateMapping[nextStates] = newState;
-                    }
-
-                    // Ajouter une transition de l'état actuel vers l'état de destination
-                    deterministic.addTransition(stateMapping[currentStates], symbol, stateMapping[nextStates]);
-                }
-            }
-
-            
+          // Ajouter une transition de l'état actuel vers l'état de destination
+          deterministic.addTransition(stateMapping[currentStates], symbol, stateMapping[nextStates]);
         }
-        return deterministic;
+      }
+    }
+    return deterministic;
   }
-  
+
   /**
    * TP n°6
    */
 
-  Automaton Automaton::createMinimalMoore(const Automaton &other) {
+  Automaton Automaton::createMinimalMoore(const Automaton &other)
+  {
     // TODO
     Automaton minimalMoore;
     return minimalMoore;
-  
   }
 
   Automaton Automaton::createMinimalBrzozowski(const Automaton &other)

@@ -185,6 +185,11 @@ namespace fa
     std::set<int> makeTransition(const std::set<int> &origin, char alpha) const;
 
     /**
+     * Make a transition from a set of states who is the destination of the transition with a character.
+     */
+    std::set<int> makeTransition_reverse(const std::set<int> &destination, char alpha) const;
+
+    /**
      * Read the string and compute the state set after traversing the automaton
      */
     std::set<int> readString(const std::string &word) const;
