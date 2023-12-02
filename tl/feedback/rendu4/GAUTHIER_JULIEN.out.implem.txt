@@ -1,0 +1,632 @@
+-- The CXX compiler identification is GNU 12.2.0
+-- The C compiler identification is GNU 12.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/build
+[ 25%] Building CXX object CMakeFiles/testfa.dir/Automaton.cc.o
+[ 50%] Building CXX object CMakeFiles/testfa.dir/testfa.cc.o
+[ 75%] Building CXX object CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o
+[100%] Linking CXX executable testfa
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonPrettyPrint_Tramaux_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1117 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1118 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1120 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1121 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1122 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1123 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1124 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1126 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1127 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1128 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1129 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1131 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1132 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1133 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1134 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1135 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1136 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonPrettyPrint_Tramaux_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1141 : référence indéfinie vers « fa::Automaton::prettyPrint(std::ostream&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsValidTest_NoState1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:237 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsValidTest_NoState2_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:244 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:245 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:250 : référence indéfinie vers « fa::Automaton::removeState(int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsValidTest_NoSymbol1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:257 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsValidTest_NoSymbol2_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:264 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:265 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:270 : référence indéfinie vers « fa::Automaton::removeSymbol(char) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsValidTest_Valid_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:277 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:278 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonRemoveSymbolTest_SymbolInTransitionGendreau_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:409 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:410 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:411 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:413 : référence indéfinie vers « fa::Automaton::removeSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:414 : référence indéfinie vers « fa::Automaton::hasTransition(int, char, int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:416 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:418 : référence indéfinie vers « fa::Automaton::hasTransition(int, char, int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonAddStateTest_KeepState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:498 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:499 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:500 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:501 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:503 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:504 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:505 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:506 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:508 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:509 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:510 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:511 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:513 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:514 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:515 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:516 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:518 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:519 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:520 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:521 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonSetStateInitialTest_OneInitialState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:530 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:534 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:537 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:538 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:541 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonSetStateInitialTest_TwoInitialStates_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:549 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:553 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:556 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:557 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:559 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:560 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:563 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonSetStateInitialTest_UnknwonState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:571 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:575 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:578 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:580 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:583 : référence indéfinie vers « fa::Automaton::isStateInitial(int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonSetStateFinalTest_OneFinalState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:620 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:624 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:627 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:628 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:631 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonSetStateFinalTest_TwoFinalStates_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:639 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:643 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:646 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:647 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:649 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:650 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:653 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonSetStateFinalTest_UnknownState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:661 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:665 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:668 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:670 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:673 : référence indéfinie vers « fa::Automaton::isStateFinal(int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonRemoveStateTest_UnknownState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:892 : référence indéfinie vers « fa::Automaton::hasState(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:894 : référence indéfinie vers « fa::Automaton::removeState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:897 : référence indéfinie vers « fa::Automaton::hasState(int) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonRemoveStateTest_AllStates_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:904 : référence indéfinie vers « fa::Automaton::hasState(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:908 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:912 : référence indéfinie vers « fa::Automaton::hasState(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:916 : référence indéfinie vers « fa::Automaton::removeState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:921 : référence indéfinie vers « fa::Automaton::hasState(int) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:925 : référence indéfinie vers « fa::Automaton::removeState(int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonHasEpsilonTransitionTest_WithoutEpsilon_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1152 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1153 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1155 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1156 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1158 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1159 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1160 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1161 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1163 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonHasEpsilonTransitionTest_WithEpsilon_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1168 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1169 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1171 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1172 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1174 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1175 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1176 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1177 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1179 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1180 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1181 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonHasEpsilonTransitionTest_Twice_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1186 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1187 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1189 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1190 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1192 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1193 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1194 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1195 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1197 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1198 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1199 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1201 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1202 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonHasEpsilonTransitionTest_AddAndRemove_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1207 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1208 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1210 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1211 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1213 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1214 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1215 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1216 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1218 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1219 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1220 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1221 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1222 : référence indéfinie vers « fa::Automaton::hasEpsilonTransition() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_Good_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1265 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1266 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1268 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1269 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1270 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1272 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1273 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1275 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1276 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1277 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1278 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1279 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1280 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_Good_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1282 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1284 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1286 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1288 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1290 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1292 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1294 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1296 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1298 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_GoodChahat_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1304 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1305 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1306 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1307 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1309 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1310 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1311 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1312 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1313 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1315 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1317 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1318 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1319 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1320 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1322 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1323 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1324 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1326 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1327 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1328 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1330 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1331 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1333 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1334 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1336 : référence indéfinie vers « fa::Automaton::removeState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1337 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1339 : référence indéfinie vers « fa::Automaton::removeState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1340 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1342 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1343 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_GoodVillemin_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1348 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1349 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1351 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1352 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1353 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1355 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1357 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1358 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1359 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1360 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1361 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1362 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_GoodVillemin_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1364 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1366 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1368 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1370 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1372 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1374 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1376 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1378 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1380 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_TwoTransitions_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1385 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1386 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1388 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1389 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1390 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1392 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1393 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1395 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1396 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1397 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1398 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1399 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1400 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_TwoTransitions_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1404 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_NotComplete_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1409 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1410 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1412 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1413 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1414 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1416 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1417 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1419 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1420 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1421 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1422 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1423 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1425 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_TwoInitialStates_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1430 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1431 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1433 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1434 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1435 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1437 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1438 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1439 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1441 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1442 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1443 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1444 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1445 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1446 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_TwoInitialStates_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1448 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_ZeroInitialState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1453 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1454 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1456 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1457 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1458 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1460 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1462 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1463 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1464 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1465 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1466 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1467 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_ZeroInitialState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1469 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_NoFinalState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1474 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1475 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1477 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1478 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1479 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1481 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1483 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1484 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1485 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1486 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1487 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1488 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_NoFinalState_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1490 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_Demougin1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1516 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1517 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1518 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1519 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1520 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1521 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1522 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1523 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1524 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1525 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_NoTransitionMaxel_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1530 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1531 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1533 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1534 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1535 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1537 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1538 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1540 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsDeterministicTest_ThreeTransitionsGasca_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1545 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1546 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1548 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1549 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1550 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1551 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1553 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1554 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1555 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1556 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1558 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1559 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1560 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1562 : référence indéfinie vers « fa::Automaton::isDeterministic() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_Good_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1569 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1570 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1572 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1573 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1574 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1576 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1577 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1579 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1580 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1581 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1582 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1583 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1584 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_Good_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1586 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_TwoTransitions_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1591 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1592 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1594 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1595 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1596 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1598 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1599 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1601 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1602 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1603 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1604 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1605 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1606 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_TwoTransitions_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1610 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_ZeroTransition_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1615 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1616 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1618 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1619 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1620 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1622 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1623 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1625 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1626 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1627 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1628 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1629 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1631 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_AddedRemovedTransition_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1636 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1637 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1639 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1640 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1641 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1643 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1644 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1646 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1647 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1648 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1649 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1650 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1651 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_AddedRemovedTransition_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1653 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1655 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_Villemin_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1660 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1661 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1663 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1664 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1665 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1667 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1668 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1669 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1670 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1671 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1672 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_Villemin_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1674 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsCompleteTest_Demougin1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1701 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1702 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1703 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1704 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1709 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1710 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1711 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1712 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1713 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1714 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1715 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1716 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1717 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1722 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1723 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1724 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1725 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1726 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1727 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1728 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1729 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1734 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1735 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1736 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1737 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1738 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1739 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1740 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1741 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1746 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1747 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1748 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1749 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1750 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonCreateCompleteTest_Dillon1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1818 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1821 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1823 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1826 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1829 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1832 : référence indéfinie vers « fa::Automaton::removeTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1835 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1837 : référence indéfinie vers « fa::Automaton::createComplete(fa::Automaton const&) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:1839 : référence indéfinie vers « fa::Automaton::isComplete() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonMatchTest_Simple_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2503 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2504 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2506 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2507 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2508 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2509 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2510 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2512 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2513 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2515 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2516 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2517 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2518 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2519 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2520 : encore plus de références indéfinies suivent vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonMatchTest_Simple_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2526 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2527 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2528 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2530 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2531 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2532 : encore plus de références indéfinies suivent vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonMatchTest_ManyInitialStates_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2539 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2540 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2542 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2543 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2544 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2546 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2547 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2548 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2550 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2551 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2552 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2553 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2555 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2556 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2557 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2559 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2560 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2561 : encore plus de références indéfinies suivent vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonMatchTest_ExponentialGuillemot_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2568 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2569 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2571 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2572 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2573 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2575 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2576 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2578 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2579 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2580 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2581 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2582 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2585 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2587 : référence indéfinie vers « fa::Automaton::match(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&) const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsEmptyTest_NotEmpty_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2598 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2599 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2601 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2602 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2603 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2605 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2606 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2607 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2608 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2610 : référence indéfinie vers « fa::Automaton::isLanguageEmpty() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2612 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2613 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2615 : référence indéfinie vers « fa::Automaton::isLanguageEmpty() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsEmptyTest_Empty_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2620 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2621 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2623 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2624 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2625 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2627 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2628 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2629 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2630 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2632 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2633 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2635 : référence indéfinie vers « fa::Automaton::isLanguageEmpty() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsEmptyTest_UnitLanguage_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2640 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2641 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2643 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2644 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2645 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2647 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2648 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2649 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2650 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2652 : référence indéfinie vers « fa::Automaton::isLanguageEmpty() const »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2654 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2655 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2657 : référence indéfinie vers « fa::Automaton::isLanguageEmpty() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsEmptyTest_TwoPartsGuillemot_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2662 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2664 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2665 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2666 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2667 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2668 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o:/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2669 : encore plus de références indéfinies suivent vers « fa::Automaton::addState(int) »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsEmptyTest_TwoPartsGuillemot_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2671 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2672 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2674 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2675 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2676 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2677 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2679 : référence indéfinie vers « fa::Automaton::isLanguageEmpty() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonIsEmptyTest_NoEarlyReturnNegar_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2684 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2685 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2687 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2688 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2689 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2690 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2691 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2693 : référence indéfinie vers « fa::Automaton::setStateInitial(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2694 : référence indéfinie vers « fa::Automaton::setStateFinal(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2696 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2697 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2698 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2699 : référence indéfinie vers « fa::Automaton::addTransition(int, char, int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2701 : référence indéfinie vers « fa::Automaton::isLanguageEmpty() const »
+/usr/bin/ld : CMakeFiles/testfa.dir/testfa.cc.o : dans la fonction « AutomatonRemoveNonAccessibleStatesTest_Demougin1_Test::TestBody() » :
+/home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2827 : référence indéfinie vers « fa::Automaton::addSymbol(char) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2828 : référence indéfinie vers « fa::Automaton::addState(int) »
+/usr/bin/ld : /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox/testfa.cc:2829 : référence 

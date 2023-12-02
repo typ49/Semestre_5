@@ -472,21 +472,25 @@ namespace fa
   }
 
   Automaton Automaton::createComplement(const Automaton &automaton)
-  {
+{
     assert(automaton.isValid());
     Automaton complement;
+
+    // Copie de l'alphabet et des états
     complement.alphabet = automaton.alphabet;
     complement.states = automaton.states;
-    complement.initialStates = automaton.initialStates;
+
+    // Inverser les états finaux et non finaux
     for (auto state : automaton.states)
     {
-      if (!automaton.isStateFinal(state))
-      {
-        complement.setStateFinal(state);
-      }
+        // Si l'état est final dans l'automate original, il ne devrait pas être final dans le complément
+        // Si l'état n'est pas final dans l'automate original, il devrait être final dans le complément
+        complement.setFinalState(state, !automaton.isStateFinal(state));
     }
+
     return complement;
-  }
+}
+
 
   Automaton Automaton::createMirror(const Automaton &automaton)
   {
@@ -919,7 +923,31 @@ namespace fa
 
   bool Automaton::isIncludedIn(const Automaton &other) const
   {
-    // TODO
+    // vérifie si les automates sont valides
+    assert(isValid());
+    assert(other.isValid());
+
+    if (!isDeterministic()) {
+      printf("A n'est pas déterministe\n");
+      Automaton deterministic = createDeterministic(*this); // rend l'automate A déterministe
+      return deterministic.isIncludedIn(other); // retourne le résultat avec ce nouvel automate
+    }
+    if (!other.isDeterministic()) {
+      printf("B n'est pas déterministe\n");
+      Automaton deterministic = createDeterministic(other); // rend l'automate other déterministe
+      return isIncludedIn(deterministic); // retourne le résultat avec ce nouvel automate
+    }
+    Automaton complementOther = createComplement(other); // fait un complement de l'automate other
+    printf ("complement\n");
+    complementOther.prettyPrint(std::cout);
+    Automaton intersection = createIntersection(*this, complmentOther); // fait l'intersection des deux automates
+    printf ("intersection\n")
+    intersection.prettyPrint(std::cout);
+    printf("intersection\n empty ? %d\n", intersection.isLanguageEmpty());
+    if (intersection.isLanguageEmpty()) {
+      return true; // si l'automate d'intersection est vide, ça veut dire qu'aucun mots de A n'est présent dans le mirroir de B et donc A est inclue dans B
+    }
+
     return false;
   }
 

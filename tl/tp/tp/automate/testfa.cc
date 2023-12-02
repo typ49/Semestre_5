@@ -1,6 +1,5 @@
 #include <gtest/gtest.h>
 
-
 #include "Automaton.h"
 
 namespace fa
@@ -13,6 +12,8 @@ namespace fa
         Automaton notAnAutomaton;
         Automaton forPrint;
         Automaton automatonDeterministic;
+        Automaton A;
+        Automaton B;
     };
 
     // Test TP1 *******************************************************************************************************
@@ -1205,10 +1206,8 @@ namespace fa
         EXPECT_TRUE(automaton.hasState(2));
         EXPECT_FALSE(automaton.hasState(3));
         EXPECT_FALSE(automaton.hasState(4));
-        
-        
-        EXPECT_EQ(automaton.countTransitions(), transitionExpected);
 
+        EXPECT_EQ(automaton.countTransitions(), transitionExpected);
     }
 
     // Test où aucun état n'est co-accessible
@@ -1525,6 +1524,105 @@ namespace fa
         EXPECT_EQ(automaton.countStates(), automatonDeterministic.countStates());
         EXPECT_EQ(automaton.countSymbols(), automatonDeterministic.countSymbols());
         EXPECT_EQ(automaton.countTransitions(), automatonDeterministic.countTransitions());
+    }
+
+    // test isIncludeIn
+
+    TEST_F(AutomatonTest, TestIsIncludeIn_AIncludeInB)
+    {
+
+        // A : all binary words that end with 0
+        A.addSymbol('0');
+        A.addSymbol('1');
+
+        A.addState(0);
+        A.addState(1);
+
+        A.setStateInitial(0);
+        A.setStateFinal(1);
+
+        A.addTransition(0, '1', 0);
+        A.addTransition(0, '0', 1);
+        A.addTransition(1, '1', 0);
+        A.addTransition(1, '0', 1);
+
+        // B : all binary words
+        B.addSymbol('0');
+        B.addSymbol('1');
+
+        B.addState(0);
+
+        B.setStateInitial(0);
+        B.setStateFinal(0);
+
+        B.addTransition(0, '1', 0);
+        B.addTransition(0, '0', 0);
+
+        EXPECT_TRUE(A.isIncludedIn(B));
+    }
+
+    TEST_F(AutomatonTest, testIsIncludeIn_repeatedWords) {
+        // A : word ab repeated
+        A.addSymbol('a');
+        A.addSymbol('b');
+
+        A.addState(0);
+        A.addState(1);
+
+        A.setStateInitial(0);
+        A.setStateFinal(1);
+
+        A.addTransition(0, 'a', 1);
+        A.addTransition(0, 'b', 1);
+
+
+        B.addSymbol('a');
+        B.addSymbol('b');
+
+        B.addState(0);
+
+        B.setStateInitial(0);
+        B.setStateFinal(0);
+
+        B.addTransition(0, 'a', 0);
+        B.addTransition(0, 'b', 0);
+
+        EXPECT_TRUE(A.isIncludedIn(B));
+    }
+
+    TEST_F(AutomatonTest, TestIsIncludeIn_BinaryWordsKO) {
+        // A : all binary words that end with 0
+        A.addSymbol('0');
+        A.addSymbol('1');
+
+        A.addState(0);
+        A.addState(1);
+
+        A.setStateInitial(0);
+        A.setStateFinal(1);
+
+        A.addTransition(0, '1', 0);
+        A.addTransition(0, '0', 1);
+        A.addTransition(1, '1', 0);
+        A.addTransition(1, '0', 1);
+
+        // B : all binary words that end with 1
+        B.addSymbol('0');
+        B.addSymbol('1');
+
+        B.addState(0);
+        B.addState(1);
+
+        B.setStateInitial(0);
+        B.setStateFinal(1);
+
+        B.addTransition(0, '1', 1);
+        B.addTransition(0, '0', 0);
+        B.addTransition(1, '1', 1);
+        B.addTransition(1, '0', 0);
+
+        EXPECT_FALSE(A.isIncludedIn(B));
+
     }
 
 } // namespace fa

@@ -1,0 +1,47 @@
+-- The CXX compiler identification is GNU 12.2.0
+-- The C compiler identification is GNU 12.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox-tests/build
+[ 25%] Building CXX object CMakeFiles/testfa.dir/Automaton.cc.o
+[ 50%] Building CXX object CMakeFiles/testfa.dir/testfa.cc.o
+[ 75%] Building CXX object CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o
+[100%] Linking CXX executable testfa
+[100%] Built target testfa
+==487453== Memcheck, a memory error detector
+==487453== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==487453== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
+==487453== Command: ./testfa
+==487453== 
+[==========] Running 1 test from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 1 test from AutomatonExampleTest
+[ RUN      ] AutomatonExampleTest.Default
+[       OK ] AutomatonExampleTest.Default (3 ms)
+[----------] 1 test from AutomatonExampleTest (5 ms total)
+
+[----------] Global test environment tear-down
+[==========] 1 test from 1 test suite ran. (25 ms total)
+[  PASSED  ] 1 test.
+==487453== 
+==487453== HEAP SUMMARY:
+==487453==     in use at exit: 0 bytes in 0 blocks
+==487453==   total heap usage: 187 allocs, 187 frees, 115,950 bytes allocated
+==487453== 
+==487453== All heap blocks were freed -- no leaks are possible
+==487453== 
+==487453== For lists of detected and suppressed errors, rerun with: -s
+==487453== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)
