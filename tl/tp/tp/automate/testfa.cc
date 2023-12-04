@@ -882,6 +882,52 @@ namespace fa
         EXPECT_TRUE(completeAutomaton.isComplete());
     }
 
+    // Test pour createComplement()
+    TEST_F(AutomatonTest, testCreateComplement) {
+        // init automaton who recognize all binary words with 0 at the end
+        automaton.addSymbol('0');
+        automaton.addSymbol('1');
+
+        automaton.addState(0);
+        automaton.addState(1);
+
+        automaton.setStateInitial(0);
+        automaton.setStateFinal(1);
+
+        automaton.addTransition(0, '1', 0);
+        automaton.addTransition(0, '0', 1);
+        automaton.addTransition(1, '0', 1);
+        automaton.addTransition(1, '1', 0);
+
+        // creating complement of automaton
+        Automaton complementAutomaton;
+        complementAutomaton = automaton.createComplement(automaton);
+        
+        // complement expected
+        /* 
+        complementAutomaton.addSymbol('0');
+        complementAutomaton.addSymbol('1');
+
+        complementAutomaton.addState(0);
+        complementAutomaton.addState(1);
+
+        complementAutomaton.setStateInitial(0);
+        complementAutomaton.setStateFinal(0);
+
+        complementAutomaton.addTransition(0, '1', 0);
+        complementAutomaton.addTransition(0, '0', 1);
+        complementAutomaton.addTransition(1, '0', 1);
+        complementAutomaton.addTransition(1, '1', 0); 
+        */
+
+        EXPECT_EQ(automaton.countSymbols(), complementAutomaton.countSymbols());
+        EXPECT_TRUE(complementAutomaton.match("011111111110101"));
+        EXPECT_FALSE(complementAutomaton.match("011111111110100"));
+        EXPECT_TRUE(complementAutomaton.match("111110111101001"));
+        EXPECT_FALSE(complementAutomaton.match("111110111101000"));
+
+    }
+
     // Test pour createMirror()
     TEST_F(AutomatonTest, TestCreateMirror)
     {

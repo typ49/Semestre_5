@@ -38,23 +38,25 @@ namespace fa
 
   bool Automaton::removeSymbol(char symbol)
   {
-    if (hasSymbol(symbol))
+    // Vérifier si le symbole est dans l'alphabet
+    if (alphabet.find(symbol) == alphabet.end())
     {
-      alphabet.erase(symbol);
-      for (auto from : transitions)
-      {
-        for (auto alpha : from.second)
-        {
-          if (alpha.first == symbol)
-          {
-            //supprime toute la map associé au symbole
-            alpha.second.clear();
-          }
-        }
-      }
-      return true;
+      // Le symbole n'est pas dans l'alphabet, renvoyer false
+      return false;
     }
-    return false;
+
+    // Le symbole est dans l'alphabet, procéder à la suppression
+    alphabet.erase(symbol);
+
+    // Supprimer les transitions associées à ce symbole
+    for (auto &stateTransitions : transitions)
+    {
+      // Supprimer l'entrée correspondante au symbole dans chaque map
+      stateTransitions.second.erase(symbol);
+    }
+
+    // Le symbole a été effectivement supprimé, renvoyer true
+    return true;
   }
 
   bool Automaton::hasSymbol(char symbol) const
@@ -69,7 +71,7 @@ namespace fa
 
   bool Automaton::addState(int state)
   {
-    if (!hasState(state))
+    if (!hasState(state) && state >= 0)
     {
       states.insert(state);
       return true;
@@ -77,42 +79,38 @@ namespace fa
     return false;
   }
 
-  bool Automaton::removeState(int state)
-  {
-    if (hasState(state))
-    {
-      // supprime l'état
-      states.erase(state);
-      initialStates.erase(state);
-      finalStates.erase(state);
-
-      // supprime les transition associées à l'état supprimé
-      std::vector<std::pair<int, char>> keysToRemove;
-      for (auto &from : transitions)
-      {
-        for (auto &alpha : from.second)
-        {
-          alpha.second.erase(state);
-          if (alpha.second.empty())
-          {
-            keysToRemove.emplace_back(from.first, alpha.first);
-          }
-        }
-      }
-
-      for (auto &key : keysToRemove)
-      {
-        transitions[key.first].erase(key.second);
-        if (transitions[key.first].empty())
-        {
-          transitions.erase(key.first);
-        }
-      }
-
-      return true;
+  bool Automaton::removeState(int state) {
+    if (!hasState(state)) {
+        return false;
     }
-    return false;
-  }
+
+    // Supprimer l'état des différents ensembles
+    states.erase(state);
+    initialStates.erase(state);
+    finalStates.erase(state);
+
+    // Supprimer toutes les transitions sortantes de cet état
+    transitions.erase(state);
+
+    // Supprimer toutes les transitions entrantes vers cet état
+    for (auto &from : transitions) {
+        for (auto &alpha : from.second) {
+            alpha.second.erase(state);
+        }
+    }
+
+    // Supprimer les entrées vides dans la map de transitions
+    for (auto it = transitions.begin(); it != transitions.end();) {
+        if (it->second.empty()) {
+            it = transitions.erase(it);
+        } else {
+            ++it;
+        }
+    }
+
+    return true;
+}
+
 
   bool Automaton::hasState(int state) const
   {
@@ -207,11 +205,12 @@ namespace fa
   std::size_t Automaton::countTransitions() const
   {
     // int count = transitions.size();
+
     std::size_t count = 0;
     for (auto from : transitions)
     {
       for (auto alpha : from.second)
-      { 
+      {
         count += alpha.second.size();
       }
     }
@@ -472,25 +471,27 @@ namespace fa
   }
 
   Automaton Automaton::createComplement(const Automaton &automaton)
-{
+  {
     assert(automaton.isValid());
     Automaton complement;
 
     // Copie de l'alphabet et des états
     complement.alphabet = automaton.alphabet;
     complement.states = automaton.states;
+    complement.transitions = automaton.transitions;
+    complement.initialStates = automaton.initialStates;
 
     // Inverser les états finaux et non finaux
     for (auto state : automaton.states)
     {
-        // Si l'état est final dans l'automate original, il ne devrait pas être final dans le complément
-        // Si l'état n'est pas final dans l'automate original, il devrait être final dans le complément
-        complement.setFinalState(state, !automaton.isStateFinal(state));
+      // Si l'état est final dans l'automate original, il ne devrait pas être final dans le complément
+      // Si l'état n'est pas final dans l'automate original, il devrait être final dans le complément
+      if (!automaton.isStateFinal(state))
+        complement.setStateFinal(state);
     }
 
     return complement;
-}
-
+  }
 
   Automaton Automaton::createMirror(const Automaton &automaton)
   {
@@ -545,7 +546,7 @@ namespace fa
     return destinations; // Retourner l'ensemble des états de destination
   }
 
-  std::set<int> Automaton::makeTransition_reverse(const std::set<int> &destination, char alpha) const 
+  std::set<int> Automaton::makeTransition_reverse(const std::set<int> &destination, char alpha) const
   {
     assert(isValid());
 
@@ -593,7 +594,6 @@ namespace fa
       // Mettre à jour l'ensemble d'états actuels pour le prochain tour de la boucle
       currentStates = nextStates;
 
-      // Vous pouvez vider nextStates si vous le souhaitez, mais ce n'est pas strictement nécessaire
       nextStates.clear();
     }
 
@@ -927,24 +927,27 @@ namespace fa
     assert(isValid());
     assert(other.isValid());
 
-    if (!isDeterministic()) {
+    if (!isDeterministic())
+    {
       printf("A n'est pas déterministe\n");
       Automaton deterministic = createDeterministic(*this); // rend l'automate A déterministe
-      return deterministic.isIncludedIn(other); // retourne le résultat avec ce nouvel automate
+      return deterministic.isIncludedIn(other);             // retourne le résultat avec ce nouvel automate
     }
-    if (!other.isDeterministic()) {
+    if (!other.isDeterministic())
+    {
       printf("B n'est pas déterministe\n");
       Automaton deterministic = createDeterministic(other); // rend l'automate other déterministe
-      return isIncludedIn(deterministic); // retourne le résultat avec ce nouvel automate
+      return isIncludedIn(deterministic);                   // retourne le résultat avec ce nouvel automate
     }
     Automaton complementOther = createComplement(other); // fait un complement de l'automate other
-    printf ("complement\n");
+    printf("complement\n");
     complementOther.prettyPrint(std::cout);
-    Automaton intersection = createIntersection(*this, complmentOther); // fait l'intersection des deux automates
-    printf ("intersection\n")
+    Automaton intersection = createIntersection(*this, complementOther); // fait l'intersection des deux automates
+    printf("intersection\n");
     intersection.prettyPrint(std::cout);
     printf("intersection\n empty ? %d\n", intersection.isLanguageEmpty());
-    if (intersection.isLanguageEmpty()) {
+    if (intersection.isLanguageEmpty())
+    {
       return true; // si l'automate d'intersection est vide, ça veut dire qu'aucun mots de A n'est présent dans le mirroir de B et donc A est inclue dans B
     }
 
@@ -1035,6 +1038,8 @@ namespace fa
   {
     // TODO
     Automaton minimalMoore;
+    minimalMoore.addSymbol('a');
+    minimalMoore.addState(0);
     return minimalMoore;
   }
 
@@ -1042,6 +1047,8 @@ namespace fa
   {
     // TODO
     Automaton minimalBrzozowski;
+    minimalBrzozowski.addSymbol('a');
+    minimalBrzozowski.addState(0);
     return minimalBrzozowski;
   }
 
