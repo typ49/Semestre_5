@@ -11,6 +11,7 @@
 #include <cctype>
 #include <utility> // std::pair
 #include <queue>
+#include <climits>
 
 namespace fa
 {

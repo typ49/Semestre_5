@@ -79,9 +79,11 @@ namespace fa
     return false;
   }
 
-  bool Automaton::removeState(int state) {
-    if (!hasState(state)) {
-        return false;
+  bool Automaton::removeState(int state)
+  {
+    if (!hasState(state))
+    {
+      return false;
     }
 
     // Supprimer l'état des différents ensembles
@@ -93,24 +95,29 @@ namespace fa
     transitions.erase(state);
 
     // Supprimer toutes les transitions entrantes vers cet état
-    for (auto &from : transitions) {
-        for (auto &alpha : from.second) {
-            alpha.second.erase(state);
-        }
+    for (auto &from : transitions)
+    {
+      for (auto &alpha : from.second)
+      {
+        alpha.second.erase(state);
+      }
     }
 
     // Supprimer les entrées vides dans la map de transitions
-    for (auto it = transitions.begin(); it != transitions.end();) {
-        if (it->second.empty()) {
-            it = transitions.erase(it);
-        } else {
-            ++it;
-        }
+    for (auto it = transitions.begin(); it != transitions.end();)
+    {
+      if (it->second.empty())
+      {
+        it = transitions.erase(it);
+      }
+      else
+      {
+        ++it;
+      }
     }
 
     return true;
-}
-
+  }
 
   bool Automaton::hasState(int state) const
   {
@@ -422,7 +429,11 @@ namespace fa
     assert(automaton.isValid());
     Automaton completeAutomaton = automaton; // Copier l'automate donné
 
-    int trapState = -1;          // Utiliser -1 comme état poubelle
+    int trapState = 0;
+    while (completeAutomaton.hasState(trapState))
+    {
+      trapState++;
+    }
     bool trapStateAdded = false; // Indicateur pour savoir si l'état poubelle a été ajouté
 
     // Parcourir chaque état de l'automate
@@ -1034,14 +1045,90 @@ namespace fa
    * TP n°6
    */
 
-  Automaton Automaton::createMinimalMoore(const Automaton &other)
-  {
-    // TODO
-    Automaton minimalMoore;
-    minimalMoore.addSymbol('a');
-    minimalMoore.addState(0);
-    return minimalMoore;
-  }
+Automaton Automaton::createMinimalMoore(const Automaton &other) {
+    assert(other.isValid());
+    if (!other.isDeterministic()) {
+        other.createDeterministic(other);
+    }
+
+    // Initialiser les groupes d'états.
+    std::map<int, int> stateGroups;
+    for (auto state : other.states) {
+        stateGroups[state] = other.isStateFinal(state) ? 1 : 0;
+    }
+
+    bool groupsChanged;
+    do {
+        groupsChanged = false;
+        std::map<int, int> newStateGroups = stateGroups;
+
+        // Assigner un groupe à chaque état en fonction de ses transitions.
+        for (auto state : other.states) {
+            for (auto alpha : other.alphabet) {
+                auto it = other.transitions.find(state);
+                if (it != other.transitions.end()) {
+                    auto transIt = it->second.find(alpha);
+                    if (transIt != it->second.end() && !transIt->second.empty()) {
+                        int targetState = *(transIt->second.begin());
+                        std::pair<int, int> key = {stateGroups[state], stateGroups[targetState]};
+                        if (newStateGroups[state] != key.second) {
+                            newStateGroups[state] = key.second;
+                            groupsChanged = true;
+                        }
+                    }
+                }
+            }
+        }
+
+        stateGroups = newStateGroups;
+    } while (groupsChanged);
+
+    // Construire le nouvel automate minimal.
+    Automaton minimal;
+    minimal.alphabet = other.alphabet; // Copier l'alphabet
+    std::map<int, int> newStatesMapping;
+    int newStateId = 0;
+    std::set<int> finalStatesInGroups;
+
+    // Identifier les états finaux dans chaque groupe
+    for (const auto& [state, group] : stateGroups) {
+        if (other.isStateFinal(state)) {
+            finalStatesInGroups.insert(group);
+        }
+    }
+
+    for (auto group : stateGroups) {
+        if (newStatesMapping.find(group.second) == newStatesMapping.end()) {
+            newStatesMapping[group.second] = newStateId++;
+            minimal.addState(newStatesMapping[group.second]);
+            if (finalStatesInGroups.find(group.second) != finalStatesInGroups.end()) {
+                minimal.setStateFinal(newStatesMapping[group.second]);
+            }
+            if (other.isStateInitial(group.first)) {
+                minimal.setStateInitial(newStatesMapping[group.second]);
+            }
+        }
+    }
+
+    // Recréer les transitions pour le nouvel automate.
+    for (auto state : other.states) {
+        for (auto alpha : other.alphabet) {
+            auto it = other.transitions.find(state);
+            if (it != other.transitions.end()) {
+                auto transIt = it->second.find(alpha);
+                if (transIt != it->second.end() && !transIt->second.empty()) {
+                    int fromState = newStatesMapping[stateGroups[state]];
+                    int toState = newStatesMapping[stateGroups[*(transIt->second.begin())]];
+                    minimal.addTransition(fromState, alpha, toState);
+                }
+            }
+        }
+    }
+
+    return minimal;
+}
+
+
 
   Automaton Automaton::createMinimalBrzozowski(const Automaton &other)
   {

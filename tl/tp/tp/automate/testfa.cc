@@ -816,7 +816,9 @@ namespace fa
         automaton.addTransition(0, '1', 2); // Transition de l'état 0 à l'état 2 avec '1'
         automaton.addTransition(2, '1', 2); // Transition de l'état 2 à lui-même avec '1'
         EXPECT_FALSE(automaton.isComplete());
+        automaton.prettyPrint(std::cout);
         completeAutomaton = automaton.createComplete(automaton);
+        completeAutomaton.prettyPrint(std::cout);
         EXPECT_TRUE(completeAutomaton.isComplete());
     }
 
@@ -1670,6 +1672,80 @@ namespace fa
         EXPECT_FALSE(A.isIncludedIn(B));
 
     }
+
+    /* test minimalMoore*/
+
+    TEST_F(AutomatonTest, TestCreateMinimalMoore_NotMinimal) {
+        A.addSymbol('a');
+        A.addSymbol('b');
+
+        A.addState(0);
+        A.addState(1);
+        A.addState(2);
+
+        A.setStateInitial(0);
+        A.setStateFinal(2);
+
+        A.addTransition(0, 'a', 1);
+        A.addTransition(0, 'b', 2);
+        A.addTransition(1, 'a', 2);
+        A.addTransition(1, 'b', 2);
+        A.addTransition(2, 'a', 2);
+        A.addTransition(2, 'b', 2);
+        // les états 1 et 2 peuvent-être fusionnés
+        A.prettyPrint(std::cout);
+        B = A.createMinimalMoore(A);
+        B.prettyPrint(std::cout);
+        EXPECT_TRUE(A.match("abbaaaababababaaaba"));
+        EXPECT_TRUE(B.match("abbaaaababababaaaba"));
+        EXPECT_TRUE(B.hasSymbol('a'));
+        EXPECT_TRUE(B.hasSymbol('b'));
+
+        EXPECT_TRUE(B.isDeterministic());
+        EXPECT_TRUE(B.isComplete());
+    }
+
+    TEST_F(AutomatonTest, TestCreateMinimalMoore_alreadyMinimal) {
+        A.addSymbol('a');
+        A.addSymbol('b');
+        A.addState(0);
+        A.addTransition(0, 'a', 0);
+        A.addTransition(0, 'b', 0);
+        A.setStateFinal(0);
+        A.setStateInitial(0);
+
+        B = A.createMinimalMoore(A);
+
+        EXPECT_TRUE(B.isDeterministic());
+        EXPECT_TRUE(B.isComplete());
+
+        EXPECT_TRUE(B.hasSymbol('a'));
+        EXPECT_TRUE(B.hasSymbol('b'));
+        EXPECT_TRUE(B.match("abbaaaababababaaaba"));
+    }
+
+    TEST_F(AutomatonTest, TestCreateMinimalMoore_notDeterminist) {
+        A.addState(0);
+        A.addState(1);
+        A.addSymbol('a');
+        A.addSymbol('b');
+        A.addTransition(0, 'a', 0);
+        A.addTransition(0, 'b', 0);
+        A.addTransition(0, 'a', 1);
+        A.addTransition(0, 'b', 1);    
+        A.setStateFinal(0);
+        A.setStateFinal(1);
+        A.setStateInitial(0);
+
+        B = A.createMinimalMoore(A);
+
+        EXPECT_TRUE(B.isDeterministic());
+        EXPECT_TRUE(B.isComplete());
+        EXPECT_TRUE(B.hasSymbol('a'));
+        EXPECT_TRUE(B.hasSymbol('b'));
+        EXPECT_TRUE(B.match("abbaaaababababaaaba"));
+    }
+
 
 } // namespace fa
 
