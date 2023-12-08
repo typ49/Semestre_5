@@ -1,0 +1,392 @@
+-- The CXX compiler identification is GNU 12.2.0
+-- The C compiler identification is GNU 12.2.0
+-- Detecting CXX compiler ABI info
+-- Detecting CXX compiler ABI info - done
+-- Check for working CXX compiler: /usr/bin/c++ - skipped
+-- Detecting CXX compile features
+-- Detecting CXX compile features - done
+-- Detecting C compiler ABI info
+-- Detecting C compiler ABI info - done
+-- Check for working C compiler: /usr/bin/cc - skipped
+-- Detecting C compile features
+-- Detecting C compile features - done
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD
+-- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
+-- Found Threads: TRUE  
+-- Configuring done
+-- Generating done
+-- Build files have been written to: /home/jube/Univ/theorie_des_langages/projet/corr/2023/sandbox-tests/build
+[ 25%] Building CXX object CMakeFiles/testfa.dir/Automaton.cc.o
+[ 50%] Building CXX object CMakeFiles/testfa.dir/testfa.cc.o
+[ 75%] Building CXX object CMakeFiles/testfa.dir/googletest/googletest/src/gtest-all.cc.o
+[100%] Linking CXX executable testfa
+[100%] Built target testfa
+==651788== Memcheck, a memory error detector
+==651788== Copyright (C) 2002-2022, and GNU GPL'd, by Julian Seward et al.
+==651788== Using Valgrind-3.19.0 and LibVEX; rerun with -h for copyright info
+==651788== Command: ./testfa
+==651788== 
+[==========] Running 95 tests from 1 test suite.
+[----------] Global test environment set-up.
+[----------] 95 tests from AutomatonTest
+[ RUN      ] AutomatonTest.TestIsValid_TRUE
+[       OK ] AutomatonTest.TestIsValid_TRUE (9 ms)
+[ RUN      ] AutomatonTest.TestIsValid_FALSE
+[       OK ] AutomatonTest.TestIsValid_FALSE (0 ms)
+[ RUN      ] AutomatonTest.TestIsValid_TRUE_ASCII
+[       OK ] AutomatonTest.TestIsValid_TRUE_ASCII (2 ms)
+[ RUN      ] AutomatonTest.TestHasSymbol_TRUE
+[       OK ] AutomatonTest.TestHasSymbol_TRUE (1 ms)
+[ RUN      ] AutomatonTest.TestHasSymbol_FALSE_NoSymbolAdded
+[       OK ] AutomatonTest.TestHasSymbol_FALSE_NoSymbolAdded (1 ms)
+[ RUN      ] AutomatonTest.TestHasSymbol_FALSE_InvalidChar
+[       OK ] AutomatonTest.TestHasSymbol_FALSE_InvalidChar (2 ms)
+[ RUN      ] AutomatonTest.AutomatonTest_TestHasSymbol_FALSE_NotThisSymbol
+[       OK ] AutomatonTest.AutomatonTest_TestHasSymbol_FALSE_NotThisSymbol (1 ms)
+[ RUN      ] AutomatonTest.TestAddSymbol_TRUE
+[       OK ] AutomatonTest.TestAddSymbol_TRUE (1 ms)
+[ RUN      ] AutomatonTest.TestAddSymbol_FALSE_InvalidChar
+[       OK ] AutomatonTest.TestAddSymbol_FALSE_InvalidChar (1 ms)
+[ RUN      ] AutomatonTest.TestAddSymbol_FALSE_AlreadyPresent
+[       OK ] AutomatonTest.TestAddSymbol_FALSE_AlreadyPresent (1 ms)
+[ RUN      ] AutomatonTest.TestRemoveSymbol_TRUE
+[       OK ] AutomatonTest.TestRemoveSymbol_TRUE (3 ms)
+[ RUN      ] AutomatonTest.TestRemoveSymbol_FALSE_InvalidChar
+[       OK ] AutomatonTest.TestRemoveSymbol_FALSE_InvalidChar (1 ms)
+[ RUN      ] AutomatonTest.TestRemoveSymbol_FALSE_NotPresent
+[       OK ] AutomatonTest.TestRemoveSymbol_FALSE_NotPresent (1 ms)
+[ RUN      ] AutomatonTest.TestCountSymbols
+[       OK ] AutomatonTest.TestCountSymbols (1 ms)
+[ RUN      ] AutomatonTest.TestHasState_TRUE
+[       OK ] AutomatonTest.TestHasState_TRUE (1 ms)
+[ RUN      ] AutomatonTest.TestHasState_FALSE
+[       OK ] AutomatonTest.TestHasState_FALSE (1 ms)
+[ RUN      ] AutomatonTest.TestAddState_TRUE
+[       OK ] AutomatonTest.TestAddState_TRUE (1 ms)
+[ RUN      ] AutomatonTest.TestAddState_FALSE_AlreadyPresent
+[       OK ] AutomatonTest.TestAddState_FALSE_AlreadyPresent (1 ms)
+[ RUN      ] AutomatonTest.TestRemoveState_TRUE
+[       OK ] AutomatonTest.TestRemoveState_TRUE (2 ms)
+[ RUN      ] AutomatonTest.TestRemoveState_FALSE_NotPresent
+[       OK ] AutomatonTest.TestRemoveState_FALSE_NotPresent (1 ms)
+[ RUN      ] AutomatonTest.TestRemoveState_TRUE_StateOnInitialState
+[       OK ] AutomatonTest.TestRemoveState_TRUE_StateOnInitialState (1 ms)
+[ RUN      ] AutomatonTest.TestRemoveState_TRUE_StateOnFinalState
+[       OK ] AutomatonTest.TestRemoveState_TRUE_StateOnFinalState (3 ms)
+[ RUN      ] AutomatonTest.TestRemoveState_TRUE_StateTransition
+[       OK ] AutomatonTest.TestRemoveState_TRUE_StateTransition (4 ms)
+[ RUN      ] AutomatonTest.TestCountStates
+[       OK ] AutomatonTest.TestCountStates (1 ms)
+[ RUN      ] AutomatonTest.TestSetAndGetStateInitial
+[       OK ] AutomatonTest.TestSetAndGetStateInitial (1 ms)
+[ RUN      ] AutomatonTest.TestSetAndGetStateFinal
+[       OK ] AutomatonTest.TestSetAndGetStateFinal (1 ms)
+[ RUN      ] AutomatonTest.TestAddTransition_TRUE
+[       OK ] AutomatonTest.TestAddTransition_TRUE (1 ms)
+[ RUN      ] AutomatonTest.TestAddTransition_FALSE_AlreadyPresent
+[       OK ] AutomatonTest.TestAddTransition_FALSE_AlreadyPresent (1 ms)
+[ RUN      ] AutomatonTest.TestAddTransition_FALSE_StateNotPresent
+[       OK ] AutomatonTest.TestAddTransition_FALSE_StateNotPresent (1 ms)
+[ RUN      ] AutomatonTest.TestAddTransition_FALSE_SymbolNotPresent
+[       OK ] AutomatonTest.TestAddTransition_FALSE_SymbolNotPresent (1 ms)
+[ RUN      ] AutomatonTest.TestAddTransition_TRUE_SameState
+[       OK ] AutomatonTest.TestAddTransition_TRUE_SameState (1 ms)
+[ RUN      ] AutomatonTest.TestAddTransition_TRUE_EPSILON
+[       OK ] AutomatonTest.TestAddTransition_TRUE_EPSILON (1 ms)
+[ RUN      ] AutomatonTest.TestRemoveTransition_TRUE
+[       OK ] AutomatonTest.TestRemoveTransition_TRUE (2 ms)
+[ RUN      ] AutomatonTest.TestRemoveTransition_FALSE_NotPresent
+[       OK ] AutomatonTest.TestRemoveTransition_FALSE_NotPresent (2 ms)
+[ RUN      ] AutomatonTest.TestRemoveTransition_TRUE_EpsilonTranstion
+[       OK ] AutomatonTest.TestRemoveTransition_TRUE_EpsilonTranstion (1 ms)
+[ RUN      ] AutomatonTest.TestCountTransitions
+[       OK ] AutomatonTest.TestCountTransitions (2 ms)
+[ RUN      ] AutomatonTest.TestHasTransition_TRUE
+[       OK ] AutomatonTest.TestHasTransition_TRUE (1 ms)
+[ RUN      ] AutomatonTest.TestHasTransition_FALSE_NotPresent
+[       OK ] AutomatonTest.TestHasTransition_FALSE_NotPresent (1 ms)
+[ RUN      ] AutomatonTest.TestHasTransition_FALSE_transitionEmpty
+[       OK ] AutomatonTest.TestHasTransition_FALSE_transitionEmpty (1 ms)
+[ RUN      ] AutomatonTest.TestHasTransition_FALSE_StateNotPresent
+[       OK ] AutomatonTest.TestHasTransition_FALSE_StateNotPresent (1 ms)
+[ RUN      ] AutomatonTest.TestHasTransition_FALSE_SymbolNotPresent
+[       OK ] AutomatonTest.TestHasTransition_FALSE_SymbolNotPresent (1 ms)
+[ RUN      ] AutomatonTest.TestPrettyPrint
+Initial states:
+	0 
+Final states:
+	2 
+Transitions:
+	For state 0:
+		For letter a: 1 
+		For letter b: 
+		For letter c: 
+	For state 1:
+		For letter a: 
+		For letter b: 1 
+		For letter c: 2 
+	For state 2:
+		For letter a: 
+		For letter b: 
+		For letter c: 
+[       OK ] AutomatonTest.TestPrettyPrint (4 ms)
+[ RUN      ] AutomatonTest.TestHasEpsilonTransition_TRUE_usingHasTransition
+[       OK ] AutomatonTest.TestHasEpsilonTransition_TRUE_usingHasTransition (1 ms)
+[ RUN      ] AutomatonTest.TestHasEpsilonTransition_TRUE_usingHasEpsilonTransition
+[       OK ] AutomatonTest.TestHasEpsilonTransition_TRUE_usingHasEpsilonTransition (1 ms)
+[ RUN      ] AutomatonTest.TestHasEpsilonTransition_FALSE
+[       OK ] AutomatonTest.TestHasEpsilonTransition_FALSE (1 ms)
+[ RUN      ] AutomatonTest.TestIsDeterministic_TRUE
+[       OK ] AutomatonTest.TestIsDeterministic_TRUE (2 ms)
+[ RUN      ] AutomatonTest.TestIsDeterministic_FALSE_DueToMultipleTransitions
+[       OK ] AutomatonTest.TestIsDeterministic_FALSE_DueToMultipleTransitions (1 ms)
+[ RUN      ] AutomatonTest.TestIsDeterministic_FALSE_NoInitialState
+[       OK ] AutomatonTest.TestIsDeterministic_FALSE_NoInitialState (1 ms)
+[ RUN      ] AutomatonTest.TestIsDeterministic_FALSE_MultipleInitialState
+[       OK ] AutomatonTest.TestIsDeterministic_FALSE_MultipleInitialState (1 ms)
+[ RUN      ] AutomatonTest.TestIsComplete_TRUE
+[       OK ] AutomatonTest.TestIsComplete_TRUE (2 ms)
+[ RUN      ] AutomatonTest.TestIsComplete_FALSE_TransitionMissing
+[       OK ] AutomatonTest.TestIsComplete_FALSE_TransitionMissing (1 ms)
+[ RUN      ] AutomatonTest.TestIsComplete_TRUE_NoInitialState
+[       OK ] AutomatonTest.TestIsComplete_TRUE_NoInitialState (1 ms)
+[ RUN      ] AutomatonTest.TestIsComplete_TRUE_MultipleInitialState
+[       OK ] AutomatonTest.TestIsComplete_TRUE_MultipleInitialState (1 ms)
+[ RUN      ] AutomatonTest.TestIsComplete_TRUE_MultipleTransition
+[       OK ] AutomatonTest.TestIsComplete_TRUE_MultipleTransition (2 ms)
+[ RUN      ] AutomatonTest.TestCreateComplete_AlreadyComplete
+[       OK ] AutomatonTest.TestCreateComplete_AlreadyComplete (8 ms)
+[ RUN      ] AutomatonTest.TestCreateComplete_TransitionMissing
+Initial states:
+	0 
+Final states:
+	1 
+Transitions:
+	For state 0:
+		For letter 0: 1 
+		For letter 1: 2 
+	For state 1:
+		For letter 0: 
+		For letter 1: 
+	For state 2:
+		For letter 0: 
+		For letter 1: 2 
+Initial states:
+	2104599369 
+Final states:
+	1515759312 
+Transitions:
+	For state 1515759312:
+		For letter 0: 1546188280 
+		For letter 1: 1546188280 
+	For state 1546188280:
+		For letter 0: 1546188280 
+		For letter 1: 1546188280 
+	For state 2104599369:
+		For letter 0: 1515759312 
+		For letter 1: 1546188280 
+[       OK ] AutomatonTest.TestCreateComplete_TransitionMissing (8 ms)
+[ RUN      ] AutomatonTest.TestCreateComplete_NoInitialState
+[       OK ] AutomatonTest.TestCreateComplete_NoInitialState (2 ms)
+[ RUN      ] AutomatonTest.TestCreateComplete_MultipleInitialState
+[       OK ] AutomatonTest.TestCreateComplete_MultipleInitialState (2 ms)
+[ RUN      ] AutomatonTest.testCreateComplement
+[       OK ] AutomatonTest.testCreateComplement (8 ms)
+[ RUN      ] AutomatonTest.TestCreateMirror
+[       OK ] AutomatonTest.TestCreateMirror (5 ms)
+[ RUN      ] AutomatonTest.TestCreateMirrorOfMirror
+[       OK ] AutomatonTest.TestCreateMirrorOfMirror (3 ms)
+[ RUN      ] AutomatonTest.TestMakeTransition
+[       OK ] AutomatonTest.TestMakeTransition (1 ms)
+[ RUN      ] AutomatonTest.TestMakeTransition_transitionFromOneState
+[       OK ] AutomatonTest.TestMakeTransition_transitionFromOneState (2 ms)
+[ RUN      ] AutomatonTest.TestMakeTransition_transitionFromMultipleState
+[       OK ] AutomatonTest.TestMakeTransition_transitionFromMultipleState (2 ms)
+[ RUN      ] AutomatonTest.TestMakeTransition_transitionWithNoMatchingSymbol
+[       OK ] AutomatonTest.TestMakeTransition_transitionWithNoMatchingSymbol (1 ms)
+[ RUN      ] AutomatonTest.TestReadString
+[       OK ] AutomatonTest.TestReadString (2 ms)
+[ RUN      ] AutomatonTest.TestMatch_TRUE
+[       OK ] AutomatonTest.TestMatch_TRUE (1 ms)
+[ RUN      ] AutomatonTest.TestMatch_FALSE
+[       OK ] AutomatonTest.TestMatch_FALSE (1 ms)
+[ RUN      ] AutomatonTest.TestIsLanguageEmpty_TRUE
+[       OK ] AutomatonTest.TestIsLanguageEmpty_TRUE (3 ms)
+[ RUN      ] AutomatonTest.TestIsLanguageEmpty_FALSE
+[       OK ] AutomatonTest.TestIsLanguageEmpty_FALSE (2 ms)
+[ RUN      ] AutomatonTest.TestIsLanguageEmpty_NoFinalState
+[       OK ] AutomatonTest.TestIsLanguageEmpty_NoFinalState (1 ms)
+[ RUN      ] AutomatonTest.testRemoveNonAccessibleStates_hasNonAccessibleStates
+[       OK ] AutomatonTest.testRemoveNonAccessibleStates_hasNonAccessibleStates (4 ms)
+[ RUN      ] AutomatonTest.testRemoveNonAccessibleStates_allStatesAccessible
+[       OK ] AutomatonTest.testRemoveNonAccessibleStates_allStatesAccessible (1 ms)
+[ RUN      ] AutomatonTest.testRemoveNonAccessibleStates_removeAllStates
+[       OK ] AutomatonTest.testRemoveNonAccessibleStates_removeAllStates (2 ms)
+[ RUN      ] AutomatonTest.testRemoveNonCoAccessibleStates_hasNonCoAccessibleStates
+[       OK ] AutomatonTest.testRemoveNonCoAccessibleStates_hasNonCoAccessibleStates (4 ms)
+[ RUN      ] AutomatonTest.testRemoveNonCoAccessibleStates_allRemove
+[       OK ] AutomatonTest.testRemoveNonCoAccessibleStates_allRemove (2 ms)
+[ RUN      ] AutomatonTest.testRemoveNonCoAccessibleStates_allCoAccessibleStates
+[       OK ] AutomatonTest.testRemoveNonCoAccessibleStates_allCoAccessibleStates (1 ms)
+[ RUN      ] AutomatonTest.testRemoveNonCoAccessibleStates_multipleFinalStates
+[       OK ] AutomatonTest.testRemoveNonCoAccessibleStates_multipleFinalStates (2 ms)
+[ RUN      ] AutomatonTest.testRemoveNonCoAccessibleStates_nonCoAccessibleFinalState
+[       OK ] AutomatonTest.testRemoveNonCoAccessibleStates_nonCoAccessibleFinalState (1 ms)
+[ RUN      ] AutomatonTest.testRemoveNonCoAccessibleStates_remove_allRemove
+[       OK ] AutomatonTest.testRemoveNonCoAccessibleStates_remove_allRemove (2 ms)
+[ RUN      ] AutomatonTest.testCreateIntersection_DisjointLanguages
+[       OK ] AutomatonTest.testCreateIntersection_DisjointLanguages (7 ms)
+[ RUN      ] AutomatonTest.testCreateIntersection_NonDisjointLanguages
+Initial states:
+	2 
+Final states:
+	14 
+Transitions:
+	For state 2:
+		For letter a: 5 8 
+		For letter b: 
+	For state 5:
+		For letter a: 11 14 
+		For letter b: 
+	For state 8:
+		For letter a: 
+		For letter b: 
+	For state 11:
+		For letter a: 
+		For letter b: 
+	For state 14:
+		For letter a: 
+		For letter b: 14 
+[       OK ] AutomatonTest.testCreateIntersection_NonDisjointLanguages (8 ms)
+[ RUN      ] AutomatonTest.testHasEmptyIntersectionWith_True
+[       OK ] AutomatonTest.testHasEmptyIntersectionWith_True (3 ms)
+[ RUN      ] AutomatonTest.testHasEmptyIntersectionWith_False
+[       OK ] AutomatonTest.testHasEmptyIntersectionWith_False (3 ms)
+[ RUN      ] AutomatonTest.TestCreateDeterministic_True
+Initial states:
+	2 
+Final states:
+	11 
+Transitions:
+	For state 2:
+		For letter a: 5 
+		For letter b: 8 
+	For state 5:
+		For letter a: 11 
+		For letter b: 14 
+	For state 8:
+		For letter a: 14 
+		For letter b: 11 
+	For state 11:
+		For letter a: 5 
+		For letter b: 8 
+	For state 14:
+		For letter a: 8 
+		For letter b: 5 
+[       OK ] AutomatonTest.TestCreateDeterministic_True (13 ms)
+[ RUN      ] AutomatonTest.TestCreateDeterministic_AlreadyDeterministic
++-------------------------------------------------------------+
+| ATTENTION ! ATTENTION ! ATTENTION ! ATTENTION ! ATTENTION ! |
+| Votre test utilise une fonction non-sûre ! C'est interdit ! |
+| La fonction non-sûre que vous appelez est:                  |
+|   countStates                                               |
+| Ce gentil message sera remplacé par un méchant assert.      |
+| Corrigez votre test sous peine d'avoir zéro.                |
++-------------------------------------------------------------+
++-------------------------------------------------------------+
+| ATTENTION ! ATTENTION ! ATTENTION ! ATTENTION ! ATTENTION ! |
+| Votre test utilise une fonction non-sûre ! C'est interdit ! |
+| La fonction non-sûre que vous appelez est:                  |
+|   countTransitions                                          |
+| Ce gentil message sera remplacé par un méchant assert.      |
+| Corrigez votre test sous peine d'avoir zéro.                |
++-------------------------------------------------------------+
+[       OK ] AutomatonTest.TestCreateDeterministic_AlreadyDeterministic (4 ms)
+[ RUN      ] AutomatonTest.TestIsIncludeIn_AIncludeInB
+[       OK ] AutomatonTest.TestIsIncludeIn_AIncludeInB (5 ms)
+[ RUN      ] AutomatonTest.testIsIncludeIn_repeatedWords
+[       OK ] AutomatonTest.testIsIncludeIn_repeatedWords (2 ms)
+[ RUN      ] AutomatonTest.TestIsIncludeIn_BinaryWordsKO
+[       OK ] AutomatonTest.TestIsIncludeIn_BinaryWordsKO (2 ms)
+[ RUN      ] AutomatonTest.TestCreateMinimalMoore_NotMinimal
+Initial states:
+	0 
+Final states:
+	2 
+Transitions:
+	For state 0:
+		For letter a: 1 
+		For letter b: 2 
+	For state 1:
+		For letter a: 2 
+		For letter b: 2 
+	For state 2:
+		For letter a: 2 
+		For letter b: 2 
+Initial states:
+	1075335386 
+Final states:
+	185120521 
+Transitions:
+	For state 22177700:
+		For letter a: 185120521 
+		For letter b: 185120521 
+	For state 185120521:
+		For letter a: 185120521 
+		For letter b: 185120521 
+	For state 1075335386:
+		For letter a: 22177700 
+		For letter b: 185120521 
+[       OK ] AutomatonTest.TestCreateMinimalMoore_NotMinimal (14 ms)
+[ RUN      ] AutomatonTest.TestCreateMinimalMoore_alreadyMinimal
+[       OK ] AutomatonTest.TestCreateMinimalMoore_alreadyMinimal (2 ms)
+[ RUN      ] AutomatonTest.TestCreateMinimalMoore_notDeterminist
+[       OK ] AutomatonTest.TestCreateMinimalMoore_notDeterminist (3 ms)
+[ RUN      ] AutomatonTest.TestCreateMinimalBrzozowski_NotMinimal
+Initial states:
+	0 
+Final states:
+	2 
+Transitions:
+	For state 0:
+		For letter a: 1 
+		For letter b: 2 
+	For state 1:
+		For letter a: 2 
+		For letter b: 2 
+	For state 2:
+		For letter a: 2 
+		For letter b: 2 
+Initial states:
+	2000942226 
+Final states:
+	1857181948 
+Transitions:
+	For state 1846173499:
+		For letter a: 1857181948 
+		For letter b: 1857181948 
+	For state 1857181948:
+		For letter a: 1857181948 
+		For letter b: 1857181948 
+	For state 2000942226:
+		For letter a: 1846173499 
+		For letter b: 1857181948 
+[       OK ] AutomatonTest.TestCreateMinimalBrzozowski_NotMinimal (6 ms)
+[ RUN      ] AutomatonTest.TestCreateMinimalBrzozowski_alreadyMinimal
+[       OK ] AutomatonTest.TestCreateMinimalBrzozowski_alreadyMinimal (2 ms)
+[ RUN      ] AutomatonTest.TestCreateMinimalBrzozowski_notDeterminist
+[       OK ] AutomatonTest.TestCreateMinimalBrzozowski_notDeterminist (3 ms)
+[----------] 95 tests from AutomatonTest (285 ms total)
+
+[----------] Global test environment tear-down
+[==========] 95 tests from 1 test suite ran. (306 ms total)
+[  PASSED  ] 95 tests.
+==651788== 
+==651788== HEAP SUMMARY:
+==651788==     in use at exit: 0 bytes in 0 blocks
+==651788==   total heap usage: 4,235 allocs, 4,235 frees, 478,995 bytes allocated
+==651788== 
+==651788== All heap blocks were freed -- no leaks are possible
+==651788== 
+==651788== For lists of detected and suppressed errors, rerun with: -s
+==651788== ERROR SUMMARY: 0 errors from 0 contexts (suppressed: 0 from 0)

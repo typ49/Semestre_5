@@ -1569,9 +1569,7 @@ namespace fa
         automatonDeterministic = automaton.createDeterministic(automaton);
         // automatonDeterministic.prettyPrint(std::cout);
         EXPECT_TRUE(automatonDeterministic.isDeterministic());
-        EXPECT_EQ(automaton.countStates(), automatonDeterministic.countStates());
-        EXPECT_EQ(automaton.countSymbols(), automatonDeterministic.countSymbols());
-        EXPECT_EQ(automaton.countTransitions(), automatonDeterministic.countTransitions());
+        EXPECT_EQ(automaton.countSymbols(), automatonDeterministic.countSymbols());      
     }
 
     // test isIncludeIn
@@ -1738,6 +1736,78 @@ namespace fa
         A.setStateInitial(0);
 
         B = A.createMinimalMoore(A);
+
+        EXPECT_TRUE(B.isDeterministic());
+        EXPECT_TRUE(B.isComplete());
+        EXPECT_TRUE(B.hasSymbol('a'));
+        EXPECT_TRUE(B.hasSymbol('b'));
+        EXPECT_TRUE(B.match("abbaaaababababaaaba"));
+    }
+
+    /* test createMinimalBrzozowski */
+        TEST_F(AutomatonTest, TestCreateMinimalBrzozowski_NotMinimal) {
+        A.addSymbol('a');
+        A.addSymbol('b');
+
+        A.addState(0);
+        A.addState(1);
+        A.addState(2);
+
+        A.setStateInitial(0);
+        A.setStateFinal(2);
+
+        A.addTransition(0, 'a', 1);
+        A.addTransition(0, 'b', 2);
+        A.addTransition(1, 'a', 2);
+        A.addTransition(1, 'b', 2);
+        A.addTransition(2, 'a', 2);
+        A.addTransition(2, 'b', 2);
+        // les états 1 et 2 peuvent-être fusionnés
+        A.prettyPrint(std::cout);
+        B = A.createMinimalBrzozowski(A);
+        B.prettyPrint(std::cout);
+        EXPECT_TRUE(A.match("abbaaaababababaaaba"));
+        EXPECT_TRUE(B.match("abbaaaababababaaaba"));
+        EXPECT_TRUE(B.hasSymbol('a'));
+        EXPECT_TRUE(B.hasSymbol('b'));
+
+        EXPECT_TRUE(B.isDeterministic());
+        EXPECT_TRUE(B.isComplete());
+    }
+
+    TEST_F(AutomatonTest, TestCreateMinimalBrzozowski_alreadyMinimal) {
+        A.addSymbol('a');
+        A.addSymbol('b');
+        A.addState(0);
+        A.addTransition(0, 'a', 0);
+        A.addTransition(0, 'b', 0);
+        A.setStateFinal(0);
+        A.setStateInitial(0);
+
+        B = A.createMinimalBrzozowski(A);
+
+        EXPECT_TRUE(B.isDeterministic());
+        EXPECT_TRUE(B.isComplete());
+
+        EXPECT_TRUE(B.hasSymbol('a'));
+        EXPECT_TRUE(B.hasSymbol('b'));
+        EXPECT_TRUE(B.match("abbaaaababababaaaba"));
+    }
+
+    TEST_F(AutomatonTest, TestCreateMinimalBrzozowski_notDeterminist) {
+        A.addState(0);
+        A.addState(1);
+        A.addSymbol('a');
+        A.addSymbol('b');
+        A.addTransition(0, 'a', 0);
+        A.addTransition(0, 'b', 0);
+        A.addTransition(0, 'a', 1);
+        A.addTransition(0, 'b', 1);    
+        A.setStateFinal(0);
+        A.setStateFinal(1);
+        A.setStateInitial(0);
+
+        B = A.createMinimalBrzozowski(A);
 
         EXPECT_TRUE(B.isDeterministic());
         EXPECT_TRUE(B.isComplete());

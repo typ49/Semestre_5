@@ -1132,10 +1132,12 @@ Automaton Automaton::createMinimalMoore(const Automaton &other) {
 
   Automaton Automaton::createMinimalBrzozowski(const Automaton &other)
   {
-    // TODO
-    Automaton minimalBrzozowski;
-    minimalBrzozowski.addSymbol('a');
-    minimalBrzozowski.addState(0);
+    assert(other.isValid());
+    Automaton minimalBrzozowski = createMirror(other);
+    minimalBrzozowski = createDeterministic(minimalBrzozowski);
+    minimalBrzozowski = createMirror(minimalBrzozowski);
+    minimalBrzozowski = createDeterministic(minimalBrzozowski);
+    minimalBrzozowski = createComplete(minimalBrzozowski);
     return minimalBrzozowski;
   }
 
