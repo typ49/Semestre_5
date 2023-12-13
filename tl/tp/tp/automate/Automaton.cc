@@ -484,20 +484,24 @@ namespace fa
   Automaton Automaton::createComplement(const Automaton &automaton)
   {
     assert(automaton.isValid());
-    Automaton complement;
 
-    // Copie de l'alphabet et des états
-    complement.alphabet = automaton.alphabet;
-    complement.states = automaton.states;
-    complement.transitions = automaton.transitions;
-    complement.initialStates = automaton.initialStates;
+    // Déterminisation si nécessaire
+    Automaton detAutomaton = automaton.isDeterministic() ? automaton : Automaton::createDeterministic(automaton);
+
+    // Rendre l'automate complet si nécessaire
+    Automaton completeAutomaton = detAutomaton.isComplete() ? detAutomaton : Automaton::createComplete(detAutomaton);
+
+    // Création de l'automate complémentaire
+    Automaton complement;
+    complement.alphabet = completeAutomaton.alphabet;
+    complement.states = completeAutomaton.states;
+    complement.transitions = completeAutomaton.transitions;
+    complement.initialStates = completeAutomaton.initialStates;
 
     // Inverser les états finaux et non finaux
-    for (auto state : automaton.states)
+    for (auto state : completeAutomaton.states)
     {
-      // Si l'état est final dans l'automate original, il ne devrait pas être final dans le complément
-      // Si l'état n'est pas final dans l'automate original, il devrait être final dans le complément
-      if (!automaton.isStateFinal(state))
+      if (!completeAutomaton.isStateFinal(state))
         complement.setStateFinal(state);
     }
 
@@ -1045,42 +1049,51 @@ namespace fa
    * TP n°6
    */
 
-Automaton Automaton::createMinimalMoore(const Automaton &other) {
+  Automaton Automaton::createMinimalMoore(const Automaton &other)
+  {
     assert(other.isValid());
-    if (!other.isDeterministic()) {
-        other.createDeterministic(other);
+    if (!other.isDeterministic())
+    {
+      other.createDeterministic(other);
     }
 
     // Initialiser les groupes d'états.
     std::map<int, int> stateGroups;
-    for (auto state : other.states) {
-        stateGroups[state] = other.isStateFinal(state) ? 1 : 0;
+    for (auto state : other.states)
+    {
+      stateGroups[state] = other.isStateFinal(state) ? 1 : 0;
     }
 
     bool groupsChanged;
-    do {
-        groupsChanged = false;
-        std::map<int, int> newStateGroups = stateGroups;
+    do
+    {
+      groupsChanged = false;
+      std::map<int, int> newStateGroups = stateGroups;
 
-        // Assigner un groupe à chaque état en fonction de ses transitions.
-        for (auto state : other.states) {
-            for (auto alpha : other.alphabet) {
-                auto it = other.transitions.find(state);
-                if (it != other.transitions.end()) {
-                    auto transIt = it->second.find(alpha);
-                    if (transIt != it->second.end() && !transIt->second.empty()) {
-                        int targetState = *(transIt->second.begin());
-                        std::pair<int, int> key = {stateGroups[state], stateGroups[targetState]};
-                        if (newStateGroups[state] != key.second) {
-                            newStateGroups[state] = key.second;
-                            groupsChanged = true;
-                        }
-                    }
-                }
+      // Assigner un groupe à chaque état en fonction de ses transitions.
+      for (auto state : other.states)
+      {
+        for (auto alpha : other.alphabet)
+        {
+          auto it = other.transitions.find(state);
+          if (it != other.transitions.end())
+          {
+            auto transIt = it->second.find(alpha);
+            if (transIt != it->second.end() && !transIt->second.empty())
+            {
+              int targetState = *(transIt->second.begin());
+              std::pair<int, int> key = {stateGroups[state], stateGroups[targetState]};
+              if (newStateGroups[state] != key.second)
+              {
+                newStateGroups[state] = key.second;
+                groupsChanged = true;
+              }
             }
+          }
         }
+      }
 
-        stateGroups = newStateGroups;
+      stateGroups = newStateGroups;
     } while (groupsChanged);
 
     // Construire le nouvel automate minimal.
@@ -1091,44 +1104,52 @@ Automaton Automaton::createMinimalMoore(const Automaton &other) {
     std::set<int> finalStatesInGroups;
 
     // Identifier les états finaux dans chaque groupe
-    for (const auto& [state, group] : stateGroups) {
-        if (other.isStateFinal(state)) {
-            finalStatesInGroups.insert(group);
-        }
+    for (const auto &[state, group] : stateGroups)
+    {
+      if (other.isStateFinal(state))
+      {
+        finalStatesInGroups.insert(group);
+      }
     }
 
-    for (auto group : stateGroups) {
-        if (newStatesMapping.find(group.second) == newStatesMapping.end()) {
-            newStatesMapping[group.second] = newStateId++;
-            minimal.addState(newStatesMapping[group.second]);
-            if (finalStatesInGroups.find(group.second) != finalStatesInGroups.end()) {
-                minimal.setStateFinal(newStatesMapping[group.second]);
-            }
-            if (other.isStateInitial(group.first)) {
-                minimal.setStateInitial(newStatesMapping[group.second]);
-            }
+    for (auto group : stateGroups)
+    {
+      if (newStatesMapping.find(group.second) == newStatesMapping.end())
+      {
+        newStatesMapping[group.second] = newStateId++;
+        minimal.addState(newStatesMapping[group.second]);
+        if (finalStatesInGroups.find(group.second) != finalStatesInGroups.end())
+        {
+          minimal.setStateFinal(newStatesMapping[group.second]);
         }
+        if (other.isStateInitial(group.first))
+        {
+          minimal.setStateInitial(newStatesMapping[group.second]);
+        }
+      }
     }
 
     // Recréer les transitions pour le nouvel automate.
-    for (auto state : other.states) {
-        for (auto alpha : other.alphabet) {
-            auto it = other.transitions.find(state);
-            if (it != other.transitions.end()) {
-                auto transIt = it->second.find(alpha);
-                if (transIt != it->second.end() && !transIt->second.empty()) {
-                    int fromState = newStatesMapping[stateGroups[state]];
-                    int toState = newStatesMapping[stateGroups[*(transIt->second.begin())]];
-                    minimal.addTransition(fromState, alpha, toState);
-                }
-            }
+    for (auto state : other.states)
+    {
+      for (auto alpha : other.alphabet)
+      {
+        auto it = other.transitions.find(state);
+        if (it != other.transitions.end())
+        {
+          auto transIt = it->second.find(alpha);
+          if (transIt != it->second.end() && !transIt->second.empty())
+          {
+            int fromState = newStatesMapping[stateGroups[state]];
+            int toState = newStatesMapping[stateGroups[*(transIt->second.begin())]];
+            minimal.addTransition(fromState, alpha, toState);
+          }
         }
+      }
     }
 
     return minimal;
-}
-
-
+  }
 
   Automaton Automaton::createMinimalBrzozowski(const Automaton &other)
   {

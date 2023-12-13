@@ -1,0 +1,30 @@
+// Julien Gauthier
+// TP noté n°3 | Système et réseau
+
+Question n°2 :  La commande permettant d'identifier l'adresse IP de la carte réseau connectée à Internet est : ip addr
+                l'IP de la carte réseau connecté à Internet est : 100.115.92.204
+                le nombre de carte réseau qui pourrait recevoir une addresse IP 
+				si un adressage par classe était utilisé sur ce réseau est : 2^24 = 16777216
+
+Question n°3 :  une des opérations exigeant une résolution de nom est : ping google.com
+                la commande pour obtenir l'adresse ip de google.com : nslookup google.com
+                L'adresse IP de google.com est : 142.251.37.206
+
+Question n°4 :  le code d'erreur retourner par une requête HTTP :
+                - avec la commande GIT est : 128
+                - avec une URL ciblant une ressource inexistante est : 404
+
+Question n°5 :  la différence entre sockaddr et sockaddr_in est que sockaddr est une structure générique qui peut être utilisée 
+                pour représenter une adresse de socket de n'importe quel domaine et de n'importe quel type, 
+                tandis que sockaddr_in est une structure spécifique utilisée pour représenter une adresse de socket 
+                dans le domaine Internet.
+                
+                l'interet d'avoir deux structure est que cela offre plus de flexibilité et de portabilité au programmeur.
+
+Question n°6 :  si le client envoie 100 octets et que le serveur en attend 150 dans un unique échange send-recv en mode connecté,
+                le serveur attendra 50 octets supplémentaires et le client enverra 50 octets supplémentaires.
+                Le serveur recevra donc 150 octets et le client enverra 150 octets.
+                
+
+Question n°7 :  la commande système permettant d'afficher exclusivement les ports utilisés par les sockets distantes 
+                en mode connecté est : netstat -n -p tcp
