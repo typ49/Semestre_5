@@ -493,16 +493,29 @@ namespace fa
 
     // Création de l'automate complémentaire
     Automaton complement;
+
+    // Copier l'alphabet, les états et les transitions
     complement.alphabet = completeAutomaton.alphabet;
-    complement.states = completeAutomaton.states;
+    for (auto state : completeAutomaton.states)
+    {
+      complement.addState(state);
+    }
     complement.transitions = completeAutomaton.transitions;
-    complement.initialStates = completeAutomaton.initialStates;
+
+    // Définir les états initiaux
+    for (auto initialState : completeAutomaton.initialStates)
+    {
+      complement.setStateInitial(initialState);
+    }
 
     // Inverser les états finaux et non finaux
     for (auto state : completeAutomaton.states)
     {
       if (!completeAutomaton.isStateFinal(state))
+      {
         complement.setStateFinal(state);
+      }
+      // Les états finaux dans l'automate original sont laissés non finaux
     }
 
     return complement;
@@ -718,7 +731,6 @@ namespace fa
       for (const auto &symbol : alphabet)
       {
         std::set<int> nextStates = makeTransition({currentState}, symbol);
-
         for (int nextState : nextStates)
         {
           // Si l'état n'a pas déjà été marqué comme accessible
@@ -744,13 +756,22 @@ namespace fa
     for (int state : toRemove)
     {
       removeState(state);
-      states.erase(state);
     }
 
-    if (!isValid())
+    // S'assurer que l'automate reste valide
+    if (states.empty() || initialStates.empty())
     {
-      addState(0);
-      addSymbol('a');
+      int newState = 0;
+      while (hasState(newState)) // Assurez-vous que le nouvel état n'existe pas déjà
+      {
+        newState++;
+      }
+      addState(newState);
+      setStateInitial(newState);
+      if (alphabet.empty())
+      {
+        addSymbol('a'); // Ajouter un symbole par défaut si l'alphabet est vide
+      }
     }
   }
 
@@ -827,89 +848,73 @@ namespace fa
     assert(lhs.isValid());
     assert(rhs.isValid());
 
-    bool disjoint = true;
-
-    // vérifie si le language est disjoint
-
-    for (auto lhsSymbol : lhs.alphabet)
-    {
-      for (auto rhsSymbol : rhs.alphabet)
-      {
-        if (lhsSymbol == rhsSymbol)
-        {
-          disjoint = false;
-        }
-      }
-    }
-
-    if (disjoint)
-    {
-      Automaton intersectionAutomaton;
-      intersectionAutomaton.addSymbol('a');
-      intersectionAutomaton.addState(0);
-      return intersectionAutomaton;
-    }
-
     Automaton intersectionAutomaton;
     std::map<std::pair<int, int>, int> productStates;
     int newState = 0;
 
-    // crée l'alphabet de l'automate intersection
+    // Intersection des alphabets
+    std::set<char> intersectionAlphabet;
     for (char symbol : lhs.alphabet)
     {
-      intersectionAutomaton.addSymbol(symbol);
+      if (rhs.alphabet.find(symbol) != rhs.alphabet.end())
+      {
+        intersectionAlphabet.insert(symbol);
+      }
     }
-    for (char symbol : rhs.alphabet)
+
+    // Si l'intersection des alphabets est vide, retourner un automate avec un état non initial et non final
+    if (intersectionAlphabet.empty())
+    {
+      intersectionAutomaton.addState(0);
+      intersectionAutomaton.addSymbol('a'); // Symbole arbitraire pour garantir un alphabet non vide
+      return intersectionAutomaton;
+    }
+
+    // Utiliser l'alphabet d'intersection
+    for (char symbol : intersectionAlphabet)
     {
       intersectionAutomaton.addSymbol(symbol);
     }
 
-    // crée le produit cartésien des états
+    // Créer le produit cartésien des états
     for (int lhsState : lhs.states)
     {
       for (int rhsState : rhs.states)
       {
         productStates[std::make_pair(lhsState, rhsState)] = newState;
         intersectionAutomaton.addState(newState);
+
+        if (lhs.initialStates.find(lhsState) != lhs.initialStates.end() &&
+            rhs.initialStates.find(rhsState) != rhs.initialStates.end())
+        {
+          intersectionAutomaton.setStateInitial(newState);
+        }
+
+        if (lhs.finalStates.find(lhsState) != lhs.finalStates.end() &&
+            rhs.finalStates.find(rhsState) != rhs.finalStates.end())
+        {
+          intersectionAutomaton.setStateFinal(newState);
+        }
+
         newState++;
       }
     }
 
-    // crée les états initiaux
-    for (int lhsState : lhs.initialStates)
-    {
-      for (int rhsState : rhs.initialStates)
-      {
-        intersectionAutomaton.setStateInitial(productStates[std::make_pair(lhsState, rhsState)]);
-      }
-    }
-
-    // crée les états finaux
-    if (!disjoint)
-    {
-      for (int lhsState : lhs.finalStates)
-      {
-        for (int rhsState : rhs.finalStates)
-        {
-          intersectionAutomaton.setStateFinal(productStates[std::make_pair(lhsState, rhsState)]);
-        }
-      }
-    }
-
-    // crée les transitions
+    // Créer les transitions pour les symboles dans l'intersection des alphabets
     for (const auto &lhsStatePair : lhs.transitions)
-    { // lhsStatePair = (état, (symbole, ensemble d'états))
+    {
       for (const auto &lhsSymbolPair : lhsStatePair.second)
-      { // lhsSymbolPair = (symbole, ensemble d'états)
-        for (const auto &rhsStatePair : rhs.transitions)
-        { // rhsStatePair = (état, (symbole, ensemble d'états))
-          for (const auto &rhsSymbolPair : rhsStatePair.second)
-          { // rhsSymbolPair = (symbole, ensemble d'états)
-            if (lhsSymbolPair.first == rhsSymbolPair.first)
+      {
+        if (intersectionAlphabet.find(lhsSymbolPair.first) != intersectionAlphabet.end())
+        {
+          for (const auto &rhsStatePair : rhs.transitions)
+          {
+            const auto rhsSymbolPairIter = rhsStatePair.second.find(lhsSymbolPair.first);
+            if (rhsSymbolPairIter != rhsStatePair.second.end())
             {
               for (int lhsToState : lhsSymbolPair.second)
               {
-                for (int rhsToState : rhsSymbolPair.second)
+                for (int rhsToState : rhsSymbolPairIter->second)
                 {
                   intersectionAutomaton.addTransition(
                       productStates[std::make_pair(lhsStatePair.first, rhsStatePair.first)],
@@ -936,38 +941,36 @@ namespace fa
    * TP n°5
    */
 
-  bool Automaton::isIncludedIn(const Automaton &other) const
-  {
-    // vérifie si les automates sont valides
+bool Automaton::isIncludedIn(const Automaton &other) const
+{
     assert(isValid());
     assert(other.isValid());
 
-    if (!isDeterministic())
-    {
-      printf("A n'est pas déterministe\n");
-      Automaton deterministic = createDeterministic(*this); // rend l'automate A déterministe
-      return deterministic.isIncludedIn(other);             // retourne le résultat avec ce nouvel automate
-    }
-    if (!other.isDeterministic())
-    {
-      printf("B n'est pas déterministe\n");
-      Automaton deterministic = createDeterministic(other); // rend l'automate other déterministe
-      return isIncludedIn(deterministic);                   // retourne le résultat avec ce nouvel automate
-    }
-    Automaton complementOther = createComplement(other); // fait un complement de l'automate other
-    printf("complement\n");
-    complementOther.prettyPrint(std::cout);
-    Automaton intersection = createIntersection(*this, complementOther); // fait l'intersection des deux automates
-    printf("intersection\n");
-    intersection.prettyPrint(std::cout);
-    printf("intersection\n empty ? %d\n", intersection.isLanguageEmpty());
-    if (intersection.isLanguageEmpty())
-    {
-      return true; // si l'automate d'intersection est vide, ça veut dire qu'aucun mots de A n'est présent dans le mirroir de B et donc A est inclue dans B
+    // Créer des copies déterministes des automates si nécessaire
+    Automaton deterministicThis = isDeterministic() ? *this : createDeterministic(*this);
+    Automaton deterministicOther = other.isDeterministic() ? other : createDeterministic(other);
+
+    // Ajouter les symboles manquants à l'autre automate pour uniformiser les alphabets
+    for (char symbol : deterministicThis.alphabet) {
+        if (deterministicOther.alphabet.find(symbol) == deterministicOther.alphabet.end()) {
+            deterministicOther.addSymbol(symbol);
+        }
     }
 
-    return false;
-  }
+    // Créer le complément de l'autre automate
+    Automaton complementOther = createComplement(deterministicOther);
+
+    // Intersection de 'this' et du complément de 'other'
+    Automaton intersection = createIntersection(deterministicThis, complementOther);
+
+    // Vérifier si l'intersection est vide
+    return intersection.isLanguageEmpty();
+}
+
+
+
+
+
 
   Automaton Automaton::createDeterministic(const Automaton &other)
   {
@@ -1049,107 +1052,106 @@ namespace fa
    * TP n°6
    */
 
-  Automaton Automaton::createMinimalMoore(const Automaton &other)
-  {
-    assert(other.isValid());
-    if (!other.isDeterministic())
-    {
-      other.createDeterministic(other);
+Automaton Automaton::createMinimalMoore(const Automaton &other)
+{
+    // Assurez-vous que l'automate est déterministe
+    Automaton deterministic = other.isDeterministic() ? other : Automaton::createDeterministic(other);
+
+    // Supprimez les états non accessibles pour simplifier la minimisation
+    deterministic.removeNonAccessibleStates();
+
+    // Initialisation des ensembles d'états finaux et non finaux
+    std::set<int> finalStates = deterministic.finalStates;
+    std::set<int> nonFinalStates;
+    for (const auto& state : deterministic.states) {
+        if (!finalStates.count(state)) {
+            nonFinalStates.insert(state);
+        }
     }
 
-    // Initialiser les groupes d'états.
-    std::map<int, int> stateGroups;
-    for (auto state : other.states)
-    {
-      stateGroups[state] = other.isStateFinal(state) ? 1 : 0;
-    }
+    // Partition initiale des états
+    std::vector<std::set<int>> partitions = {finalStates, nonFinalStates};
 
-    bool groupsChanged;
-    do
-    {
-      groupsChanged = false;
-      std::map<int, int> newStateGroups = stateGroups;
+    // Processus de partitionnement des états
+    bool partitionChanged;
+    do {
+        partitionChanged = false;
+        std::vector<std::set<int>> newPartitions;
 
-      // Assigner un groupe à chaque état en fonction de ses transitions.
-      for (auto state : other.states)
-      {
-        for (auto alpha : other.alphabet)
-        {
-          auto it = other.transitions.find(state);
-          if (it != other.transitions.end())
-          {
-            auto transIt = it->second.find(alpha);
-            if (transIt != it->second.end() && !transIt->second.empty())
-            {
-              int targetState = *(transIt->second.begin());
-              std::pair<int, int> key = {stateGroups[state], stateGroups[targetState]};
-              if (newStateGroups[state] != key.second)
-              {
-                newStateGroups[state] = key.second;
-                groupsChanged = true;
-              }
+        for (const auto& partition : partitions) {
+            std::map<std::string, std::set<int>> signatureToStates;
+
+            for (int state : partition) {
+                std::string signature;
+                for (char symbol : deterministic.alphabet) {
+                    auto dest = deterministic.makeTransition({state}, symbol);
+                    for (int d : dest) {
+                        signature += std::to_string(d) + ",";
+                    }
+                }
+                signatureToStates[signature].insert(state);
             }
-          }
+
+            for (const auto& [_, group] : signatureToStates) {
+                newPartitions.push_back(group);
+                if (group.size() != partition.size()) {
+                    partitionChanged = true;
+                }
+            }
         }
-      }
 
-      stateGroups = newStateGroups;
-    } while (groupsChanged);
+        partitions = std::move(newPartitions);
+    } while (partitionChanged);
 
-    // Construire le nouvel automate minimal.
+    // Création de l'automate minimal
     Automaton minimal;
-    minimal.alphabet = other.alphabet; // Copier l'alphabet
-    std::map<int, int> newStatesMapping;
-    int newStateId = 0;
-    std::set<int> finalStatesInGroups;
+    minimal.alphabet = deterministic.alphabet;
 
-    // Identifier les états finaux dans chaque groupe
-    for (const auto &[state, group] : stateGroups)
-    {
-      if (other.isStateFinal(state))
-      {
-        finalStatesInGroups.insert(group);
-      }
+    std::map<int, int> stateMapping;
+    std::map<int, int> inverseStateMapping;
+    int newState = 0;
+    for (const auto& partition : partitions) {
+        for (int oldState : partition) {
+            stateMapping[oldState] = newState;
+            inverseStateMapping[newState] = oldState;
+        }
+        newState++;
     }
 
-    for (auto group : stateGroups)
-    {
-      if (newStatesMapping.find(group.second) == newStatesMapping.end())
-      {
-        newStatesMapping[group.second] = newStateId++;
-        minimal.addState(newStatesMapping[group.second]);
-        if (finalStatesInGroups.find(group.second) != finalStatesInGroups.end())
-        {
-          minimal.setStateFinal(newStatesMapping[group.second]);
+    // Ajout des états
+    for (int i = 0; i < newState; i++) {
+        minimal.addState(i);
+        if (deterministic.initialStates.count(inverseStateMapping[i])) {
+            minimal.setStateInitial(i);
         }
-        if (other.isStateInitial(group.first))
-        {
-          minimal.setStateInitial(newStatesMapping[group.second]);
+        if (deterministic.finalStates.count(inverseStateMapping[i])) {
+            minimal.setStateFinal(i);
         }
-      }
     }
 
-    // Recréer les transitions pour le nouvel automate.
-    for (auto state : other.states)
-    {
-      for (auto alpha : other.alphabet)
-      {
-        auto it = other.transitions.find(state);
-        if (it != other.transitions.end())
-        {
-          auto transIt = it->second.find(alpha);
-          if (transIt != it->second.end() && !transIt->second.empty())
-          {
-            int fromState = newStatesMapping[stateGroups[state]];
-            int toState = newStatesMapping[stateGroups[*(transIt->second.begin())]];
-            minimal.addTransition(fromState, alpha, toState);
-          }
+    // Ajout des transitions
+    for (const auto& [from, transMap] : deterministic.transitions) {
+        for (const auto& [symbol, toSet] : transMap) {
+            for (int to : toSet) {
+                minimal.addTransition(stateMapping[from], symbol, stateMapping[to]);
+            }
         }
-      }
+    }
+
+    // Gestion du cas où l'automate minimal serait vide
+    if (minimal.states.empty()) {
+        minimal.addState(0);
+        minimal.setStateInitial(0);
+        minimal.setStateFinal(0);
     }
 
     return minimal;
-  }
+}
+
+
+
+
+
 
   Automaton Automaton::createMinimalBrzozowski(const Automaton &other)
   {

@@ -12,6 +12,8 @@
 #include <utility> // std::pair
 #include <queue>
 #include <climits>
+#include <unordered_map>
+#include <unordered_set>
 
 namespace fa
 {
