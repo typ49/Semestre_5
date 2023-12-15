@@ -1,14 +1,4 @@
 #include "Automaton.h"
-#include <iostream>
-#include <vector>
-#include <map>
-#include <set>
-#include <cassert>
-#include <cctype>
-#include <functional>
-#include <cassert>
-#include <utility> // std::pair
-#include <stack>
 
 namespace fa
 {
