@@ -1,0 +1,11 @@
+un joueur envoie un demande de shuriken au serveur
+
+si il y a des shuriken, le serveur envoie une demande au autre joueur
+
+les joueur recoivent une demande de vote
+
+les joueur vote et envoie leur réponse au serveur
+
+le serveur résoud le vote à l'unanimité
+
+le serveur execute le résultat (use or not use shuriken)
