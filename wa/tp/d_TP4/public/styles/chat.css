@@ -1,7 +1,15 @@
+@font-face {
+    font-family: 'sundayPasta';
+    src: url('../../fonts/sundayPasta/SundayPasta.otf') format('opentype'),
+         url('../../fonts/sundayPasta/SundayPasta.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
 body {
     padding: 0;
     margin: 0;
-    font-family: sans-serif;
+    font-family: 'sundayPasta', sans-serif;
 }
 * {
     box-sizing: border-box;   
