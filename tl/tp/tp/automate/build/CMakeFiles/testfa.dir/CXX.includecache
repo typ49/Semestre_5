@@ -728,35 +728,7 @@ src/gtest-typed-test.cc
 
 /home/juliengauthier410/l3/s5/tl/tp/tp/automate/testfa.cc
 gtest/gtest.h
-/home/juliengauthier410/l3/s5/tl/tp/tp/automate/gtest/gtest.h
+-
 Automaton.h
 /home/juliengauthier410/l3/s5/tl/tp/tp/automate/Automaton.h
-cstddef
--
-iosfwd
--
-map
--
-string
--
-vector
--
-iostream
--
-set
--
-algorithm
--
-cstdalign
--
-fstream
--
-cassert
--
-climits
--
-queue
--
-time.h
--
 
