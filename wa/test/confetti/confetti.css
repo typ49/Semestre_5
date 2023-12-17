@@ -1,0 +1,25 @@
+#canvas {
+    position: relative; /* Ajout pour positionnement relatif des enfants */
+    width: 100%;
+    height: 100vh; /* Assurez-vous que le div prend toute la hauteur de la vue */
+    overflow: hidden; /* Cache les confettis qui dépassent */
+}
+
+#victory {
+    position: absolute; /* Positionnement absolu à l'intérieur du div canvas */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centre le texte */
+    font-size: 50px; /* Taille de la police */
+    color: white; /* Couleur du texte */
+    z-index: 1000; /* S'assure qu'il est au premier plan */
+    text-align: center;
+}
+
+.confetti {
+    max-width: 640px;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    user-select: none;
+}
