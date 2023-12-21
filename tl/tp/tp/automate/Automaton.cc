@@ -871,8 +871,7 @@ namespace fa
     {
       for (int rhsState : rhs.states)
       {
-        std::pair<int, int> statePair = std::make_pair(lhsState, rhsState);
-        productStates[statePair] = newState;
+        productStates[std::make_pair(lhsState, rhsState)] = newState;
         intersectionAutomaton.addState(newState);
 
         if (lhs.initialStates.find(lhsState) != lhs.initialStates.end() &&
@@ -937,17 +936,17 @@ namespace fa
     assert(isValid());
     assert(other.isValid());
 
-        // Créer des copies déterministes des automates si nécessaire
+    // Créer des copies déterministes des automates si nécessaire
     Automaton deterministicThis = isDeterministic() ? *this : createDeterministic(*this);
     Automaton deterministicOther = other.isDeterministic() ? other : createDeterministic(other);
 
     // Ajouter les symboles manquants à l'autre automate pour uniformiser les alphabets
-        for (char symbol : deterministicThis.alphabet)
+    for (char symbol : deterministicThis.alphabet)
     {
       if (deterministicOther.alphabet.find(symbol) == deterministicOther.alphabet.end())
       {
         deterministicOther.addSymbol(symbol);
-        }
+      }
     }
 
     // Créer le complément de l'autre automate
@@ -1042,6 +1041,7 @@ namespace fa
 
   Automaton Automaton::createMinimalMoore(const Automaton &other)
   {
+
     if (other.isLanguageEmpty())
     {
       Automaton minimal;
@@ -1054,7 +1054,6 @@ namespace fa
       }
       return minimal;
     }
-
     // Assurez-vous que l'automate est déterministe et complet
     Automaton deterministic = other.isDeterministic() ? other : Automaton::createDeterministic(other);
     deterministic = deterministic.isComplete() ? deterministic : Automaton::createComplete(deterministic);
@@ -1066,88 +1065,111 @@ namespace fa
     Automaton minimal;
     minimal.alphabet = deterministic.alphabet;
 
-    // Partition initiale des états
-    std::map<std::string, std::set<int>> initialPartition;
-    for (int state : deterministic.states)
+    // Initialisation des ensembles d'états finaux et non finaux
+    std::set<int> finalStates = deterministic.finalStates;
+    std::set<int> nonFinalStates;
+    for (const auto &state : deterministic.states)
     {
-      std::string signature = deterministic.finalStates.count(state) > 0 ? "1" : "0";
-      initialPartition[signature].insert(state);
+      if (finalStates.find(state) == finalStates.end())
+      {
+        nonFinalStates.insert(state);
+      }
     }
+
+    // Partition initiale des états
+    std::vector<std::set<int>> partitions = {finalStates, nonFinalStates};
 
     // Processus de partitionnement des états
     bool partitionChanged;
     std::map<int, int> stateMapping;
+    int newState = 0;
     do
     {
       partitionChanged = false;
-      std::map<std::string, std::set<int>> newPartition;
+      std::vector<std::set<int>> newPartitions;
 
-      for (const auto &[signature, group] : initialPartition)
+      for (const auto &partition : partitions)
       {
-        std::map<std::string, std::set<int>> localPartition;
-        for (int state : group)
+        std::map<std::string, std::set<int>> signatureToStates;
+
+        for (int state : partition)
         {
-          std::string localSignature = signature;
+          std::string signature;
+          std::set<int> stateSet = {state};
           for (char symbol : deterministic.alphabet)
           {
-            auto destState = *deterministic.makeTransition({state}, symbol).begin();
-            for (const auto &[sig, grp] : initialPartition)
+            auto dest = deterministic.makeTransition(stateSet, symbol);
+            for (int d : dest)
             {
-              if (grp.count(destState) > 0)
-              {
-                localSignature += sig + symbol;
-                break;
-              }
+              signature += std::to_string(d) + ",";
             }
           }
-          localPartition[localSignature].insert(state);
+          signatureToStates[signature].insert(state);
         }
 
-        for (const auto &[localSig, localGroup] : localPartition)
+        for (const auto &[_, group] : signatureToStates)
         {
-          if (localGroup.size() != group.size())
+          if (group.size() < partition.size())
           {
             partitionChanged = true;
           }
-          newPartition[localSig].insert(localGroup.begin(), localGroup.end());
+          newPartitions.push_back(group);
+
+          // Vérifie si l'un des états de la partition est un état initial ou final
+          bool isInitialState = std::any_of(group.begin(), group.end(), [&](int oldState)
+                                            { return deterministic.initialStates.count(oldState) > 0; });
+          bool isFinalState = std::any_of(group.begin(), group.end(), [&](int oldState)
+                                          { return deterministic.finalStates.count(oldState) > 0; });
+
+          // Ajout de l'état correspondant dans l'automate minimal
+          minimal.addState(newState);
+          if (isInitialState)
+          {
+            minimal.setStateInitial(newState);
+          }
+          if (isFinalState)
+          {
+            minimal.setStateFinal(newState);
+          }
+
+          // Mise à jour du mapping des états
+          for (int oldState : group)
+          {
+            stateMapping[oldState] = newState;
+          }
+          newState++;
         }
       }
 
-      initialPartition = std::move(newPartition);
+      partitions = std::move(newPartitions);
     } while (partitionChanged);
 
-    // Création des nouveaux états et transitions dans l'automate minimal
-    int newState = 0;
-    for (const auto &[signature, group] : initialPartition)
-    {
-      minimal.addState(newState);
-      if (std::any_of(group.begin(), group.end(), [&](int s)
-                      { return deterministic.initialStates.count(s) > 0; }))
-      {
-        minimal.setStateInitial(newState);
-      }
-      if (std::any_of(group.begin(), group.end(), [&](int s)
-                      { return deterministic.finalStates.count(s) > 0; }))
-      {
-        minimal.setStateFinal(newState);
-      }
-      for (int oldState : group)
-      {
-        stateMapping[oldState] = newState;
-      }
-      newState++;
-    }
-
+    // Ajout des transitions
     for (const auto &[from, transMap] : deterministic.transitions)
     {
       for (const auto &[symbol, toSet] : transMap)
       {
         for (int to : toSet)
         {
-          minimal.addTransition(stateMapping[from], symbol, stateMapping[to]);
+          if (stateMapping.find(from) != stateMapping.end() &&
+              stateMapping.find(to) != stateMapping.end())
+          {
+            minimal.addTransition(stateMapping[from], symbol, stateMapping[to]);
+          }
         }
       }
     }
+
+    // Gestion du cas où l'automate minimal serait vide
+    if (minimal.states.empty())
+    {
+      minimal.addState(0);
+      minimal.setStateInitial(0);
+      minimal.setStateFinal(0);
+    }
+
+    minimal = Automaton::createDeterministic(minimal);
+    minimal = Automaton::createComplete(minimal);
 
     return minimal;
   }
