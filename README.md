@@ -22,7 +22,3 @@
 >
 >> [gitLab : metro L3](https://disc.univ-fcomte.fr/cr700-gitlab/mbidault/metro-l3.git)
 >
->- test pour projet Swiftness
->
->> [gitHub : Swiftness](https://github.com/naelebk/Swiftness.git)
->
